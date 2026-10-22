@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>EASY COSHIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16181d;--muted:#5f646c;--faint:#9aa0a8;--line:#e3e5e9;--bg:#f5f6f7;--red:#e31e24;--red-soft:#fdeced}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:14px;line-height:1.5}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+header{background:var(--ink);color:#fff}
+.top{max-width:1180px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:8px}
+.brand b{font-weight:900;font-size:20px;letter-spacing:.02em}
+.brand b span{color:var(--red)}
+.brand small{font-size:11px;color:#b7bcc4;letter-spacing:.08em}
+.clocks{display:flex;gap:4px;margin-left:auto}
+.clock{padding:6px 12px;border-radius:4px;background:#23262d;text-align:center;min-width:92px}
+.clock .c{font-size:10.5px;color:#b7bcc4;letter-spacing:.06em}
+.clock .t{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.clock .d{font-size:10.5px;color:#8b9099}
+.clock.off .t{color:#8b9099}
+.searchbar{max-width:1180px;margin:0 auto;padding:0 20px 16px}
+.searchbar input{width:100%;padding:12px 16px;border-radius:5px;border:0;font-size:15px;background:#fff}
+.notice{background:var(--red);color:#fff;font-size:13px}
+.notice div{max-width:1180px;margin:0 auto;padding:8px 20px}
+
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+section{margin-bottom:26px}
+section h2{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+section h2::after{content:'';flex:1;height:1px;background:var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 14px 12px;display:flex;flex-direction:column;gap:3px;transition:border-color .12s,box-shadow .12s;min-height:84px}
+.card:hover{border-color:var(--ink)}
+.card.soon{background:transparent;border-style:dashed;cursor:default}
+.card.soon:hover{border-color:var(--line)}
+.card .nm{font-weight:700;font-size:14.5px;padding-right:46px}
+.card .ds{font-size:12.5px;color:var(--muted)}
+.card .tg{display:inline-block;font-size:10.5px;padding:1px 6px;border-radius:3px;border:1px solid var(--line);color:var(--muted);margin-top:auto;align-self:flex-start}
+.card .tg.red{border-color:var(--red);color:var(--red)}
+.card .acts{position:absolute;top:9px;right:8px;display:flex;gap:2px}
+.ic{width:26px;height:26px;border-radius:4px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--faint)}
+.ic:hover{background:var(--bg);color:var(--ink)}
+.ic.on{color:var(--red)}
+.ic svg{width:15px;height:15px}
+.copied{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 16px;border-radius:4px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.copied.show{opacity:1}
+.none{color:var(--faint);padding:30px 0;text-align:center}
+footer{max-width:1180px;margin:0 auto;padding:0 20px 30px;font-size:12px;color:var(--faint)}
+@media(max-width:700px){.clocks{margin-left:0;width:100%}.clock{flex:1;min-width:0}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand"><b>EASY <span>COSHIP</span></b><small>업무 허브</small></div>
+    <div class="clocks" id="clocks"></div>
+  </div>
+  <div class="searchbar"><input id="q" type="search" placeholder="찾기 — 예) 선박, 시트, 가격, 카톡, 접수폼" autocomplete="off"></div>
+</header>
+<div class="notice" id="notice"></div>
+
+<main id="main"></main>
+<footer>링크는 각 시스템의 로그인·공유 권한으로 보호됩니다. 이 페이지에는 데이터가 없습니다. 링크 추가·수정은 담당자에게 요청하세요.</footer>
+<div class="copied" id="copied">링크 복사됨</div>
+
+<script>
+/* =========================================================
+   설정 — 공지와 링크는 여기만 고치면 됩니다
+   ========================================================= */
+const NOTICE = '';   // 예) '이번 주 선박 마감 10/24(금) · 이메일 입력 교육 10/28(화)'
+
+const SECTIONS = [
+ {title:'COSHIP AI · 택배팀 자동화', items:[
+  {n:'메일센터', d:'캐→한 선편 출항 안내 일괄 발송', u:'mailcenter/', tag:'시험판', red:true},
+  {n:'검수센터', d:'접수 데이터 오류 자동 점검', soon:true},
+  {n:'진행관리', d:'고객별 서류·진행 단계·일정', soon:true},
+  {n:'통합 대시보드', d:'지사·서비스·단계별 현황', soon:true},
+  {n:'통계 리포트', d:'기간별 출고량·거래처별 물량', soon:true, tag:'팀장 담당'},
+ ]},
+ {title:'시스템', items:[
+  {n:'코쉽 BMS', d:'BL·AR 입력과 수정', u:'https://bms.coship.ca/'},
+  {n:'택배팀 DB', d:'BL·AR·파트너 조회, CSV 내려받기', u:'https://courier.coship.ca/'},
+  {n:'파트너 조회', d:'택배팀 DB → Partner Search', u:'https://courier.coship.ca/'},
+  {n:'운영 앱', d:'정산·GST·매출', u:'https://auto.coship.ca/', tag:'권한자'},
+ ]},
+ {title:'온라인 접수 시트', items:[
+  {n:'캐→한 메이플', d:'선박 접수 시트', u:'https://docs.google.com/spreadsheets/d/1FqwtUcLJ1q4FStQiQ5r_61mo66heZzIRpR_VJqvvZEw/edit?gid=0#gid=0'},
+  {n:'캐→한 항공', d:'항공 접수 시트', u:'https://docs.google.com/spreadsheets/d/15gh-9hRymReuuR2BJzcAtT2lUsW5WkxCpsWtjHBJcIs/edit'},
+  {n:'한→캐 메이플', d:'선박 접수 시트', u:'https://docs.google.com/spreadsheets/d/10xIzzLMxDwluRuV-SaaPYlNKjfYf7gYqSPDRfSxVpqU/edit?gid=86204045#gid=86204045'},
+  {n:'한→캐 항공', d:'항공 접수 시트', u:'https://docs.google.com/spreadsheets/d/1iw_wCMxbK_pDPWys1Ir5H8kNVA7AV7J0wSz_Sr0kmP8/edit?gid=1149549543#gid=1149549543'},
+  {n:'캐나다 국내택배', d:'국내택배 접수 시트', u:'https://docs.google.com/spreadsheets/d/1rrle9aJS1Q0eMt202rWgNUyjDN4mmTb1S__Hqu5mJE4/edit'},
+ ]},
+ {title:'고객 전달용 접수폼', items:[
+  {n:'캐→한 항공택배', d:'한국어', u:'https://form.coship.ca/ca-to-kr-air/', copy:true},
+  {n:'캐→한 선박택배(메이플)', d:'한국어', u:'https://form.coship.ca/ca-to-kr-maple/', copy:true},
+  {n:'한→캐 항공택배', d:'한국어', u:'https://form.coship.ca/kr-to-ca-air/', copy:true},
+  {n:'한→캐 선박택배(메이플)', d:'한국어', u:'https://form.coship.ca/kr-to-ca-maple/', copy:true},
+  {n:'캐나다 국내택배', d:'한국어', u:'https://form.coship.ca/ca-domestic/', copy:true},
+  {n:'Canada → Korea Air', d:'English', u:'https://form.coship.ca/en/ca-to-kr-air/', copy:true},
+  {n:'Korea → Canada Air', d:'English', u:'https://form.coship.ca/en/kr-to-ca-air/', copy:true},
+  {n:'Korea → Canada Maple', d:'English', u:'https://form.coship.ca/en/kr-to-ca-maple/', copy:true},
+  {n:'Canada Domestic', d:'English', u:'https://form.coship.ca/en/ca-domestic/', copy:true},
+ ]},
+ {title:'고객 응대', items:[
+  {n:'홈페이지 문의 관리', d:'고객 문의 확인·담당자 배정', u:'https://inquiry.coship.ca/'},
+  {n:'가격 안내 멘트 (Gems)', d:'서비스별 가격 안내 문구', u:'https://exp-coship.github.io/gemini/'},
+  {n:'고객안내 자료', d:'요금표·접수처·안내 이미지 (드라이브)', u:'https://drive.google.com/drive/folders/1yCzualcHHo80MdKOYfj_lYrDjjY0csvm?usp=sharing'},
+  {n:'카카오톡 채널 관리자', d:'1:1 상담 응대', u:'https://center-pf.kakao.com/'},
+  {n:'카카오톡 채널 (고객용)', d:'고객에게 보낼 채널 링크', u:'https://pf.kakao.com/_dLNBd', copy:true},
+ ]},
+ {title:'운송장 조회', items:[
+  {n:'UPS', d:'UPS 배송 조회', u:'https://www.ups.com/track?loc=ko_KR'},
+  {n:'Canada Post', d:'캐나다 우체국 조회', u:'https://www.canadapost-postescanada.ca/track-reperage/en'},
+  {n:'CJ대한통운', d:'국내 택배 조회', u:'https://www.cjlogistics.com/ko/tool/parcel/tracking'},
+  {n:'우체국 택배', d:'국내 우체국 조회', u:'https://service.epost.go.kr/iservice/usr/trace/usrtrc001k01.jsp'},
+ ]},
+ {title:'홈페이지 · SNS', items:[
+  {n:'코쉽 홈페이지', d:'www.coship.ca', u:'https://www.coship.ca/', copy:true},
+  {n:'인스타그램', d:'@canadashipping_', u:'https://www.instagram.com/canadashipping_/'},
+  {n:'유튜브', d:'@coship1000', u:'https://www.youtube.com/@coship1000'},
+ ]},
+];
+
+/* ========================================================= */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(){try{return JSON.parse(localStorage.getItem('easy_fav')||'[]')}catch(e){return[]}},set(v){try{localStorage.setItem('easy_fav',JSON.stringify(v))}catch(e){}}};
+let fav=store.get();
+const IC={
+ star:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>',
+ copy:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2"/></svg>'
+};
+
+if(NOTICE) $('notice').innerHTML=`<div>${esc(NOTICE)}</div>`;
+
+/* 지사 시각 */
+const ZONES=[['밴쿠버','America/Vancouver'],['토론토','America/Toronto'],['서울','Asia/Seoul']];
+function tick(){
+  const now=new Date();
+  $('clocks').innerHTML=ZONES.map(([c,z])=>{
+    const t=new Intl.DateTimeFormat('ko-KR',{timeZone:z,hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
+    const d=new Intl.DateTimeFormat('ko-KR',{timeZone:z,month:'numeric',day:'numeric',weekday:'short'}).format(now);
+    const h=+new Intl.DateTimeFormat('en-US',{timeZone:z,hour:'numeric',hour12:false}).format(now);
+    const wd=new Intl.DateTimeFormat('en-US',{timeZone:z,weekday:'short'}).format(now);
+    const open=h>=9&&h<18&&!['Sat','Sun'].includes(wd);
+    return `<div class="clock ${open?'':'off'}" title="${open?'업무 시간':'업무 시간 외'}"><div class="c">${c}</div><div class="t">${t}</div><div class="d">${d}</div></div>`;
+  }).join('');
+}
+tick(); setInterval(tick,30000);
+
+/* 렌더 */
+function card(it){
+  const k=it.n;
+  if(it.soon) return `<div class="card soon"><div class="nm">${esc(it.n)}</div><div class="ds">${esc(it.d)}</div><span class="tg">${esc(it.tag||'준비 중')}</span></div>`;
+  return `<a class="card" href="${esc(it.u)}" target="_blank" rel="noopener">
+    <div class="acts">
+      ${it.copy?`<button class="ic" data-copy="${esc(it.u)}" title="링크 복사">${IC.copy}</button>`:''}
+      <button class="ic ${fav.includes(k)?'on':''}" data-fav="${esc(k)}" title="즐겨찾기">${IC.star}</button>
+    </div>
+    <div class="nm">${esc(it.n)}</div><div class="ds">${esc(it.d)}</div>
+    ${it.tag?`<span class="tg ${it.red?'red':''}">${esc(it.tag)}</span>`:''}
+  </a>`;
+}
+function render(){
+  const q=$('q').value.trim().toLowerCase();
+  const match=it=>!q||(it.n+' '+it.d+' '+(it.tag||'')+' '+(it.sec||'')).toLowerCase().includes(q);
+  const all=SECTIONS.flatMap(s=>s.items.map(it=>({...it,sec:s.title})));
+  let html='';
+  const favs=all.filter(it=>fav.includes(it.n)&&!it.soon&&match(it));
+  if(favs.length) html+=`<section><h2>★ 즐겨찾기</h2><div class="grid">${favs.map(card).join('')}</div></section>`;
+  SECTIONS.forEach(s=>{
+    const its=s.items.map(it=>({...it,sec:s.title})).filter(match);
+    if(its.length) html+=`<section><h2>${esc(s.title)}</h2><div class="grid">${its.map(card).join('')}</div></section>`;
+  });
+  $('main').innerHTML=html||'<div class="none">찾는 항목이 없습니다. 다른 단어로 검색해 보세요.</div>';
+}
+$('q').oninput=render;
+$('main').addEventListener('click',e=>{
+  const c=e.target.closest('[data-copy]'), f=e.target.closest('[data-fav]');
+  if(c){e.preventDefault();navigator.clipboard.writeText(c.dataset.copy).then(()=>{$('copied').classList.add('show');setTimeout(()=>$('copied').classList.remove('show'),1200)})}
+  if(f){e.preventDefault();const k=f.dataset.fav;fav=fav.includes(k)?fav.filter(x=>x!==k):[...fav,k];store.set(fav);render()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==$('q')){e.preventDefault();$('q').focus()}});
+render();
+</script>
+</body>
+</html>
