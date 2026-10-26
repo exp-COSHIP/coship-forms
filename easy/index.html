@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>COSHIP AI · 스케줄센터</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+<style>
+:root{--ink:#16181d;--muted:#666b73;--faint:#9aa0a8;--line:#e2e4e8;--bg:#f6f7f8;--red:#e31e24;--red-soft:#fdeced;--amber:#b25e00;--amber-soft:#fff4e5;--kr:#ffff00;--noaddr:#ffd7d7;--hq:#fff2cc;--niro:#e2efda;--van:#d9e1f2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:14px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:12px}
+header b{font-size:16px;letter-spacing:.04em}
+header .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:2px 7px;border-radius:3px}
+header a{margin-left:auto;font-size:12.5px;color:var(--muted);text-decoration:none}
+main{max-width:1320px;margin:0 auto;padding:22px 20px 60px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ph{padding:12px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ph h2{font-size:15px}
+.ph .sub{color:var(--muted);font-size:12.5px}
+.ph .r{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.pb{padding:16px 18px}
+.drop{border:2px dashed var(--line);border-radius:6px;padding:22px;text-align:center;color:var(--muted);cursor:pointer}
+.drop.over{border-color:var(--red);background:var(--red-soft)}
+.drop b{color:var(--ink)}
+.files{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.set{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:13px;align-items:center}
+.set input,.set select{padding:5px 8px;border:1px solid #c9ccd2;border-radius:4px;background:#fff}
+.btn{padding:7px 13px;border-radius:4px;border:1px solid var(--ink);background:#fff;cursor:pointer;font-weight:500;font-size:13px;white-space:nowrap}
+.btn.pri{background:var(--ink);color:#fff}
+.btn.sm{padding:3px 9px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:default}
+.blocks{display:flex;flex-direction:column;gap:8px}
+.blk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:5px}
+.blk.niro{background:var(--niro)} .blk.van{background:var(--van)}
+.blk select,.blk input{padding:4px 7px;border:1px solid #c9ccd2;border-radius:4px;background:#fff}
+.blk .x{margin-left:auto}
+.vh{padding:9px 12px;font-weight:700;font-size:13.5px;border-radius:5px 5px 0 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.vh.niro{background:var(--niro)} .vh.van{background:var(--van)}
+.vh .r{margin-left:auto;display:flex;gap:6px;font-weight:400}
+.vh a{font-size:12.5px;color:var(--ink)}
+.sched{border:1px solid var(--line);border-radius:5px;margin-bottom:16px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11.5px;color:var(--muted);font-weight:500;padding:6px;border-bottom:1px solid #c9ccd2;background:#f0f0f0;white-space:nowrap}
+td{padding:3px 4px;border-bottom:1px solid var(--line);vertical-align:middle}
+td input{width:100%;padding:5px 6px;border:1px solid transparent;border-radius:3px;background:transparent}
+td input:hover{border-color:#d5d8dd}
+td input:focus{border-color:var(--ink);background:#fff;outline:none}
+tr.hq td{background:var(--hq);color:var(--muted);font-size:12.5px;padding:7px 8px}
+td.kr input{background:var(--kr)}
+td.noaddr input{background:var(--noaddr)}
+td.ctl{white-space:nowrap;width:1%}
+.ic{width:24px;height:24px;border:1px solid var(--line);background:#fff;border-radius:3px;cursor:pointer;font-size:12px;line-height:1}
+.ic:hover{border-color:var(--ink)}
+.tags{display:flex;gap:3px;flex-wrap:wrap}
+.tg{font-size:10.5px;padding:1px 6px;border-radius:3px;white-space:nowrap;border:1px solid var(--line);color:var(--muted)}
+.tg.pu{border-color:#9db3e3;color:#2f4fbf}
+.tg.dl{border-color:#a9d18e;color:#3b6e22}
+.tg.fx{background:#eee}
+.tg.warn{background:var(--amber-soft);border-color:#f0cf9f;color:var(--amber)}
+.tg.err{background:var(--red);border-color:var(--red);color:#fff}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:12px}
+.kcard{border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
+.kcard .kh{padding:8px 12px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;font-size:13px}
+.kcard .kh b{font-size:14px}
+.kcard .kh .btn{margin-left:auto}
+.kcard pre{padding:10px 12px;font-family:inherit;font-size:12.5px;white-space:pre-wrap;line-height:1.6;max-height:260px;overflow:auto}
+.kcard.done{opacity:.5}
+.skip{margin-top:14px;font-size:12.5px;color:var(--muted)}
+.skip li{margin-left:18px}
+textarea.fx{width:100%;min-height:60px;padding:8px;border:1px solid #c9ccd2;border-radius:4px;font-size:12.5px}
+.note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+.pend{font-size:12.5px;margin-top:10px}
+.pend li{margin-left:18px}
+.hide{display:none}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 16px;border-radius:4px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header><b>COSHIP AI</b><span class="tag">스케줄센터 · 픽업/배송 스케줄 자동 작성</span><a href="../">← EASY COSHIP</a></header>
+<main>
+
+<section class="panel">
+  <div class="ph"><h2>① 원본 올리기</h2><span class="sub">courier.coship.ca → Work Assigned → CSV (work-assigned-YYYY-MM-DD.csv)</span></div>
+  <div class="pb">
+    <div class="drop" id="drop"><b>CSV를 끌어오거나 클릭</b><br>이 브라우저 안에서만 읽고 어디에도 저장하지 않습니다.</div>
+    <input type="file" id="file" accept=".csv" class="hide">
+    <div class="files" id="files"></div>
+    <div class="set">
+      <label>스케줄 날짜 <input type="date" id="date"></label>
+      <label><input type="checkbox" id="blOn" checked> REMARK에 BL 번호 넣기</label>
+      <label>전달물품 (월간 스케줄 엑셀) <input type="file" id="wb" accept=".xlsx"></label>
+      <span id="wbInfo" style="color:var(--muted);font-size:12.5px"></span>
+    </div>
+    <details style="margin-top:12px;font-size:13px">
+      <summary style="cursor:pointer">고정거래처 목록 (카톡 제외) — 쉼표로 구분, 이 브라우저에 기억</summary>
+      <textarea class="fx" id="fixed" style="margin-top:8px"></textarea>
+    </details>
+  </div>
+</section>
+
+<section class="panel hide" id="pVeh">
+  <div class="ph"><h2>② 차량 · 담당자</h2><span class="sub" id="dayInfo"></span>
+    <div class="r"><button class="btn sm" id="addBlk">+ 차량 추가</button><button class="btn sm" id="reAssign">권역 기준 다시 배정</button></div></div>
+  <div class="pb"><div class="blocks" id="blocks"></div>
+    <p class="note">랭리·써리·화이트락·애보츠포드·델타 건은 NIRO가 있으면 NIRO로, 없으면 첫 차량으로 배정합니다. 블록 순서는 엑셀 순서와 같습니다.</p></div>
+</section>
+
+<section class="panel hide" id="pSch">
+  <div class="ph"><h2>③ 스케줄 확인 · 수정</h2><span class="sub" id="schInfo"></span>
+    <div class="r"><button class="btn sm" id="autoTime">시간 다시 채우기</button><button class="btn pri" id="dlX">엑셀 내려받기</button></div></div>
+  <div class="pb">
+    <div id="sched"></div>
+    <div id="excluded" class="note"></div>
+    <div id="pending" class="pend"></div>
+  </div>
+</section>
+
+<section class="panel hide" id="pKk">
+  <div class="ph"><h2>④ 카톡 안내 멘트</h2><span class="sub" id="kkInfo"></span>
+    <div class="r"><button class="btn" id="dlT">전체 txt 내려받기</button></div></div>
+  <div class="pb"><div class="kgrid" id="kk"></div><div class="skip" id="kkSkip"></div></div>
+</section>
+
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 설정 ================= */
+const HQ={name:'코퀴틀람 본사',addr:'1501 Hartley Ave, Coquitlam, BC V3K 6Z7'};
+const CARS=['SPRINTER','NIRO','METRRIS'];
+const DRIVERS=['MARK','WOODY','ROBIN','CUSTOM'];
+const GUIDE='https://drive.google.com/file/d/1iQqF43HRY1gagRDO4VA4tVn6vjuA0Qxy/view?usp=drive_link';
+const FIXED_DEFAULT='랭리헬타, 로히드헬타, 더뉴스룸, 뉴스룸, 오로니아매장, 오로니아, 택배방, 랭리한남, 써리한남, UVANU, 우밴유, UPS STORE, 네이처밴, NATUREVAN, 이믹스, 밴브릿지, 리비누, 하온유학원, MEGA, 아씨버나비, 마켓리본';
+const KR_PRE=/^01[016789]/;
+const DAYS=['일','월','화','수','목','금','토'];
+// 권역 (도시 → 순서). 루트: COQ 출발 → RMD → VAN-E → VAN-DT → VAN-W → W.VAN → N.VAN → BUR → NW → COQ
+const REGION=[
+  [/RICHMOND|RMD/,'RMD',10],[/WEST VANCOUVER|W\.? ?VAN/,'W.VAN',50],[/NORTH VANCOUVER|N\.? ?VAN/,'N.VAN',60],
+  [/VANCOUVER|VAN\b/,'VAN',30],[/BURNABY|BUR/,'BUR',70],[/NEW WESTMINSTER|NEW WEST|N\.? ?WEST|NW\b/,'NW',80],
+  [/PORT MOODY|PORT COQUITLAM|COQUITLAM|POCO|COQ|PITT MEADOWS|MAPLE RIDGE/,'COQ',90],
+  [/LANGLEY/,'LANGLEY',200],[/SURREY|CLOVERDALE/,'SURREY',210],[/WHITE ROCK/,'WHITE ROCK',220],[/DELTA/,'DELTA',230],[/ABBOTSFORD/,'ABBOTSFORD',240]];
+const NIRO_ZONE=r=>r.ord>=200;
+const DT_ST=/\b(SMITHE|HOWE|HORNBY|GRANVILLE|SEYMOUR|RICHARDS|HOMER|NELSON|ROBSON|DAVIE|BURRARD|THURLOW|BUTE|JERVIS|GEORGIA|PENDER|CORDOVA|WATER|ABBOTT|CARRALL|KEEFER|BEATTY|CAMBIE|EXPO|PACIFIC|BEACH|DRAKE|HELMCKEN|COMOX|HARO|BARCLAY|ALBERNI|MAINLAND|MARINASIDE|DUNSMUIR|HASTINGS)\b/;
+
+/* ================= 보조 ================= */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const norm=s=>String(s||'').toUpperCase().replace(/\s|\(|\)|\.|,/g,'').replace(/쳐/g,'처');
+const title=s=>String(s||'').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1600)}
+function parseCSV(text){
+  if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
+  const rows=[];let row=[],f='',q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true; else if(c===','){row.push(f);f=''}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}
+    else f+=c}
+  if(f!==''||row.length){row.push(f);rows.push(row)}
+  const h=rows.shift().map(s=>s.trim());
+  return {head:h,data:rows.filter(r=>r.length>1).map(r=>Object.fromEntries(h.map((k,i)=>[k,(r[i]||'').trim()])))};
+}
+function fmtTel(t){
+  const d=String(t||'').replace(/\D/g,'');
+  if(/^01\d{9}$/.test(d)) return d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7);
+  if(/^01\d{8}$/.test(d)) return d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);
+  const x=d.length===11&&d[0]==='1'?d.slice(1):d;
+  if(x.length===10) return x.slice(0,3)+'-'+x.slice(3,6)+'-'+x.slice(6);
+  return String(t||'').trim();
+}
+const isKR=t=>KR_PRE.test(String(t||'').replace(/\D/g,''));
+function region(city,addr){
+  const s=(city+' | '+addr).toUpperCase();
+  for(const [re,k,o] of REGION) if(re.test(s)){
+    if(k==='VAN'){ if(/\b(E|EAST)\b/.test(addr.toUpperCase())) return {k:'VAN-E',ord:20}; if(DT_ST.test(addr.toUpperCase())) return {k:'VAN-DT',ord:30}; if(/\b(W|WEST)\b/.test(addr.toUpperCase())) return {k:'VAN-W',ord:40}; return {k:'VAN',ord:35}; }
+    return {k,ord:o};
+  }
+  return {k:'기타',ord:150};
+}
+function cleanAddr(addr,city){
+  let a=String(addr||'').replace(/\s+/g,' ').replace(/[,\s]+$/,'').trim();
+  if(!a) return '';
+  a=a.replace(/\bU#\s*/i,'#').replace(/,?\s*(B\.?C\.?|BRITISH COLUMBIA)\b.*$/i,'').replace(/,?\s*CANADA\b.*$/i,'').replace(/[,\s]+$/,'');
+  // "/BUZZ" → UNIT#/BUZZ#, 주소
+  const bz=a.match(/^(.*?)\s*\/\s*BUZZ(?:ER)?\s*[:#]?\s*(\w+)(.*)$/i);
+  if(bz){const main=bz[1]+bz[3]; const u=main.match(/^(?:UNIT|#|APT|SUITE)\s*(\d+\w?)\s*,?\s*(.*)$/i);
+    a=u?`#${u[1]}/BUZZ ${bz[2]}, ${u[2]}`:`${main.trim()} (BUZZ ${bz[2]})`;}
+  let c=String(city||'').trim();
+  if(!c){ for(const [re] of REGION){const m=a.toUpperCase().match(re); if(m&&m[0].length>4){c=m[0];break}} }
+  if(c){ const i=a.toUpperCase().lastIndexOf(c.toUpperCase()); if(i>0) a=a.slice(0,i).replace(/[,\s]+$/,''); a+=', '+title(c); }
+  return a;
+}
+function pkgCode(r){const n=+r.Packages||0, c=(r.Carrier||'').toUpperCase();
+  if(c==='O') return (r['W.Type']==='DL'?'I':'M')+'-'+n;
+  if(c==='A') return 'A-'+n;
+  return (c||'?')+'-'+n;}
+function pkgText(p){const m=String(p).match(/^([A-Z])-(\d+)$/);if(!m)return p;return ({M:'선박',I:'선박',A:'항공'}[m[1]]||m[1])+' '+m[2]+'개'}
+
+/* ================= 상태 ================= */
+let STOPS=[], BLOCKS=[], EXCL=[], DELIV=[], SEQ=1, FILE_DATE='';
+const fixedList=()=>$('fixed').value.split(/[,\n]/).map(norm).filter(x=>x.length>=2);
+const isFixed=n=>{const x=norm(n);return fixedList().some(f=>x.includes(f)||f.includes(x)&&x.length>=2)};
+
+function defaultBlocks(d){
+  const wd=d.getDay();
+  if(wd===2) return [{id:SEQ++,car:'NIRO',drv:'',custom:'',zone:'LANGLEY / SURREY',start:'9:00'},{id:SEQ++,car:'SPRINTER',drv:'',custom:'',zone:'VANCOUVER',start:'8:30'}];
+  return [{id:SEQ++,car:'SPRINTER',drv:'',custom:'',zone:'',start:'9:00'}];
+}
+function assign(){
+  const niro=BLOCKS.find(b=>b.car==='NIRO'), other=BLOCKS.find(b=>b.car!=='NIRO')||BLOCKS[0];
+  STOPS.forEach(s=>{s.blk=(niro&&NIRO_ZONE(s.reg))?niro.id:(other||niro).id});
+  STOPS.sort((a,b)=>a.reg.ord-b.reg.ord||a.i-b.i);
+  BLOCKS.forEach(b=>autoTime(b.id));
+}
+function autoTime(bid){
+  const b=BLOCKS.find(x=>x.id===bid); if(!b) return;
+  const [hh,mm]=String(b.start).split(':').map(x=>parseInt(x)||0); const h0=(hh||9)+(mm>0?1:0); let i=0;
+  STOPS.filter(s=>s.blk===bid).forEach(s=>{const h=h0+Math.floor(i/2);s.time=`${h}-${h+2}`;i++});
+  b.ret=i?`${h0+Math.floor((i-1)/2)+2}:00`:'';
+}
+function remarkOf(r,bal){
+  const p=[]; if(r.Remark) p.push(r.Remark);
+  if(bal===999) p.push('결제 별도 확인(999)');
+  if($('blOn').checked&&r['BL No.']) p.push(r['BL No.']);
+  return p.join(' / ');
+}
+function build(rows){
+  STOPS=[];EXCL=[];
+  rows.forEach((r,i)=>{
+    if(/1501\s*HARTLEY/i.test(r.Address)){EXCL.push(`${r.Customer} — 본사 주소 (스케줄 제외)`);return}
+    const bal=parseFloat(r.Balance)||0, addr=cleanAddr(r.Address,r.City);
+    STOPS.push({id:SEQ++,i,wt:r['W.Type'],cust:r.Customer,addr,tel:fmtTel(r.Phone),time:'',pkg:pkgCode(r),
+      pay:bal>1&&bal!==999?'$'+bal.toFixed(2):'',bal,remark:remarkOf(r,bal),bl:r['BL No.']||'',reg:region(r.City,r.Address),raw:r,sent:false});
+  });
+  applyDeliv();
+  const d=$('date').value?new Date($('date').value+'T00:00:00'):new Date();
+  BLOCKS=defaultBlocks(d); assign(); renderAll();
+}
+function applyDeliv(){
+  STOPS.forEach(s=>{s.remark=s.remark.replace(/\s*\/?\s*📦 전달:[^/]*$/,'');
+    const m=DELIV.filter(d=>{const a=norm(s.cust),b=norm(d.who);return b.length>=2&&(a.includes(b)||b.includes(a))});
+    if(m.length) s.remark=(s.remark?s.remark+' / ':'')+'📦 전달: '+m.map(x=>x.what).join(', ');});
+}
+
+/* ================= 렌더 ================= */
+function renderAll(){renderBlocks();renderSched();renderKakao();}
+function blkLabel(b){return `${b.car}  |  담당: ${b.drv==='CUSTOM'?(b.custom||'CUSTOM'):(b.drv||'미정')}${b.zone?'  |  구역: '+b.zone:''}`}
+function renderBlocks(){
+  $('pVeh').classList.remove('hide');
+  const d=new Date($('date').value+'T00:00:00');
+  $('dayInfo').textContent=isNaN(d)?'':`${d.getMonth()+1}월 ${d.getDate()}일 ${DAYS[d.getDay()]}요일 기본 배치`;
+  $('blocks').innerHTML=BLOCKS.map((b,k)=>`<div class="blk ${b.car==='NIRO'?'niro':'van'}" data-b="${b.id}">
+    <b>${k+1}</b>
+    <select data-f="car">${CARS.map(c=>`<option ${c===b.car?'selected':''}>${c}</option>`).join('')}</select>
+    담당 <select data-f="drv"><option value="">선택</option>${DRIVERS.map(c=>`<option ${c===b.drv?'selected':''}>${c}</option>`).join('')}</select>
+    <input data-f="custom" placeholder="직접 입력" value="${esc(b.custom)}" class="${b.drv==='CUSTOM'?'':'hide'}" style="width:110px">
+    구역 <input data-f="zone" value="${esc(b.zone)}" style="width:150px">
+    출발 <input data-f="start" value="${esc(b.start)}" style="width:62px">
+    ${k?`<button class="btn sm" data-a="up">위로</button>`:''}
+    ${BLOCKS.length>1?`<button class="btn sm x" data-a="del">삭제</button>`:''}
+  </div>`).join('');
+  document.querySelectorAll('.blk').forEach(el=>{
+    const b=BLOCKS.find(x=>x.id==el.dataset.b);
+    el.querySelectorAll('[data-f]').forEach(inp=>inp.oninput=inp.onchange=()=>{b[inp.dataset.f]=inp.value;
+      if(inp.dataset.f==='car'||inp.dataset.f==='drv'){renderBlocks();renderSched()} else if(inp.dataset.f==='start'){autoTime(b.id);renderSched()} else renderSchedHeads();});
+    el.querySelectorAll('[data-a]').forEach(btn=>btn.onclick=()=>{
+      const k=BLOCKS.indexOf(b);
+      if(btn.dataset.a==='up'){BLOCKS.splice(k,1);BLOCKS.splice(k-1,0,b)}
+      else {BLOCKS.splice(k,1);STOPS.filter(s=>s.blk===b.id).forEach(s=>s.blk=BLOCKS[0].id);autoTime(BLOCKS[0].id)}
+      renderAll();});
+  });
+}
+function mapUrl(bid){
+  const a=[HQ.addr].concat(STOPS.filter(s=>s.blk===bid&&s.addr).map(s=>s.addr)).concat([HQ.addr]);
+  return 'https://www.google.com/maps/dir/'+a.map(x=>encodeURIComponent(x.replace(/\/BUZZ \w+/,''))).join('/');
+}
+function renderSchedHeads(){BLOCKS.forEach(b=>{const h=document.querySelector(`.vh[data-b="${b.id}"] .lbl`);if(h)h.textContent=blkLabel(b)})}
+function renderSched(){
+  $('pSch').classList.remove('hide');
+  const total=STOPS.length, pu=STOPS.filter(s=>s.wt==='PU').length;
+  $('schInfo').textContent=`총 ${total}건 · 픽업 ${pu} · 배송 ${total-pu}`;
+  $('sched').innerHTML=BLOCKS.map(b=>{
+    const list=STOPS.filter(s=>s.blk===b.id);
+    return `<div class="vh ${b.car==='NIRO'?'niro':'van'}" data-b="${b.id}"><span class="lbl">${esc(blkLabel(b))}</span>
+      <div class="r">${list.length}건 · <a href="${mapUrl(b.id)}" target="_blank" rel="noopener">구글맵 경로</a> <button class="btn sm" data-add="${b.id}">+ 행 추가</button></div></div>
+    <div class="sched"><table><thead><tr><th></th><th>CUSTOMER</th><th>ADDRESS</th><th>TEL</th><th>TIME</th><th>PKG</th><th>PAYMENT</th><th>REMARK</th><th>구분</th></tr></thead><tbody>
+    <tr class="hq"><td></td><td>${HQ.name}</td><td>${HQ.addr}</td><td></td><td>${esc(b.start)} 출발</td><td colspan="4"></td></tr>
+    ${list.map((s,k)=>`<tr data-s="${s.id}">
+      <td class="ctl"><button class="ic" data-m="up" title="위로">▲</button> <button class="ic" data-m="dn" title="아래로">▼</button>
+        <select data-m="mv" style="font-size:11.5px;padding:2px;border:1px solid var(--line);border-radius:3px" title="차량 이동">${BLOCKS.map((x,i)=>`<option value="${x.id}" ${x.id===b.id?'selected':''}>${i+1} ${x.car}</option>`).join('')}</select>
+        <button class="ic" data-m="del" title="스케줄에서 빼기">✕</button></td>
+      <td style="min-width:110px"><input data-f="cust" value="${esc(s.cust)}"></td>
+      <td class="${s.addr?'':'noaddr'}" style="min-width:260px"><input data-f="addr" value="${esc(s.addr)}" placeholder="주소 없음"></td>
+      <td class="${isKR(s.tel)?'kr':''}" style="min-width:115px"><input data-f="tel" value="${esc(s.tel)}"></td>
+      <td style="width:72px"><input data-f="time" value="${esc(s.time)}"></td>
+      <td style="width:64px"><input data-f="pkg" value="${esc(s.pkg)}"></td>
+      <td style="width:86px"><input data-f="pay" value="${esc(s.pay)}"></td>
+      <td style="min-width:200px"><input data-f="remark" value="${esc(s.remark)}"></td>
+      <td><div class="tags">${s.wt?`<span class="tg ${s.wt==='PU'?'pu':'dl'}">${s.wt==='PU'?'픽업':'배송'}</span>`:''}<span class="tg">${s.reg.k}</span>${isFixed(s.cust)?'<span class="tg fx">고정거래처</span>':''}${isKR(s.tel)?'<span class="tg warn">한국번호</span>':''}${s.addr?'':'<span class="tg err">주소 없음</span>'}</div></td>
+    </tr>`).join('')}
+    <tr class="hq"><td></td><td>${HQ.name}</td><td>${HQ.addr}</td><td></td><td style="white-space:nowrap"><input value="${esc(b.ret||'')}" data-ret="${b.id}" style="width:52px;background:transparent;border:0;padding:0"> 복귀</td><td colspan="4"></td></tr>
+    </tbody></table></div>`;}).join('');
+  // 이벤트
+  document.querySelectorAll('#sched tr[data-s]').forEach(tr=>{
+    const s=STOPS.find(x=>x.id==tr.dataset.s);
+    tr.querySelectorAll('input[data-f]').forEach(inp=>inp.oninput=()=>{s[inp.dataset.f]=inp.value;
+      if(inp.dataset.f==='tel') inp.parentElement.classList.toggle('kr',isKR(inp.value));
+      if(inp.dataset.f==='addr') inp.parentElement.classList.toggle('noaddr',!inp.value.trim());
+      kkSoon();});
+    tr.querySelector('[data-f="tel"]').onblur=e=>{s.tel=fmtTel(e.target.value);e.target.value=s.tel};
+    tr.querySelectorAll('[data-m]').forEach(el=>{
+      const go=()=>{
+        const m=el.dataset.m, same=STOPS.filter(x=>x.blk===s.blk), k=same.indexOf(s);
+        if(m==='up'&&k>0){swap(s,same[k-1])} else if(m==='dn'&&k<same.length-1){swap(s,same[k+1])}
+        else if(m==='mv'){s.blk=+el.value;STOPS.splice(STOPS.indexOf(s),1);STOPS.push(s)}
+        else if(m==='del'){STOPS.splice(STOPS.indexOf(s),1);EXCL.push(`${s.cust} — 직접 뺌`)}
+        else return;
+        renderSched();renderKakao();};
+      if(el.tagName==='SELECT') el.onchange=go; else el.onclick=go;});
+  });
+  document.querySelectorAll('[data-ret]').forEach(inp=>inp.oninput=()=>{BLOCKS.find(b=>b.id==inp.dataset.ret).ret=inp.value});
+  document.querySelectorAll('[data-add]').forEach(btn=>btn.onclick=()=>{
+    STOPS.push({id:SEQ++,i:999,wt:'',cust:'',addr:'',tel:'',time:'',pkg:'',pay:'',bal:0,remark:'',bl:'',reg:{k:'수동',ord:999},blk:+btn.dataset.add,sent:false});renderSched();renderKakao();});
+  $('excluded').innerHTML=EXCL.length?'스케줄 제외: '+EXCL.map(esc).join(' · '):'';
+  renderPending();
+}
+function swap(a,b){const i=STOPS.indexOf(a),j=STOPS.indexOf(b);STOPS[i]=b;STOPS[j]=a;}
+function renderPending(){
+  if(!DELIV.length){$('pending').innerHTML='';return}
+  const on=DELIV.filter(d=>STOPS.some(s=>{const a=norm(s.cust),b=norm(d.who);return a.includes(b)||b.includes(a)}));
+  const off=DELIV.filter(d=>!on.includes(d));
+  $('pending').innerHTML=`<b>전달물품 미완료 ${DELIV.length}건</b> — 오늘 스케줄 반영 ${on.length}건${off.length?`, 오늘 방문 없음 ${off.length}건:<ul>${off.map(d=>`<li>${esc(d.who)} — ${esc(d.what)} <span style="color:var(--faint)">(${esc(d.when)})</span></li>`).join('')}</ul>`:''}`;
+}
+
+/* ================= 카톡 ================= */
+let kkT=null; const kkSoon=()=>{clearTimeout(kkT);kkT=setTimeout(renderKakao,300)};
+function fmtDate(){const d=new Date($('date').value+'T00:00:00');return isNaN(d)?'':`${d.getMonth()+1}월 ${d.getDate()}일 (${DAYS[d.getDay()]})`}
+function fmtTime(t){const m=String(t).match(/^(\d{1,2})(?::(\d\d))?\s*[-~]\s*(\d{1,2})(?::(\d\d))?$/);if(!m)return t;
+  const f=(h,mm)=>{h=+h;const ap=h<12?'오전':'오후';const hh=h>12?h-12:h;return `${ap} ${hh}시${mm&&mm!=='00'?' '+mm+'분':''}`};
+  return `${f(m[1],m[2])} ~ ${f(m[3],m[4])}`}
+function msg(s){
+  const pu=s.wt!=='DL';
+  const L=[pu?`안녕하세요, ${s.cust} 고객님. 캐나다쉬핑입니다. 고객님께서 신청하신 화물 운송 및 픽업 서비스를 위해 기사님이 방문할 예정입니다. 아래 내용 확인 후 '확인완료' 톡 부탁드립니다.`
+            :`안녕하세요, ${s.cust} 고객님. 캐나다쉬핑입니다. 고객님의 화물이 통관 및 하역을 모두 마치고 아래 날짜로 배송해드릴 예정입니다. 아래 내용 확인 후 '확인완료' 톡 부탁드립니다.`,'',
+    `📅 ${pu?'방문':'배송'} 예정일: ${fmtDate()}`,`⏰ ${pu?'방문':'배송'} 예정 시간: ${fmtTime(s.time)}`,`📍 ${pu?'방문지':'배송지'} 주소: ${s.addr}`,`📦 화물 정보 및 수량: ${pkgText(s.pkg)}`];
+  const bal=parseFloat(String(s.pay).replace(/[^\d.]/g,''))||0;
+  if(bal>1) L.push(`💰 미결제 잔액: $${bal.toFixed(2)} (수령 시 결제 부탁드립니다)`);
+  L.push(`📞 캐나다 연락처: ${s.tel}`,'','📢 [픽업 및 배송 전 꼭 읽어주세요]',GUIDE,'','언제나 저희 캐나다쉬핑을 이용해 주셔서 진심으로 감사드립니다. 오늘도 좋은 하루 보내세요.');
+  return L.join('\n');
+}
+function kakaoList(){
+  const ok=[],skip=[];
+  BLOCKS.forEach(b=>STOPS.filter(s=>s.blk===b.id).forEach(s=>{
+    if(!s.cust) return;
+    if(isFixed(s.cust)) skip.push([s,'고정거래처']); else if(isKR(s.tel)) skip.push([s,'한국 전화번호']); else if(!s.addr.trim()) skip.push([s,'주소 없음']); else ok.push(s);}));
+  return {ok,skip};
+}
+function renderKakao(){
+  $('pKk').classList.remove('hide');
+  const {ok,skip}=kakaoList();
+  $('kkInfo').textContent=`발송 대상 ${ok.length}건 · 제외 ${skip.length}건 · 복사하면 흐리게 표시`;
+  $('kk').innerHTML=ok.map(s=>`<div class="kcard ${s.sent?'done':''}" data-s="${s.id}"><div class="kh"><b>${esc(s.cust)}</b><span class="tg ${s.wt==='DL'?'dl':'pu'}">${s.wt==='DL'?'배송':'픽업'}</span><span style="color:var(--muted)">${esc(s.tel)}</span><button class="btn sm">복사</button></div><pre>${esc(msg(s))}</pre></div>`).join('')||'<p style="color:var(--faint)">발송 대상이 없습니다</p>';
+  $('kkSkip').innerHTML=skip.length?'카톡 제외: <ul>'+skip.map(([s,w])=>`<li>${esc(s.cust)} — ${w}</li>`).join('')+'</ul>':'';
+  document.querySelectorAll('.kcard').forEach(c=>c.querySelector('button').onclick=async()=>{
+    const s=STOPS.find(x=>x.id==c.dataset.s);
+    try{await navigator.clipboard.writeText(msg(s))}catch(e){const t=document.createElement('textarea');t.value=msg(s);document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
+    s.sent=true;c.classList.add('done');toast(`${s.cust} 고객 멘트 복사됨`);});
+}
+
+/* ================= 내려받기 ================= */
+function fileTag(){const d=new Date($('date').value+'T00:00:00');const mm=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');return {mmdd:mm+dd,dow:DAYS[d.getDay()],d}}
+function save(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
+$('dlT').onclick=()=>{const {ok}=kakaoList(),{mmdd}=fileTag();
+  save(new Blob([ok.map(s=>`■ ${s.cust} (${s.tel})\n\n${msg(s)}`).join('\n\n────────────────────\n\n')],{type:'text/plain;charset=utf-8'}),`${mmdd}_카톡멘트.txt`)};
+$('dlX').onclick=async()=>{
+  if(!window.ExcelJS){alert('엑셀 모듈을 불러오지 못했습니다. 인터넷 연결을 확인하세요.');return}
+  const {mmdd,dow,d}=fileTag();
+  const wb=new ExcelJS.Workbook(), ws=wb.addWorksheet(`${mmdd} ${dow}`,{views:[{showGridLines:true}]});
+  ws.columns=[{width:18},{width:38},{width:18},{width:10},{width:8},{width:10},{width:42},{width:14}];
+  const F='맑은 고딕', thin={style:'thin',color:{argb:'FFBFBFBF'}}, box={top:thin,left:thin,bottom:thin,right:thin};
+  const fill=c=>({type:'pattern',pattern:'solid',fgColor:{argb:'FF'+c}});
+  const styleRow=(r,{bg,bold=false,sz=10,color})=>{for(let c=1;c<=7;c++){const cell=r.getCell(c);cell.font={name:F,size:sz,bold,color:color?{argb:'FF'+color}:undefined};cell.alignment={vertical:'middle',wrapText:c===2||c===7};if(bg)cell.fill=fill(bg);cell.border=box}};
+  let r=ws.addRow([`COSHIP 배송/픽업 스케줄 — ${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${dow}요일`]);
+  ws.mergeCells(r.number,1,r.number,7); styleRow(r,{bg:'2F4FBF',bold:true,sz:14,color:'FFFFFF'}); r.height=26;
+  BLOCKS.forEach((b,k)=>{
+    if(k) ws.addRow([]);
+    r=ws.addRow([blkLabel(b)]); ws.mergeCells(r.number,1,r.number,7); styleRow(r,{bg:b.car==='NIRO'?'E2EFDA':'D9E1F2',bold:true,sz:12}); r.height=20;
+    const list=STOPS.filter(s=>s.blk===b.id);
+    if(list.some(s=>s.addr)){const h=r.getCell(8);h.value={text:'구글맵 경로',hyperlink:mapUrl(b.id)};h.font={name:F,size:10,color:{argb:'FF0563C1'},underline:true}}
+    r=ws.addRow(['CUSTOMER','ADDRESS','TEL','TIME','PKG','PAYMENT','REMARK']); styleRow(r,{bg:'E7E6E6',bold:true,sz:11});
+    r=ws.addRow([HQ.name,HQ.addr,'',`${b.start} 출발`,'','','']); styleRow(r,{bg:'FFF2CC'});
+    list.forEach(s=>{
+      r=ws.addRow([s.cust,s.addr,s.tel,s.time,s.pkg,s.pay,s.remark]); styleRow(r,{});
+      if(isKR(s.tel)) r.getCell(3).fill=fill('FFFF00');
+      if(!s.addr.trim()) r.getCell(2).fill=fill('FFD7D7');
+    });
+    r=ws.addRow([HQ.name,HQ.addr,'',b.ret?`${b.ret} 복귀`:'','','','']); styleRow(r,{bg:'FFF2CC'});
+  });
+  ws.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,margins:{left:.3,right:.3,top:.4,bottom:.4,header:.2,footer:.2}};
+  const buf=await wb.xlsx.writeBuffer();
+  save(new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),`${mmdd}_${dow}_스케줄.xlsx`);
+};
+$('autoTime').onclick=()=>{BLOCKS.forEach(b=>autoTime(b.id));renderSched();renderKakao()};
+$('reAssign').onclick=()=>{assign();renderSched();renderKakao()};
+$('addBlk').onclick=()=>{BLOCKS.push({id:SEQ++,car:'SPRINTER',drv:'',custom:'',zone:'',start:'9:00'});renderAll()};
+
+/* ================= 전달물품 (월간 엑셀의 '전달물품' 시트) ================= */
+async function unzip(buf){
+  const v=new DataView(buf),u8=new Uint8Array(buf),td=new TextDecoder();
+  let e=buf.byteLength-22;while(e>=0&&v.getUint32(e,true)!==0x06054b50)e--; if(e<0) throw new Error('엑셀 아님');
+  const n=v.getUint16(e+10,true);let p=v.getUint32(e+16,true);const out={};
+  for(let i=0;i<n;i++){const m=v.getUint16(p+10,true),cs=v.getUint32(p+20,true),fl=v.getUint16(p+28,true),xl=v.getUint16(p+30,true),cl=v.getUint16(p+32,true),lo=v.getUint32(p+42,true);
+    const name=td.decode(u8.subarray(p+46,p+46+fl));p+=46+fl+xl+cl;
+    out[name]=async()=>{const st=lo+30+v.getUint16(lo+26,true)+v.getUint16(lo+28,true),raw=u8.subarray(st,st+cs);
+      if(m===0)return td.decode(raw);return await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text()};}
+  return out;
+}
+async function readSheet(file,want){
+  const z=await unzip(await file.arrayBuffer()),dp=new DOMParser(),X=async k=>dp.parseFromString(await z[k](),'text/xml');
+  const wbx=await X('xl/workbook.xml'),rel=await X('xl/_rels/workbook.xml.rels');
+  const sh=[...wbx.getElementsByTagName('sheet')].find(s=>s.getAttribute('name').trim()===want); if(!sh) return null;
+  const rid=sh.getAttribute('r:id')||sh.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','id');
+  let tgt=[...rel.getElementsByTagName('Relationship')].find(r=>r.getAttribute('Id')===rid).getAttribute('Target').replace(/^\/?(xl\/)?/,'');
+  const ss=z['xl/sharedStrings.xml']?[...(await X('xl/sharedStrings.xml')).getElementsByTagName('si')].map(si=>[...si.getElementsByTagName('t')].map(t=>t.textContent).join('')):[];
+  const doc=await X('xl/'+tgt),rows=[];
+  const col=r=>{let c=0;for(const ch of r.replace(/\d/g,''))c=c*26+ch.charCodeAt(0)-64;return c-1};
+  for(const row of doc.getElementsByTagName('row')){const a=[];for(const c of row.getElementsByTagName('c')){const t=c.getAttribute('t'),vv=c.getElementsByTagName('v')[0];
+    a[col(c.getAttribute('r'))]=t==='s'?ss[+vv?.textContent]:t==='inlineStr'?[...c.getElementsByTagName('t')].map(x=>x.textContent).join(''):(vv?vv.textContent:'');}
+    rows.push(Array.from(a,x=>x??''));}
+  return rows;
+}
+const xdate=v=>/^\d{5}(\.\d+)?$/.test(v)?(d=>`${d.getUTCMonth()+1}/${d.getUTCDate()}`)(new Date(Date.UTC(1899,11,30)+(+v)*864e5)):String(v||'');
+$('wb').onchange=async()=>{
+  const f=$('wb').files[0]; if(!f) return;
+  try{const rows=await readSheet(f,'전달물품');
+    if(!rows){$('wbInfo').textContent="'전달물품' 시트를 찾지 못했습니다";return}
+    DELIV=rows.filter(r=>String(r[1]||'').trim()&&String(r[2]||'').trim()&&!String(r[3]||'').trim()).map(r=>({when:xdate(r[0]),who:String(r[1]).trim(),what:String(r[2]).trim().replace(/\s+/g,' ')}));
+    $('wbInfo').textContent=`전달물품 미완료 ${DELIV.length}건 불러옴 (D열 전달일 빈 건)`;
+    if(STOPS.length){applyDeliv();renderSched();renderKakao()}
+  }catch(e){$('wbInfo').textContent='엑셀을 읽지 못했습니다'}
+};
+
+/* ================= 파일 ================= */
+$('fixed').value=LS.get('sc_fixed')||FIXED_DEFAULT;
+$('fixed').oninput=()=>{LS.set('sc_fixed',$('fixed').value);if(STOPS.length){renderSched();renderKakao()}};
+$('date').value=new Date().toLocaleDateString('en-CA');
+$('date').onchange=()=>{if(STOPS.length){renderBlocks();renderKakao()}};
+$('blOn').onchange=()=>{STOPS.forEach(s=>{if(s.raw){s.remark=remarkOf(s.raw,s.bal)}});applyDeliv();renderSched();renderKakao()};
+const drop=$('drop'),file=$('file');
+drop.onclick=()=>file.click();
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');load(e.dataTransfer.files[0])};
+file.onchange=()=>load(file.files[0]);
+async function load(f){
+  if(!f) return;
+  const {head,data}=parseCSV(await f.text());
+  if(!['W.Type','Carrier','Customer','Address','Packages'].every(k=>head.includes(k))){alert('Work Assigned CSV가 아닙니다');return}
+  const m=f.name.match(/(\d{4}-\d{2}-\d{2})/); if(m) $('date').value=m[1];
+  $('files').textContent=`${f.name} · ${data.length}건`;
+  build(data);
+}
+</script>
+</body>
+</html>
