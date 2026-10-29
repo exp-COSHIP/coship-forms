@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>COSHIP AI · 조회센터</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16181d;--muted:#666b73;--faint:#9aa0a8;--line:#e2e4e8;--bg:#f6f7f8;--red:#e31e24;--red-soft:#fdeced;--green:#2e7d32}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:14px;line-height:1.5}
+button,input,select{font:inherit;color:inherit}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:12px}
+header b{font-size:16px;letter-spacing:.04em}
+header .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:2px 7px;border-radius:3px}
+header a{margin-left:auto;font-size:12.5px;color:var(--muted);text-decoration:none}
+main{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:6px;margin-bottom:16px}
+.ph{padding:12px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ph h2{font-size:15px}.ph .sub{color:var(--muted);font-size:12.5px}
+.pb{padding:16px 18px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted)}
+label.f input,label.f select{padding:9px 10px;border:1px solid #c9ccd2;border-radius:4px;background:#fff;color:var(--ink);font-size:15px}
+.chk{display:flex;gap:6px;align-items:center;font-size:13px;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11.5px;color:var(--muted);font-weight:500;padding:7px 6px;border-bottom:1px solid #c9ccd2;white-space:nowrap}
+td{padding:5px 6px;border-bottom:1px solid var(--line)}
+td input{width:100%;padding:8px;border:1px solid #c9ccd2;border-radius:4px;font-size:15px;text-align:right}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.btn{padding:9px 16px;border-radius:4px;border:1px solid var(--ink);background:#fff;cursor:pointer;font-weight:500;font-size:13.5px;white-space:nowrap}
+.btn.pri{background:var(--ink);color:#fff}
+.btn.sm{padding:4px 10px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:default}
+.ic{width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:4px;cursor:pointer}
+.acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.info{font-size:12.5px;color:var(--muted)}
+.price{font-weight:700;font-size:16px}
+.cost{color:var(--muted)}
+.m{color:var(--green);font-weight:500}.m.neg{color:var(--red)}
+tr.best td{background:#fafbf3}
+.err{color:var(--red);font-size:13px;margin-top:10px}
+.note{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.7}
+details summary{cursor:pointer;font-size:13px}
+.hide{display:none!important}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 16px;border-radius:4px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:9px 18px;border:1px solid var(--line);border-radius:5px;background:#fff;cursor:pointer;font-weight:500}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+textarea.tn{width:100%;min-height:96px;padding:10px;border:1px solid #c9ccd2;border-radius:4px;font-family:Consolas,monospace;font-size:14px}
+.tk{border:1px solid var(--line);border-radius:6px;margin-top:12px}
+.tk .h{padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tk .h b{font-family:Consolas,monospace}
+.st{font-size:12px;padding:2px 8px;border-radius:3px;border:1px solid var(--line)}
+.st.ok{background:#e8f5e9;border-color:#a5d6a7;color:var(--green)}
+.st.no{background:var(--red-soft);border-color:#f5b5b7;color:var(--red)}
+.tk ol{list-style:none;padding:8px 14px;font-size:12.5px}
+.tk li{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.tk li:last-child{border:0}
+.tk li span{color:var(--muted);font-variant-numeric:tabular-nums}
+@media(max-width:640px){.hidem{display:none}}
+</style>
+</head>
+<body>
+<header><b>COSHIP AI</b><span class="tag">조회센터 · 코쉽 가격 · UPS 견적·배송조회 · 단위 계산 · 직원용</span><a href="../">← EASY COSHIP</a></header>
+<main>
+<div class="tabs"><button class="tab on" data-t="p">코쉽 가격조회</button><button class="tab" data-t="q">UPS 요금 견적</button><button class="tab" data-t="t">UPS 배송 조회</button><button class="tab" data-t="u">단위 · CBM 계산</button></div>
+<div id="tabT" class="tabp hide">
+<section class="panel">
+  <div class="ph"><h2>UPS 배송 조회</h2><span class="sub">운송장 번호 한 줄에 하나 · 최대 20개</span></div>
+  <div class="pb">
+    <textarea class="tn" id="tn" placeholder="1Z..."></textarea>
+    <div class="acts"><button class="btn pri" id="goT">조회</button><span class="info" id="statT"></span></div>
+    <div class="err" id="errT"></div>
+    <div id="trk"></div>
+  </div>
+</section>
+</div>
+<div id="tabQ" class="tabp hide">
+<section class="panel">
+  <div class="ph"><h2>배송 정보</h2><span class="sub">UPS 계정 AE7873 계약 기준으로 조회</span></div>
+  <div class="pb">
+    <div class="row">
+      <label class="f">출발 우편번호<input id="fromP" value="V3K 6Z7" autocomplete="off"></label>
+      <label class="f">도착 국가<select id="toC"><option value="CA">캐나다</option><option value="US">미국</option></select></label>
+      <label class="f">도착 우편번호<input id="toP" placeholder="예) M5V 3L9" autocomplete="off"></label>
+      <label class="f hide" id="stW">미국 주(州) 코드<input id="toS" placeholder="예) WA" maxlength="2"></label>
+    </div>
+    <label class="chk"><input type="checkbox" id="resi" checked> 주거지 배송 (회사 주소면 해제)</label>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="ph"><h2>박스</h2><span class="sub">kg · cm · 같은 박스는 수량으로</span></div>
+  <div class="pb">
+    <table><thead><tr><th>무게 kg</th><th>가로 cm</th><th>세로 cm</th><th>높이 cm</th><th>수량</th><th class="r hidem">부피무게</th><th></th></tr></thead><tbody id="boxes"></tbody></table>
+    <div class="acts"><button class="btn sm" id="addBox">+ 박스 추가</button><span class="info" id="sum"></span></div>
+    <div class="acts"><button class="btn pri" id="go">요금 조회</button><span class="info" id="stat"></span></div>
+    <div class="err" id="err"></div>
+  </div>
+</section>
+
+<section class="panel hide" id="res">
+  <div class="ph"><h2>견적 결과</h2><span class="sub" id="resSub"></span><button class="btn sm" id="copyAll" style="margin-left:auto">고객 안내문 복사</button></div>
+  <div class="pb">
+    <table><thead><tr><th>서비스</th><th class="r">예상 소요</th><th class="r">UPS 조회가</th><th class="r">고객 청구가</th><th class="r hidem">회사 원가(계약)</th><th class="r hidem">마진</th><th></th></tr></thead><tbody id="rates"></tbody></table>
+    <p class="note">고객 청구가 = UPS 조회가(공시 요금) × <span id="rateTxt"></span>. 조회가에는 유류할증료 등 UPS 부가요금이 포함되며 세금(GST/HST)은 포함되지 않습니다. 회사 원가는 계약 할인 요금으로, 고객에게 안내하지 않습니다.</p>
+  </div>
+</section>
+
+</div>
+
+<div id="tabP" class="tabp">
+<section class="panel">
+  <div class="ph"><h2>코쉽 가격조회</h2><span class="sub">2026 요금표 기준 · 거래처 할인은 조정 비율로 적용</span>
+    <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"><a class="btn sm" href="https://www.coship.ca/courier-ca-to-kr" target="_blank" rel="noopener">홈페이지 캐→한</a><a class="btn sm" href="https://www.coship.ca/courier-korea-to-canada" target="_blank" rel="noopener">홈페이지 한→캐</a></div></div>
+  <div class="pb">
+    <div class="row">
+      <label class="f">서비스<select id="pSvc">
+        <option value="ca_air">캐→한 항공 (일반)</option>
+        <option value="ca_tier">캐→한 항공 (사업자 티어)</option>
+        <option value="ca_maple">캐→한 선박 (메이플)</option>
+        <option value="kr_air">한→캐 항공 (원화)</option>
+        <option value="kr_maple">한→캐 메이플 (원화)</option></select></label>
+      <label class="f" id="pRegW">출발 권역<select id="pReg"></select></label>
+      <label class="f">조정 비율 (조회가 ×)<input id="pMul" value="1" inputmode="decimal"></label>
+    </div>
+    <div id="pAirBox" style="margin-top:14px">
+      <table><thead><tr><th>무게 kg</th><th>가로 cm</th><th>세로 cm</th><th>높이 cm</th><th>수량</th><th class="r">청구중량</th><th class="r">박스당</th><th></th></tr></thead><tbody id="pBoxes"></tbody></table>
+      <div class="acts"><button class="btn sm" id="pAdd">+ 박스 추가</button></div>
+    </div>
+    <div id="pMapleBox" class="hide" style="margin-top:14px"></div>
+    <div id="pRes" style="margin-top:16px"></div>
+    <p class="note" id="pNote"></p>
+  </div>
+</section>
+</div>
+<div id="tabU" class="tabp hide">
+<section class="panel">
+  <div class="ph"><h2>단위 변환</h2><span class="sub">한쪽에 입력하면 반대쪽이 계산됩니다</span></div>
+  <div class="pb"><div class="row">
+    <label class="f">인치 (in)<input id="uIn" inputmode="decimal"></label><label class="f">센티미터 (cm)<input id="uCm" inputmode="decimal"></label>
+    <label class="f">파운드 (lb)<input id="uLb" inputmode="decimal"></label><label class="f">킬로그램 (kg)<input id="uKg" inputmode="decimal"></label>
+  </div></div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>부피무게</h2><span class="sub">가로 × 세로 × 높이 ÷ 5000 (cm)</span></div>
+  <div class="pb"><div class="row">
+    <label class="f">단위<select id="vU"><option value="cm">cm</option><option value="in">inch</option></select></label>
+    <label class="f">가로<input id="vL" inputmode="decimal"></label><label class="f">세로<input id="vW" inputmode="decimal"></label><label class="f">높이<input id="vH" inputmode="decimal"></label>
+    <label class="f">실무게 kg (선택)<input id="vA" inputmode="decimal"></label>
+  </div><div class="acts"><span class="price" id="vOut">—</span><span class="info" id="vSub"></span></div></div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>CBM 계산기</h2><span class="sub">박스 종류별 개수 입력</span></div>
+  <div class="pb"><div class="row">
+    <label class="f">소박스 (0.1)<input id="c1" inputmode="numeric" placeholder="0"></label>
+    <label class="f">중박스 · 기내용 캐리어 (0.15)<input id="c2" inputmode="numeric" placeholder="0"></label>
+    <label class="f">대박스 · 정장박스 · 이민가방 · 중대형 캐리어 (0.2)<input id="c3" inputmode="numeric" placeholder="0"></label>
+  </div><div class="acts"><span class="price" id="cOut">0 CBM</span><span class="info" id="cSub"></span></div>
+  <p class="note">실측 CBM이 필요하면 위 부피무게 칸에 크기를 넣으면 함께 표시됩니다 (가로×세로×높이 cm ÷ 1,000,000).</p></div>
+</section>
+</div>
+
+<section class="panel" id="srvPanel">
+  <div class="pb">
+    <details><summary>조회 서버 설정 (처음 한 번)</summary>
+      <div class="row" style="margin-top:10px">
+        <label class="f">조회 서버 주소 (Apps Script /exec)<input id="gas" placeholder="https://script.google.com/macros/s/…/exec"></label>
+        <label class="f">직원 코드<input id="code" type="password"></label>
+        <label class="f">고객가 비율<input id="mul" value="0.8" inputmode="decimal"></label>
+      </div>
+      <p class="note">주소·코드는 이 브라우저에만 기억됩니다. UPS 키는 조회 서버(Apps Script)에만 있습니다.</p>
+    </details>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const n=v=>parseFloat(String(v||'').replace(/[^\d.]/g,''))||0;
+const money=v=>'$'+(+v).toFixed(2);
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1600)}
+
+let BOX=[{w:'',l:'',wd:'',h:'',q:'1'}], RATES=[];
+function boxRow(b,i){return `<tr data-i="${i}">
+  ${['w','l','wd','h','q'].map(k=>`<td><input data-k="${k}" value="${esc(b[k])}" inputmode="decimal" autocomplete="off"></td>`).join('')}
+  <td class="r hidem" data-vol></td><td><button class="ic" data-del title="삭제" ${BOX.length>1?'':'disabled'}>✕</button></td></tr>`}
+function renderBoxes(){
+  $('boxes').innerHTML=BOX.map(boxRow).join('');
+  document.querySelectorAll('#boxes tr').forEach(tr=>{
+    const b=BOX[+tr.dataset.i];
+    tr.querySelectorAll('input').forEach(inp=>inp.oninput=()=>{b[inp.dataset.k]=inp.value;clearTimeout(tr._t);tr._t=setTimeout(updSum,250)});
+    tr.querySelector('[data-del]').onclick=()=>{BOX.splice(+tr.dataset.i,1);renderBoxes()};
+  });
+  updSum();
+}
+function updSum(){   // 전체 재렌더 없이 결과만 갱신
+  let cnt=0,act=0,vol=0;
+  document.querySelectorAll('#boxes tr').forEach(tr=>{const b=BOX[+tr.dataset.i],q=Math.max(1,Math.round(n(b.q))||1),v=n(b.l)*n(b.wd)*n(b.h)/5000;
+    tr.querySelector('[data-vol]').textContent=v?v.toFixed(1)+' kg':'';cnt+=q;act+=n(b.w)*q;vol+=v*q;});
+  $('sum').textContent=cnt?`박스 ${cnt}개 · 실무게 ${act.toFixed(1)}kg · 부피무게 ${vol.toFixed(1)}kg (÷5000)`:'';
+}
+$('addBox').onclick=()=>{const last=BOX[BOX.length-1];BOX.push({w:'',l:last.l,wd:last.wd,h:last.h,q:'1'});renderBoxes()};
+$('toC').onchange=()=>$('stW').classList.toggle('hide',$('toC').value!=='US');
+
+function packages(){
+  const out=[];BOX.forEach(b=>{const q=Math.max(1,Math.round(n(b.q))||1);for(let i=0;i<q;i++)out.push({w:n(b.w),l:n(b.l),wd:n(b.wd),h:n(b.h)})});
+  return out.filter(p=>p.w>0);
+}
+function validate(){
+  const c=$('toC').value,p=$('toP').value.toUpperCase().replace(/\s/g,'');
+  if(c==='CA'&&!/^[A-Z]\d[A-Z]\d[A-Z]\d$/.test(p)) return '도착 우편번호를 A1A 1A1 형식으로 입력하세요';
+  if(c==='US'&&!/^\d{5}(-?\d{4})?$/.test(p)) return '미국 ZIP 코드 5자리를 입력하세요';
+  if(c==='US'&&!/^[A-Z]{2}$/i.test($('toS').value.trim())) return '미국 주 코드 2자리를 입력하세요';
+  const pk=packages(); if(!pk.length) return '박스 무게를 입력하세요';
+  if(pk.some(x=>!(x.l>0&&x.wd>0&&x.h>0))) return '박스 크기(가로·세로·높이)를 모두 입력하세요';
+  if(pk.some(x=>x.w>70)) return 'UPS 박스당 최대 70kg입니다';
+  if(!$('gas').value.trim()||!$('code').value) return '아래 "조회 서버 설정"에 주소와 직원 코드를 입력하세요';
+  return '';
+}
+$('go').onclick=async()=>{
+  $('err').textContent='';const v=validate(); if(v){$('err').textContent=v;return}
+  LS.set('uq_gas',$('gas').value.trim());LS.set('uq_code',$('code').value);LS.set('uq_mul',$('mul').value);
+  $('go').disabled=true;$('stat').textContent='조회 중…';
+  try{
+    const c=$('toC').value;
+    const r=await fetch($('gas').value.trim(),{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({
+      code:$('code').value,from:{postal:$('fromP').value},to:{postal:$('toP').value,country:c,prov:c==='US'?$('toS').value.trim().toUpperCase():'',residential:$('resi').checked},packages:packages()})});
+    const j=await r.json();
+    if(!j.ok) throw new Error(j.error||'조회 실패');
+    RATES=j.rates; renderRates();
+    $('stat').textContent=`조회 완료 · ${new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}`;
+  }catch(e){$('err').textContent='조회 실패: '+e.message;$('stat').textContent=''}
+  $('go').disabled=false;
+};
+const mul=()=>{const m=n($('mul').value);return m>0&&m<=2?m:0.8};
+function renderRates(){
+  $('res').classList.remove('hide'); $('rateTxt').textContent=mul();
+  const pk=packages(), min=Math.min(...RATES.map(r=>r.published));
+  $('resSub').textContent=`${$('fromP').value.toUpperCase()} → ${$('toP').value.toUpperCase()} · 박스 ${pk.length}개 · 청구중량 ${RATES[0]?.billable||'-'}kg`;
+  $('rates').innerHTML=RATES.map((r,i)=>{const cust=r.published*mul(),mg=r.negotiated!=null?cust-r.negotiated:null;
+    return `<tr class="${r.published===min?'best':''}"><td><b>${esc(r.name)}</b></td><td class="r">${r.days?r.days+'영업일':'—'}</td>
+      <td class="r">${money(r.published)}</td><td class="r price">${money(cust)}</td>
+      <td class="r cost hidem">${r.negotiated!=null?money(r.negotiated):'—'}</td>
+      <td class="r hidem">${mg!=null?`<span class="m ${mg<0?'neg':''}">${money(mg)}</span>`:'—'}</td>
+      <td><button class="btn sm" data-c="${i}">복사</button></td></tr>`}).join('')||'<tr><td colspan="7" style="color:var(--faint);padding:16px;text-align:center">조회된 서비스가 없습니다</td></tr>';
+  document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>copy(custText([RATES[+b.dataset.c]])));
+}
+function custText(list){
+  const pk=packages();
+  return `[캐나다쉬핑 UPS 배송 견적]\n도착지: ${$('toP').value.toUpperCase()}${$('toC').value==='US'?' (USA)':''}\n박스: ${pk.length}개 (${pk.map(p=>`${p.w}kg`).join(', ')})\n\n`+
+    list.map(r=>`• ${r.name}: ${money(r.published*mul())}${r.days?` (약 ${r.days}영업일)`:''}`).join('\n')+
+    `\n\n※ 세금 별도, 실제 무게·크기 측정 후 금액이 달라질 수 있습니다.`;
+}
+async function copy(t){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast('복사됨')}
+$('copyAll').onclick=()=>copy(custText(RATES));
+$('mul').oninput=()=>{if(RATES.length)renderRates()};
+
+/* ===== 탭 · 배송 조회 ===== */
+const TABS={q:'tabQ',t:'tabT',p:'tabP',u:'tabU'};
+function showTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.t===t));
+  document.querySelectorAll('.tabp').forEach(x=>x.classList.toggle('hide',x.id!==TABS[t]));
+  $('srvPanel').classList.toggle('hide',!(t==='q'||t==='t'));}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+$('goT').onclick=async()=>{
+  $('errT').textContent='';
+  const nums=[...new Set($('tn').value.split(/[\s,]+/).map(x=>x.trim().toUpperCase()).filter(Boolean))].slice(0,20);
+  if(!nums.length){$('errT').textContent='운송장 번호를 입력하세요';return}
+  if(!$('gas').value.trim()||!$('code').value){$('errT').textContent='아래 "조회 서버 설정"에 주소와 직원 코드를 입력하세요';return}
+  LS.set('uq_gas',$('gas').value.trim());LS.set('uq_code',$('code').value);
+  $('goT').disabled=true;$('statT').textContent=`${nums.length}건 조회 중…`;
+  try{
+    const r=await fetch($('gas').value.trim(),{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({code:$('code').value,action:'track',numbers:nums})});
+    const j=await r.json(); if(!j.ok) throw new Error(j.error||'조회 실패');
+    $('trk').innerHTML=j.results.map(x=>x.error?`<div class="tk"><div class="h"><b>${esc(x.no)}</b><span class="st no">조회 불가</span><span class="info">${esc(x.error)}</span></div></div>`:
+      `<div class="tk"><div class="h"><b>${esc(x.no)}</b><span class="st ${x.delivered?'ok':''}">${esc(x.status||'-')}</span>${x.service?`<span class="info">${esc(x.service)}</span>`:''}${x.eta&&!x.delivered?`<span class="info">예정 ${esc(x.eta)}</span>`:''}
+       <button class="btn sm" style="margin-left:auto" data-cp="${esc(x.no)}|${esc(x.status)}|${esc(x.activity[0]?.when||'')}|${esc(x.activity[0]?.where||'')}">안내문 복사</button></div>
+       <ol>${x.activity.map(a=>`<li><span>${esc(a.when)}</span><div>${esc(a.what)}${a.where?` <span>· ${esc(a.where)}</span>`:''}</div></li>`).join('')}</ol></div>`).join('');
+    document.querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>{const [no,st,w,loc]=b.dataset.cp.split('|');
+      copy(`[캐나다쉬핑 UPS 배송 조회]\n운송장: ${no}\n현재 상태: ${st}\n최근 기록: ${w}${loc?' · '+loc:''}\nhttps://www.ups.com/track?tracknum=${no}`)});
+    const d=j.results.filter(x=>x.delivered).length;
+    $('statT').textContent=`${j.results.length}건 · 배송완료 ${d} · 진행 중 ${j.results.filter(x=>!x.error).length-d} · 조회 불가 ${j.results.filter(x=>x.error).length}`;
+  }catch(e){$('errT').textContent='조회 실패: '+e.message;$('statT').textContent=''}
+  $('goT').disabled=false;
+};
+
+/* ===== 코쉽 가격조회 ===== */
+const CA_RATES={"van": [[0.5, 29.9], [1, 31.9], [1.5, 36.9], [2, 41.9], [2.5, 46.4], [3, 49.9], [3.5, 53.9], [4, 57.9], [4.5, 61.9], [5, 64.9], [5.5, 68.9], [6, 72.9], [6.5, 76.9], [7, 80.9], [7.5, 84.4], [8, 87.9], [8.5, 91.4], [9, 94.4], [9.5, 97.9], [10, 99.9], [11, 105.4], [12, 111.4], [13, 117.9], [14, 124.9], [15, 131.9], [16, 138.9], [17, 145.9], [18, 153.4], [19, 161.4], [20, 169.9], [21, 185.9], [22, 191.9], [23, 197.9], [24, 203.9], [25, 209.9], [30, 229.9]], "bc": [[1, 55], [1.5, 60], [2, 65], [2.5, 70], [3, 75], [3.5, 80], [4, 85], [4.5, 90], [5, 95], [5.5, 100], [6, 107], [6.5, 114], [7, 121], [7.5, 128], [8, 135], [8.5, 142], [9, 149], [9.5, 156], [10, 163], [11, 170], [12, 177], [13, 184], [14, 191], [15, 198], [16, 205], [17, 212], [18, 219], [19, 226], [20, 240], [21, 248], [22, 256], [23, 261], [24, 268], [25, 275], [30, 290], [35, 340], [40, 400]], "ab": [[1, 60], [1.5, 65], [2, 70], [2.5, 75], [3, 80], [3.5, 85], [4, 90], [4.5, 95], [5, 100], [5.5, 105], [6, 112], [6.5, 119], [7, 126], [7.5, 133], [8, 140], [8.5, 147], [9, 154], [9.5, 161], [10, 168], [11, 175], [12, 182], [13, 189], [14, 196], [15, 203], [16, 210], [17, 217], [18, 224], [19, 231], [20, 245], [21, 253], [22, 261], [23, 266], [24, 273], [25, 280], [30, 295], [35, 345], [40, 405]], "sk": [[1, 65], [1.5, 70], [2, 75], [2.5, 80], [3, 85], [3.5, 90], [4, 95], [4.5, 100], [5, 105], [5.5, 110], [6, 117], [6.5, 124], [7, 131], [7.5, 138], [8, 145], [8.5, 152], [9, 159], [9.5, 166], [10, 173], [11, 180], [12, 187], [13, 194], [14, 201], [15, 208], [16, 215], [17, 222], [18, 229], [19, 236], [20, 250], [21, 258], [22, 266], [23, 271], [24, 278], [25, 285], [30, 300], [35, 350], [40, 410]], "gta": [[1, 32], [1.5, 37], [2, 42], [2.5, 47], [3, 52], [3.5, 57], [4, 62], [4.5, 67], [5, 73], [5.5, 78], [6, 83], [6.5, 88], [7, 93], [7.5, 98], [8, 103], [8.5, 108], [9, 113], [9.5, 118], [10, 123], [11, 130], [12, 135], [13, 140], [14, 145], [15, 150], [16, 155], [17, 160], [18, 165], [19, 170], [20, 175], [25, 210], [30, 240], [35, 290], [40, 330]], "on": [[1, 45], [1.5, 50], [2, 55], [2.5, 60], [3, 65], [3.5, 70], [4, 75], [4.5, 80], [5, 85], [5.5, 90], [6, 95], [6.5, 100], [7, 105], [7.5, 110], [8, 115], [8.5, 120], [9, 125], [9.5, 130], [10, 135], [11, 145], [12, 155], [13, 165], [14, 175], [15, 185], [16, 192], [17, 199], [18, 206], [19, 213], [20, 220], [25, 250], [30, 280], [35, 330], [40, 380]], "qc_nb": [[1, 55], [1.5, 60], [2, 65], [2.5, 70], [3, 75], [3.5, 80], [4, 85], [4.5, 90], [5, 95], [5.5, 100], [6, 105], [6.5, 110], [7, 115], [7.5, 120], [8, 125], [8.5, 130], [9, 135], [9.5, 140], [10, 145], [11, 155], [12, 165], [13, 175], [14, 185], [15, 195], [16, 204], [17, 213], [18, 222], [19, 231], [20, 240], [25, 270], [30, 300], [35, 350], [40, 390]], "mb_etc": [[1, 70], [1.5, 75], [2, 80], [2.5, 85], [3, 90], [3.5, 95], [4, 100], [4.5, 105], [5, 110], [5.5, 115], [6, 120], [6.5, 125], [7, 130], [7.5, 135], [8, 140], [8.5, 145], [9, 150], [9.5, 155], [10, 160], [11, 170], [12, 180], [13, 190], [14, 200], [15, 210], [16, 218], [17, 226], [18, 234], [19, 242], [20, 250], [25, 280], [30, 310], [35, 360], [40, 410]]};   // 캐→한 항공 접수폼(ca-to-kr-air)과 같은 운임표
+const CA_REG={van:'메트로 밴쿠버',bc:'BC주 (밴쿠버 외)',ab:'AB주',sk:'SK주',gta:'광역토론토 (GTA)',on:'ON주 (GTA 외)',qc_nb:'QC·NB주',mb_etc:'MB·NS·NL·PE주'};
+const CA_MAX={van:30,bc:40,ab:40,sk:40,gta:40,on:40,qc_nb:40,mb_etc:40};
+const HEAVY_REG=['gta','on','qc_nb','mb_etc'];
+const fuelCA=w=>w<=5?3:w<=10?6:w<=15?9:w<=20?12:15;
+const TIER_W=[0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10];
+const TIERS={
+  TIER1:[13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70],
+  TIER2:[15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,72],
+  TIER3:[16,19.5,23,26.5,30,33.5,37,40.5,44,47.5,51,54.5,58,61.5,65,68.5,72,75.5,79,82.5]};
+const KR_AIR=[[1,63900],[1.5,72700],[2,80000],[2.5,86400],[3,97000],[3.5,104100],[4,111400],[4.5,119500],[5,127500],[5.5,136000],[6,146800],[6.5,154000],[7,160800],[7.5,167000],[8,173800],[8.5,180900],[9,187700],[9.5,194700],[10,201500],[10.5,207400],[11,213500],[11.5,219700],[12,225300],[12.5,231300],[13,237500],[13.5,244000],[14,249300],[14.5,255400],[15,252500],[15.5,258600],[16,264600],[16.5,270700],[17,276700],[17.5,282800],[18,288800],[18.5,294900],[19,300900],[19.5,307000],[20,313000],[21,323100],[22,333200],[23,343300],[24,356900],[25,371200]];
+const cad=v=>'$'+(Math.round(v*100)/100).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2});
+const krw=v=>'₩'+Math.round(v).toLocaleString('ko-KR');
+let PB=[{w:'',l:'',wd:'',h:'',q:'1'}];
+function pSvcChange(){
+  const sv=$('pSvc').value, air=/air|tier/.test(sv);
+  $('pAirBox').classList.toggle('hide',!air);$('pMapleBox').classList.toggle('hide',air);
+  $('pRegW').classList.toggle('hide',!(sv==='ca_air'||sv==='ca_tier'));
+  $('pReg').innerHTML=sv==='ca_tier'?Object.keys(TIERS).map(k=>`<option>${k}</option>`).join(''):Object.entries(CA_REG).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+  $('pRegW').firstChild.textContent=sv==='ca_tier'?'거래처 티어':'출발 권역';
+  $('pNote').innerHTML={
+    ca_air:'캐→한 항공 일반: 접수폼과 같은 권역별 운임 + 유류할증료(5kg 이하 $3 ~ 20kg 초과 $15) + 동부 권역 20kg 이상 통관비 $10/박스. 리튬배터리 $10, 대형포장 $30, 1m 초과 $20, 검역 $6 등 부가요금은 별도입니다.',
+    ca_tier:'사업자 티어(월 50건 이상): 10kg까지 요금표, 10kg 초과는 별도 문의. 합포장비 $3, 검역비·세금은 별도입니다.',
+    ca_maple:'메이플박스 $79 (20kg · 세 변의 합 150cm 미만, 23kg까지 1kg당 $10) · 메이플백 $119 (30kg · 170cm 미만, 30~35kg $50/EA). 기본 2박스부터. 1달 무료보관 후 주당 $10 / $15.',
+    kr_air:'한→캐 항공: 2026.04.13 특별 유류할증료 포함 원화 요금표. 25kg 초과는 별도 문의. 캐나다 도착 후 세금·관세사비는 수취인 부담.',
+    kr_maple:'한→캐 메이플박스(2025.09): 메트로 밴쿠버 ₩89,000/박스, 그 외 지역 +₩55,000. 20kg · 150cm 미만, 초과 kg당 ₩10,000(밴쿠버) / ₩20,000(그 외). 관세사 비용 C$20/박스 별도.'}[sv];
+  pRender();
+}
+function pBoxRows(){
+  $('pBoxes').innerHTML=PB.map((b,i)=>`<tr data-i="${i}">${['w','l','wd','h','q'].map(k=>`<td><input data-k="${k}" value="${esc(b[k])}" inputmode="decimal" autocomplete="off"></td>`).join('')}<td class="r" data-cw></td><td class="r" data-fee></td><td><button class="ic" data-del ${PB.length>1?'':'disabled'}>✕</button></td></tr>`).join('');
+  document.querySelectorAll('#pBoxes tr').forEach(tr=>{const b=PB[+tr.dataset.i];
+    tr.querySelectorAll('input').forEach(inp=>inp.oninput=()=>{b[inp.dataset.k]=inp.value;clearTimeout(tr._t);tr._t=setTimeout(pRender,250)});
+    tr.querySelector('[data-del]').onclick=()=>{PB.splice(+tr.dataset.i,1);pBoxRows();pRender()};});
+}
+$('pAdd').onclick=()=>{const l=PB[PB.length-1];PB.push({w:'',l:l.l,wd:l.wd,h:l.h,q:'1'});pBoxRows();pRender()};
+function band(table,w){for(const [x,r] of table) if(w<=x+1e-9) return [x,r]; return null}
+function boxFee(sv,reg,b){
+  const a=n(b.w); if(!(a>0)) return null;
+  const vol=n(b.l)*n(b.wd)*n(b.h)/5000, cw=Math.max(a,vol);
+  if(sv==='ca_air'){ if(cw>(CA_MAX[reg]||40)) return {cw,err:`${CA_MAX[reg]}kg 초과 · 별도 문의`};
+    const [bw,r]=band(CA_RATES[reg],cw)||CA_RATES[reg][CA_RATES[reg].length-1]; const heavy=HEAVY_REG.includes(reg)&&cw>=20?10:0;
+    return {cw,bw,fee:r+fuelCA(cw)+heavy,detail:`${bw}kg 구간 $${r} + 유류 $${fuelCA(cw)}${heavy?' + 통관 $10':''}`,cur:'cad'}; }
+  if(sv==='ca_tier'){ if(cw>10) return {cw,err:'10kg 초과 · 별도 문의'}; const i=TIER_W.findIndex(x=>cw<=x+1e-9); return {cw,bw:TIER_W[i],fee:TIERS[reg][i],detail:`${TIER_W[i]}kg 구간`,cur:'cad'}; }
+  if(sv==='kr_air'){ if(cw>25) return {cw,err:'25kg 초과 · 별도 문의'}; const [bw,r]=band(KR_AIR,Math.max(cw,1)); return {cw,bw,fee:r,detail:`${bw}kg 구간`,cur:'krw'}; }
+}
+function mapleUI(){
+  const sv=$('pSvc').value;
+  const F=sv==='ca_maple'?[['mb','메이플박스 개수'],['mbo','박스 초과 kg 합계 (20~23kg)'],['mg','메이플백 개수'],['mgo','백 30~35kg 개수'],['mbuy','코쉽 박스 구매 개수 ($5)'],['mlg','대형·특수포장 개수 ($30)'],['mjb','제주 박스 개수 ($20)'],['mjg','제주 백 개수 ($35)']]
+    :[['kb','메이플박스 개수'],['kout','메트로 밴쿠버 외 지역 박스 수'],['ko','초과 kg 합계'],['kbuy','상자 구매 개수 (₩10,000)'],['kjj','제주 픽업 박스 개수 (₩10,000)']];
+  if($('pMapleBox').dataset.svc!==sv){$('pMapleBox').dataset.svc=sv;
+    $('pMapleBox').innerHTML='<div class="row">'+F.map(([k,l])=>`<label class="f">${l}<input data-m="${k}" inputmode="decimal" placeholder="0"></label>`).join('')+'</div>';
+    $('pMapleBox').querySelectorAll('input').forEach(i=>i.oninput=()=>{clearTimeout(i._t);i._t=setTimeout(pRender,250)});}
+}
+const mv=k=>{const e=document.querySelector(`[data-m="${k}"]`);return e?n(e.value):0};
+function pRender(){
+  const sv=$('pSvc').value, reg=$('pReg').value, mul=n($('pMul').value)||1; let lines=[],tot=0,cur='cad',err='';
+  if(/air|tier/.test(sv)){
+    document.querySelectorAll('#pBoxes tr').forEach(tr=>{const b=PB[+tr.dataset.i],q=Math.max(1,Math.round(n(b.q))||1),f=boxFee(sv,reg,b);
+      tr.querySelector('[data-cw]').textContent=f?f.cw.toFixed(2)+'kg':''; tr.querySelector('[data-fee]').textContent=f?(f.err||(f.cur==='krw'?krw(f.fee):cad(f.fee))):'';
+      if(!f) return; if(f.err){err=f.err;return} cur=f.cur; tot+=f.fee*q; lines.push(`${q}개 × ${f.cur==='krw'?krw(f.fee):cad(f.fee)} (${f.cw.toFixed(2)}kg · ${f.detail})`);});
+    if(sv==='kr_air') cur='krw';
+  } else {
+    mapleUI();
+    if(sv==='ca_maple'){const mb=mv('mb'),mg=mv('mg');
+      tot=mb*79+mv('mbo')*10+mg*119+mv('mgo')*50+mv('mbuy')*5+mv('mlg')*30+mv('mjb')*20+mv('mjg')*35;
+      lines=[mb&&`메이플박스 ${mb} × $79`,mv('mbo')&&`박스 초과 ${mv('mbo')}kg × $10`,mg&&`메이플백 ${mg} × $119`,mv('mgo')&&`백 30~35kg ${mv('mgo')} × $50`,mv('mbuy')&&`박스 구매 ${mv('mbuy')} × $5`,mv('mlg')&&`대형포장 ${mv('mlg')} × $30`,mv('mjb')&&`제주 박스 ${mv('mjb')} × $20`,mv('mjg')&&`제주 백 ${mv('mjg')} × $35`].filter(Boolean);
+      if(mb+mg&&mb+mg<2) err='기본 2박스부터 접수 가능합니다';}
+    else {cur='krw';const kb=mv('kb'),out=Math.min(mv('kout'),kb);tot=kb*89000+out*55000+mv('ko')*10000+mv('kbuy')*10000+mv('kjj')*10000;
+      lines=[kb&&`메이플박스 ${kb} × ₩89,000`,out&&`밴쿠버 외 ${out} × ₩55,000`,mv('ko')&&`초과 ${mv('ko')}kg × ₩10,000 (밴쿠버 외 지역은 ₩20,000 — 직접 확인)`,mv('kbuy')&&`상자 구매 ${mv('kbuy')} × ₩10,000`,mv('kjj')&&`제주 픽업 ${mv('kjj')} × ₩10,000`].filter(Boolean);
+      if(kb) lines.push(`+ 관세사 비용 C$${20*kb} 별도 (C$20 × ${kb})`);}
+  }
+  const f=cur==='krw'?krw:cad, adj=tot*mul;
+  $('pRes').innerHTML=(tot||err)?`<div style="border:1px solid var(--line);border-radius:6px;padding:12px 14px">
+    ${lines.map(l=>`<div class="info">${esc(l)}</div>`).join('')}
+    <div style="margin-top:8px;display:flex;gap:18px;align-items:baseline;flex-wrap:wrap"><span>조회가 <b>${f(tot)}</b></span>${mul!==1?`<span>× ${mul} → 고객가 <span class="price">${f(adj)}</span></span>`:`<span class="price">${f(tot)}</span>`}
+    <button class="btn sm" id="pCopy" style="margin-left:auto">견적 문구 복사</button></div>${err?`<div class="err">${esc(err)}</div>`:''}</div>`:'';
+  const c=$('pCopy'); if(c) c.onclick=()=>copy(`[캐나다쉬핑 ${$('pSvc').selectedOptions[0].text} 견적]\n${!$('pRegW').classList.contains('hide')?($('pSvc').value==='ca_tier'?'요율: ':'출발 권역: ')+$('pReg').selectedOptions[0].text+'\n':''}${lines.join('\n')}\n\n예상 금액: ${f(mul!==1?adj:tot)}\n※ 입고 후 실측 무게·크기로 최종 금액이 확정되며, 부가요금·세금은 별도입니다.`);
+}
+$('pSvc').onchange=pSvcChange; $('pReg').onchange=pRender; $('pMul').oninput=()=>{clearTimeout(window._pm);window._pm=setTimeout(pRender,250)};
+pBoxRows(); pSvcChange();
+/* ===== 단위 · CBM ===== */
+const fx=(v,d=2)=>v?(+v.toFixed(d)).toString():'';
+function link(a,b,f,g){$(a).oninput=()=>{$(b).value=fx(f(n($(a).value)))};$(b).oninput=()=>{$(a).value=fx(g(n($(b).value)))}}
+link('uIn','uCm',x=>x*2.54,x=>x/2.54); link('uLb','uKg',x=>x*0.45359237,x=>x/0.45359237);
+function vol(){const k=$('vU').value==='in'?2.54:1,L=n($('vL').value)*k,W=n($('vW').value)*k,H=n($('vH').value)*k,a=n($('vA').value),v=L*W*H/5000;
+  $('vOut').textContent=v?`부피무게 ${v.toFixed(2)} kg`:'—';
+  $('vSub').textContent=v?`${L.toFixed(1)}×${W.toFixed(1)}×${H.toFixed(1)} cm · CBM ${(L*W*H/1e6).toFixed(3)}${a?` · 청구중량 ${Math.max(a,v).toFixed(2)} kg (${v>a?'부피':'실무게'} 적용)`:''}`:'';}
+['vU','vL','vW','vH','vA'].forEach(id=>$(id).oninput=$(id).onchange=()=>{clearTimeout(window._v);window._v=setTimeout(vol,250)});
+function cbm(){const a=n($('c1').value),b=n($('c2').value),c=n($('c3').value),t=a*0.1+b*0.15+c*0.2;
+  $('cOut').textContent=`${(+t.toFixed(2))} CBM`;$('cSub').textContent=a+b+c?`소 ${a}×0.1 + 중 ${b}×0.15 + 대 ${c}×0.2 · 총 ${a+b+c}개`:'';}
+['c1','c2','c3'].forEach(id=>$(id).oninput=()=>{clearTimeout(window._c);window._c=setTimeout(cbm,250)});
+showTab('p');
+
+$('gas').value=LS.get('uq_gas')||'';$('code').value=LS.get('uq_code')||'';$('mul').value=LS.get('uq_mul')||'0.8';
+renderBoxes();
+</script>
+</body>
+</html>
