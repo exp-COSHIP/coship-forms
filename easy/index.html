@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>COSHIP AI · 안내센터</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16181d;--muted:#666b73;--faint:#9aa0a8;--line:#e2e4e8;--bg:#f6f7f8;--red:#e31e24;--red-soft:#fdeced;--amber:#b25e00;--amber-soft:#fff4e5;--blue:#2f4fbf;--green:#2e7d32}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:14px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:12px}
+header b{font-size:16px;letter-spacing:.04em}
+header .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:2px 7px;border-radius:3px}
+header a{margin-left:auto;font-size:12.5px;color:var(--muted);text-decoration:none}
+main{max-width:1320px;margin:0 auto;padding:22px 20px 60px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:6px;margin-bottom:18px}
+.ph{padding:12px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ph h2{font-size:15px}.ph .sub{color:var(--muted);font-size:12.5px}
+.ph .r{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pb{padding:16px 18px}
+.drop{border:2px dashed var(--line);border-radius:6px;padding:22px;text-align:center;color:var(--muted);cursor:pointer}
+.drop.over{border-color:var(--red);background:var(--red-soft)}
+.drop b{color:var(--ink)}
+.files{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.set{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:13px;align-items:center}
+.set input,.set select{padding:5px 8px;border:1px solid #c9ccd2;border-radius:4px;background:#fff}
+.btn{padding:7px 13px;border-radius:4px;border:1px solid var(--ink);background:#fff;cursor:pointer;font-weight:500;font-size:13px;white-space:nowrap}
+.btn.pri{background:var(--ink);color:#fff}
+.btn.sm{padding:3px 9px;font-size:12px}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.quick .btn{border-color:#c9ccd2}
+.tbl{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11.5px;color:var(--muted);font-weight:500;padding:7px 6px;border-bottom:1px solid #c9ccd2;white-space:nowrap;position:sticky;top:0;background:#fff;z-index:1}
+td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.mono{font-family:Consolas,monospace;font-size:12px;white-space:nowrap}
+td select,td input{padding:4px 6px;border:1px solid #d5d8dd;border-radius:3px;background:#fff;font-size:12.5px}
+td .addr{color:var(--muted);font-size:12px;max-width:340px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dir{font-size:11px;padding:1px 6px;border-radius:3px;border:1px solid var(--line);white-space:nowrap}
+.dir.in{border-color:#9db3e3;color:var(--blue)} .dir.out{border-color:#a9d18e;color:var(--green)}
+.grp{margin-top:18px}
+.grp h3{font-size:14px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+.grp h3 .n{font-weight:400;color:var(--muted);font-size:12.5px}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:12px}
+.kcard{border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column;background:#fff}
+.kcard .kh{padding:8px 12px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;font-size:13px}
+.kcard .kh b{font-size:14px}.kcard .kh span{color:var(--muted)}
+.kcard .kh .btn{margin-left:auto}
+.kcard textarea{border:0;padding:10px 12px;font-size:12.5px;line-height:1.6;min-height:240px;resize:vertical;font-family:inherit}
+.kcard.done{opacity:.5}
+.note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+.hide{display:none!important}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 16px;border-radius:4px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.mrow{display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:18px}
+@media(max-width:820px){.mrow{grid-template-columns:1fr}}
+.mf{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.mf input,.mf select,.mf textarea{padding:8px 10px;border:1px solid #c9ccd2;border-radius:4px;background:#fff;color:var(--ink);font-size:14px}
+.mf textarea{min-height:56px;resize:vertical}
+.mf2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mf input,.mf select,.mf textarea{width:100%;min-width:0}
+.mform{min-width:0}
+#mOut{width:100%;min-height:420px;padding:12px;border:1px solid #c9ccd2;border-radius:6px;font-size:13px;line-height:1.65;font-family:inherit;resize:vertical}
+details.tpl summary{cursor:pointer;font-size:13px}
+details.tpl textarea{width:100%;min-height:150px;margin-top:6px;padding:8px;border:1px solid #c9ccd2;border-radius:4px;font-size:12.5px;font-family:Consolas,monospace}
+</style>
+</head>
+<body>
+<header><b>COSHIP AI</b><span class="tag">안내센터 · 입출고·배송 안내 멘트 자동 작성</span><a href="../">← EASY COSHIP</a></header>
+<main>
+<section class="panel">
+  <div class="ph"><h2>바로 쓰기 · 한두 건 직접 입력</h2><span class="sub">안내 유형을 고르고 칸을 채우면 멘트가 바로 만들어집니다</span></div>
+  <div class="pb">
+    <div class="mrow">
+      <div class="mform">
+        <label class="mf">안내 유형<select id="mType"></select></label>
+        <div id="mFields"></div>
+        <div style="display:flex;gap:8px;margin-top:10px"><button class="btn sm" id="mClear">입력 지우기</button></div>
+      </div>
+      <div class="mout">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b style="font-size:13px">멘트 미리보기</b><span class="note" style="margin:0">직접 고쳐도 됩니다</span><button class="btn pri sm" id="mCopy" style="margin-left:auto">복사</button></div>
+        <textarea id="mOut"></textarea>
+      </div>
+    </div>
+    <details class="tpl" style="margin-top:12px"><summary>템플릿 보기 · 수정 (이 브라우저에 기억)</summary><div id="tplEd"></div><button class="btn sm" id="tplReset" style="margin-top:8px">기본 템플릿으로 되돌리기</button></details>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="ph"><h2>여러 건 · 데이터 올리기</h2><span class="sub">BL Search CSV 또는 같은 열의 엑셀 · 인바운드는 차수(MBL)별로 골라 쓰기</span></div>
+  <div class="pb">
+    <div class="drop" id="drop"><b>CSV · 엑셀을 끌어오거나 클릭</b><br>이 브라우저 안에서만 읽고 어디에도 저장하지 않습니다.</div>
+    <input type="file" id="file" accept=".csv,.xlsx" multiple class="hide">
+    <div class="files" id="files"></div>
+    <div class="set">
+      <label>차수(MBL) <select id="mbl"><option value="">전체</option></select></label>
+      <label>방향 <select id="dirF"><option value="">전체</option><option value="in">한→캐 (인바운드)</option><option value="out">캐→한 (아웃바운드)</option></select></label>
+      <label>기본 배송일 <input type="date" id="dDate"></label>
+      <label>배송 시간 문구 <input id="dTime" value="배송 전일 별도 안내 예정" style="width:190px"></label>
+    </div>
+  </div>
+</section>
+
+<section class="panel hide" id="pList">
+  <div class="ph"><h2>② 고객별 안내 유형</h2><span class="sub" id="lInfo"></span>
+    <div class="r"><input id="q" placeholder="이름·BL 찾기" style="padding:5px 8px;border:1px solid #c9ccd2;border-radius:4px"></div></div>
+  <div class="pb">
+    <div class="quick" id="quick"></div>
+    <div class="tbl"><table><thead><tr><th><input type="checkbox" id="all" checked></th><th>고객</th><th>BL</th><th>방향</th><th>박스</th><th>주소 · 연락처</th><th>안내 유형</th><th>배송일</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <p class="note">인바운드(한→캐)는 우편번호로 자동 분류합니다 — 밴쿠버 권역(V2W~V7) 직접 배송 · 본사 주소는 본사 픽업 · 그 외 UPS 출고. 체크한 건만 멘트를 만듭니다. 유형을 바꾸면 아래 멘트가 바로 바뀝니다.</p>
+  </div>
+</section>
+
+<section class="panel hide" id="pOut">
+  <div class="ph"><h2>③ 안내 멘트</h2><span class="sub" id="oInfo"></span>
+    <div class="r"><button class="btn" id="dlT">전체 txt 내려받기</button></div></div>
+  <div class="pb">
+    <div id="out"></div>
+    <p class="note">멘트 칸은 직접 고칠 수 있습니다(복사·내려받기에 반영). 위에서 유형·날짜를 바꾸면 해당 멘트는 다시 만들어집니다.</p>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const GUIDE='https://drive.google.com/file/d/1iQqF43HRY1gagRDO4VA4tVn6vjuA0Qxy/view?usp=drive_link';
+const END='언제나 저희 캐나다쉬핑을 이용해 주셔서 진심으로 감사드립니다. 오늘도 좋은 하루 보내세요.';
+/* 안내 유형 · 기본 템플릿 — {변수}는 자동 치환 */
+const TYPES=[
+ {id:'dlv',  dir:'in',  nm:'통관완료 · 배송 안내', tpl:
+`안녕하세요, {name} 고객님. 캐나다쉬핑입니다.
+고객님의 화물이 통관 및 하역을 모두 마치고 아래 날짜로 배송해드릴 예정입니다. 아래 내용 확인 후 '확인완료' 톡 부탁드립니다.
+
+📅 배송 예정일: {date}
+⏰ 배송 예정 시간: {time}
+📍 배송지 주소: {addr}
+📦 화물 정보 및 수량: {pkgs}박스
+📞 캐나다 연락처: {tel}
+
+📢 [픽업 및 배송 전 꼭 읽어주세요] ${GUIDE}
+
+${END}`},
+ {id:'ups',  dir:'in',  nm:'통관완료 · UPS 출고 안내', tpl:
+`안녕하세요, {name} 고객님. 캐나다쉬핑입니다.
+한국에서 보내신 고객님의 소중한 화물이 통관을 완료하였으며, UPS를 통해 발송될 예정입니다.
+
+📍 배송지 주소: {addr}
+📦 화물 정보 및 수량: {pkgs}박스
+📞 캐나다 연락처: {tel}
+
+출고되는 대로 UPS 트래킹 번호를 별도로 안내드리겠습니다.
+${END}`},
+ {id:'van',  dir:'in',  nm:'입고완료 · 밴쿠버 본사 픽업', tpl:
+`안녕하세요, {name} 고객님. 캐나다쉬핑입니다.
+고객님의 화물이 통관을 완료하고 밴쿠버 본사에 입고 완료되었습니다.
+
+📍 픽업 장소: 캐나다쉬핑 본사 (1501 Hartley Ave, Coquitlam, BC V3K 6Z7)
+🕐 픽업 가능 시간: 영업시간 중 (월~금 오전 8시 ~ 오후 5시)
+📦 화물 정보 및 수량: {pkgs}박스
+📞 캐나다 연락처: {tel}
+
+방문 예정 날짜를 미리 회신 또는 연락 주시면 원활한 수령에 도움이 됩니다.
+${END}`},
+ {id:'tor',  dir:'in',  nm:'입고완료 · 토론토 지사 픽업', tpl:
+`안녕하세요, {name} 고객님. 캐나다쉬핑입니다.
+고객님의 화물이 통관을 완료하고 토론토 지사에 입고 완료되었습니다.
+
+📍 픽업 장소: 캐나다쉬핑 토론토 지사 (355 Admiral Blvd #4, Mississauga, ON L5T 2M8)
+🕐 픽업 가능 시간: 영업시간 중 (방문 전 연락 부탁드립니다)
+📦 화물 정보 및 수량: {pkgs}박스
+📞 캐나다 연락처: {tel}
+
+방문 예정 날짜를 미리 회신 또는 연락 주시면 원활한 수령에 도움이 됩니다.
+${END}`},
+ {id:'kr',   dir:'any', nm:'입고완료 · 한국지사 (초안)', tpl:
+`안녕하세요, {name} 고객님. 캐나다쉬핑입니다.
+고객님의 화물이 캐나다쉬핑 한국지사에 입고 완료되었습니다.
+
+📍 입고지: 캐나다쉬핑 한국지사 (경기도 고양시 일산동구 고봉로678번길 146)
+📦 화물 정보 및 수량: {pkgs}박스
+🔖 운송장 번호: {bl}
+
+화물 측정(무게·부피) 후 운임과 결제 방법을 안내드리겠습니다.
+${END}`},
+ {id:'price',dir:'out', nm:'픽업완료 · 측정·결제 안내', tpl:
+`안녕하세요 {name} 고객님, 캐나다쉬핑입니다. 😊
+고객님께서 맡겨주신 소중한 화물의 입고 및 측정이 완료되어 안내해 드립니다.
+
+📦 [화물 측정 정보]
+- 실무게 / 부피무게: {measure}
+
+💳 [결제 안내]
+- 총 결제 금액: {amount}
+
+아래 두 가지 방법 중 편하신 방법으로 결제 부탁드립니다.
+
+[결제 방법]
+1️⃣ E-Transfer (이-트랜스퍼)
+✉️ E-MAIL: exp@coship.ca
+💡 주의: 입금 시 MEMO란에 반드시 '{bl}' 기재해 주시길 부탁드립니다.
+
+2️⃣ 신용카드 (Credit Card)
+💳 신용카드로 $100 이상 결제 시 3%의 수수료가 발생합니다. (카드 결제를 원하실 경우 카드번호 / 유효기간 / CVV번호를 알려주시면 감사하겠습니다.)
+
+결제 완료 후 이 대화창에 메시지를 하나 남겨주시면 더욱 빠른 처리가 가능합니다.
+진행하시면서 궁금한 점이 있으시면 언제든 문의해 주세요. 감사합니다! 🍁`},
+ {id:'name', dir:'out', nm:'영문명·이메일 최종 확인', tpl:
+`안녕하세요 {name} 고객님, 캐나다쉬핑입니다. 🚢
+선박 택배 세관 통관을 위한 [영문 성함 및 이메일] 최종 확인 부탁드립니다!
+
+👤 1. 영문 성함 확인
+성 (Last Name) : {last}
+이름 (First Name) : {first}
+
+🚨 [중요] 위 영문 성함은 고객님의 여권과 철자 및 띄어쓰기가 100% 일치해야 통관에 문제가 생기지 않습니다. (예: 이름에 띄어쓰기나 하이픈(-)이 있는지 꼭 확인해 주세요!)
+
+✉️ 2. 이메일 주소 확인
+{email}
+
+위 정보에 오타나 수정할 부분이 없다면 "모두 맞습니다" 라고 답장 남겨주세요! 확인 후 다음 진행 도와드리겠습니다. 감사합니다. 😊
+
+추가로, 운송 중 발생하는 파손에 대하여 운송사는 면책으로, 보상이 어려우니 파손의 위험이 있는 물품이 있을 경우 포장을 꼼꼼히 하시어 발송해주시기 바랍니다.`},
+ {id:'kdlv', dir:'out', nm:'국내배송 안내사항', tpl:
+`국내 배송 시 안내사항 전달드립니다.
+
+1. 한국에서 배송시 한 번에 배송되지 않고 나누어 배송될 수 있습니다.
+2. 기본적으로는 문 앞 배송이지만, 택배이기 때문에 접근이 어려울 경우, 문 앞이 아닌 경비실 앞 등에 두고 갈 수 있습니다(택배사 판단)
+엘리베이터가 없는 경우 1층 배송이 원칙입니다.
+3. 한국 내 작업조건(계단, 셔틀, 엘리베이터 등) 에 따라 추가 비용 발생 할 수 있습니다(택배사 판단)`},
+ {id:'none', dir:'any', nm:'— 안내 안 함', tpl:''},
+];
+const T=Object.fromEntries(TYPES.map(t=>[t.id,t]));
+const QUICK=[['auto','인바운드 자동 분류 (배송/UPS/픽업)'],['price','픽업완료 가격안내'],['name','영문명·이메일 확인'],['kdlv','국내배송 안내'],['kr','한국지사 입고']];
+
+/* ===== 보조 ===== */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+const DAYS=['일','월','화','수','목','금','토'];
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1600)}
+function parseCSV(text){
+  if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
+  const rows=[];let row=[],f='',q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true; else if(c===','){row.push(f);f=''}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}
+    else f+=c}
+  if(f!==''||row.length){row.push(f);rows.push(row)}
+  return rows;
+}
+async function unzip(buf){
+  const v=new DataView(buf),u8=new Uint8Array(buf),td=new TextDecoder();
+  let e=buf.byteLength-22;while(e>=0&&v.getUint32(e,true)!==0x06054b50)e--; if(e<0) throw new Error('엑셀 아님');
+  const n=v.getUint16(e+10,true);let p=v.getUint32(e+16,true);const out={};
+  for(let i=0;i<n;i++){const m=v.getUint16(p+10,true),cs=v.getUint32(p+20,true),fl=v.getUint16(p+28,true),xl=v.getUint16(p+30,true),cl=v.getUint16(p+32,true),lo=v.getUint32(p+42,true);
+    const name=td.decode(u8.subarray(p+46,p+46+fl));p+=46+fl+xl+cl;
+    out[name]=async()=>{const st=lo+30+v.getUint16(lo+26,true)+v.getUint16(lo+28,true),raw=u8.subarray(st,st+cs);
+      if(m===0)return td.decode(raw);return await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text()};}
+  return out;
+}
+async function readXlsx(file){
+  const z=await unzip(await file.arrayBuffer()),dp=new DOMParser();
+  const ss=z['xl/sharedStrings.xml']?[...dp.parseFromString(await z['xl/sharedStrings.xml'](),'text/xml').getElementsByTagName('si')].map(si=>[...si.getElementsByTagName('t')].map(t=>t.textContent).join('')):[];
+  const sheet=Object.keys(z).filter(k=>/^xl\/worksheets\/sheet\d+\.xml$/.test(k)).sort((a,b)=>parseInt(a.match(/\d+/))-parseInt(b.match(/\d+/)))[0];
+  const doc=dp.parseFromString(await z[sheet](),'text/xml'),rows=[];
+  const col=r=>{let c=0;for(const ch of r.replace(/\d/g,''))c=c*26+ch.charCodeAt(0)-64;return c-1};
+  for(const row of doc.getElementsByTagName('row')){const a=[];for(const c of row.getElementsByTagName('c')){const t=c.getAttribute('t'),vv=c.getElementsByTagName('v')[0];
+    a[col(c.getAttribute('r'))]=t==='s'?ss[+vv?.textContent]:t==='inlineStr'?[...c.getElementsByTagName('t')].map(x=>x.textContent).join(''):(vv?vv.textContent:'');}
+    rows.push(Array.from(a,x=>x??''));}
+  return rows;
+}
+const toObjs=rows=>{const h=rows.shift().map(s=>String(s).trim());return rows.filter(r=>r.length>1).map(r=>Object.fromEntries(h.map((k,i)=>[k,String(r[i]??'').trim()])))};
+const korName=s=>{const p=String(s||'').split('|');return (p[0]||p[1]||'').trim()};
+const enName=s=>{const p=String(s||'').split('|');return (p[1]||'').trim()};
+function fmtTel(t){
+  const d=String(t||'').replace(/\D/g,'');
+  if(/^01\d{9}$/.test(d)) return d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7);
+  const x=d.length===11&&d[0]==='1'?d.slice(1):d;
+  return x.length===10?x.slice(0,3)+'-'+x.slice(3,6)+'-'+x.slice(6):String(t||'').trim();
+}
+/* 캐나다 주소 정리: 첫 줄 영문명·TEL 줄 제거, 줄을 쉼표로 이어 붙이고 우편번호 보강 */
+function caAddr(r){
+  const en=enName(r.consignee).toUpperCase().replace(/[^A-Z]/g,'');
+  let lines=String(r.consignee_addr||'').split(/\r?\n/).map(s=>s.trim()).filter(Boolean)
+    .filter((l,i)=>!(i===0&&en&&l.toUpperCase().replace(/[^A-Z]/g,'')===en)).filter(l=>!/^(TEL|CELL)\s*:/i.test(l));
+  let a=lines.join(', ').replace(/,\s*,/g,',').replace(/\s*,?\s*CANADA\b/ig,'').replace(/\s+/g,' ').replace(/,\s*$/,'').trim();
+  const pc=String(r.consignee_postal_code||'').toUpperCase().replace(/\s/g,'');
+  const pcf=/^[A-Z]\d[A-Z]\d[A-Z]\d$/.test(pc)?pc.slice(0,3)+' '+pc.slice(3):'';
+  if(pcf&&!a.toUpperCase().replace(/\s/g,'').includes(pc)) a+=' '+pcf;
+  return a;
+}
+const postalOf=r=>{const pc=String(r.consignee_postal_code||'').toUpperCase().replace(/\s/g,'');if(/^[A-Z]\d[A-Z]\d[A-Z]\d$/.test(pc))return pc;
+  const m=String(r.consignee_addr||'').toUpperCase().match(/([A-Z]\d[A-Z])\s?(\d[A-Z]\d)/);return m?m[1]+m[2]:''};
+function autoType(r){
+  const ad=String(r.consignee_addr||'')+' '+(r.remark_d||'');
+  if(/토론토\s*(지사)?\s*픽업|미시사가\s*픽업/.test(ad)) return 'tor';
+  if(/1501\s*HARTLEY/i.test(ad)||/(본사|코퀴|코퀴틀람|사무실)\s*픽업|직접\s*픽업|PICK\s*UP/i.test(ad)) return 'van';
+  const pc=postalOf(r);
+  if(/^V(3|4|5|6|7)/.test(pc)||/^V2[W-Z]/.test(pc)) return 'dlv';
+  return 'ups';
+}
+/* 측정 정보: 리마크의 "30KG 3개" 표기 우선, 없으면 총중량/박스 */
+function measureOf(r){
+  const t=[r.remark_p,r.remark_d,r.memo].join(' ');
+  const m=[...t.matchAll(/(\d+(?:\.\d+)?)\s*KG\s*(\d+)\s*(?:개|BOX|박스|EA)/gi)].map(x=>`${x[1]}KG ${x[2]}개`);
+  if(m.length) return [...new Set(m)].join(', ');
+  const w=parseFloat(r.gross_weight_kg)||0,p=parseInt(r.pkgs)||0;
+  return w&&p?`총 ${w}KG / ${p}개`:(p?`${p}개`:'(측정 정보 입력)');
+}
+const money=v=>{const n=parseFloat(v);return n?'$'+(Number.isInteger(n)?n:n.toFixed(2)):'(금액 입력)'};
+function fmtDate(iso){const d=new Date(iso+'T00:00:00');return isNaN(d)?'(배송일 입력)':`${d.getMonth()+1}월 ${d.getDate()}일(${DAYS[d.getDay()]})`}
+
+/* ===== 상태 ===== */
+let ROWS=[], FILES=[], EDIT={}, TPL={};
+function loadTpl(){TYPES.forEach(t=>TPL[t.id]=LS.get('nt_tpl_'+t.id)??t.tpl)}
+function vars(x){
+  const en=enName(x.r.shipper)||enName(x.r.consignee), [last,...rest]=en.includes(',')?en.split(','):en.split(' ');
+  return {name:x.name,bl:x.bl,pkgs:x.pkgs,tel:x.tel,addr:x.addr,date:fmtDate(x.date||$('dDate').value),time:$('dTime').value,
+    measure:measureOf(x.r),amount:money(x.r.total_price),last:(last||'').trim(),first:rest.join(' ').trim(),email:(x.r.shipper_email||'(이메일 없음)').trim()};
+}
+const fill=(tpl,v)=>tpl.replace(/\{(\w+)\}/g,(m,k)=>v[k]??m);
+function build(objs){
+  ROWS=objs.filter(r=>r.bl_no&&!/^EMPLOYEE/i.test(r.shipper||'')).map((r,i)=>{
+    const inb=String(r.branch||'').toUpperCase()==='SEOUL';
+    return {i,r,bl:r.bl_no,name:korName(inb?r.consignee:r.shipper)||korName(r.shipper),dir:inb?'in':'out',car:/air/i.test(r.carrier_type)?'항공':'선박',
+      pkgs:parseInt(r.pkgs)||0,tel:fmtTel(inb?r.consignee_phone:r.shipper_phone),addr:inb?caAddr(r):String(r.consignee_addr||'').replace(/\s+/g,' ').trim(),
+      mbl:r.mawb_no||'',type:inb?autoType(r):(/ocean/i.test(r.carrier_type)?'name':'price'),on:true,date:''};
+  });
+  const ms=[...new Set(ROWS.map(x=>x.mbl).filter(Boolean))].sort();
+  $('mbl').innerHTML='<option value="">전체</option>'+ms.map(m=>`<option>${esc(m)}</option>`).join('');
+  EDIT={}; render();
+}
+const visible=()=>{const m=$('mbl').value,d=$('dirF').value,q=$('q').value.trim().toLowerCase();
+  return ROWS.filter(x=>(!m||x.mbl===m)&&(!d||x.dir===d)&&(!q||(x.name+x.bl).toLowerCase().includes(q)))};
+
+/* ===== 렌더 ===== */
+function render(){
+  $('pList').classList.remove('hide');$('pOut').classList.remove('hide');
+  const V=visible();
+  $('lInfo').textContent=`${V.length}건 표시 · 한→캐 ${V.filter(x=>x.dir==='in').length} · 캐→한 ${V.filter(x=>x.dir==='out').length}`;
+  $('quick').innerHTML='<span style="font-size:12.5px;color:var(--muted);align-self:center">표시된 건 일괄 지정:</span>'+QUICK.map(([k,n])=>`<button class="btn sm" data-q="${k}">${n}</button>`).join('');
+  document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const k=b.dataset.q;
+    visible().forEach(x=>{if(k==='auto'){if(x.dir==='in')x.type=autoType(x.r)} else if(k==='kr'||T[k].dir===x.dir) x.type=k});EDIT={};render()});
+  $('rows').innerHTML=V.map(x=>`<tr data-i="${x.i}">
+    <td><input type="checkbox" data-on ${x.on?'checked':''}></td>
+    <td><b>${esc(x.name)}</b></td><td class="mono">${esc(x.bl)}</td>
+    <td><span class="dir ${x.dir}">${x.dir==='in'?'한→캐':'캐→한'} ${x.car}</span></td><td>${x.pkgs}</td>
+    <td><div class="addr" title="${esc(x.addr)}">${esc(x.addr)||'—'}</div><div style="font-size:12px">${esc(x.tel)}</div></td>
+    <td><select data-t>${TYPES.filter(t=>t.dir==='any'||t.dir===x.dir).map(t=>`<option value="${t.id}" ${t.id===x.type?'selected':''}>${t.nm}</option>`).join('')}</select></td>
+    <td>${x.type==='dlv'?`<input type="date" data-d value="${x.date||''}" title="비우면 기본 배송일">`:''}</td></tr>`).join('')||'<tr><td colspan="8" style="color:var(--faint);padding:18px;text-align:center">해당 건이 없습니다</td></tr>';
+  document.querySelectorAll('#rows tr[data-i]').forEach(tr=>{const x=ROWS[+tr.dataset.i];
+    tr.querySelector('[data-on]').onchange=e=>{x.on=e.target.checked;renderOut()};
+    tr.querySelector('[data-t]').onchange=e=>{x.type=e.target.value;delete EDIT[x.i];render()};
+    const d=tr.querySelector('[data-d]'); if(d) d.onchange=()=>{x.date=d.value;delete EDIT[x.i];renderOut()};});
+  renderOut();
+}
+function groups(){
+  const G=[];
+  TYPES.filter(t=>t.id!=='none').forEach(t=>{
+    const L=visible().filter(x=>x.on&&x.type===t.id);
+    if(!L.length) return;
+    if(t.id==='dlv'){const by={};L.forEach(x=>{const d=x.date||$('dDate').value||'';(by[d]=by[d]||[]).push(x)});
+      Object.keys(by).sort().forEach(d=>G.push({t,title:`${fmtDate(d)} 배송`,L:by[d]}));}
+    else G.push({t,title:t.nm,L});
+  });
+  return G;
+}
+const textOf=(x,t)=>EDIT[x.i]??fill(TPL[t.id],vars(x));
+function renderOut(){
+  const G=groups(), n=G.reduce((a,g)=>a+g.L.length,0);
+  $('oInfo').textContent=`${n}건 · 유형 ${G.length}개 · 복사하면 흐리게 표시`;
+  $('out').innerHTML=G.map((g,gi)=>`<div class="grp"><h3>${esc(g.title)} <span class="n">${g.L.length}건</span></h3><div class="kgrid">${g.L.map(x=>`
+    <div class="kcard ${x.sent?'done':''}" data-i="${x.i}" data-t="${g.t.id}"><div class="kh"><b>${esc(x.name)}</b><span>${esc(x.tel||x.bl)}</span><button class="btn sm">복사</button></div>
+    <textarea>${esc(textOf(x,g.t))}</textarea></div>`).join('')}</div></div>`).join('')||'<p style="color:var(--faint)">체크된 건이 없습니다</p>';
+  document.querySelectorAll('.kcard').forEach(c=>{const x=ROWS[+c.dataset.i],ta=c.querySelector('textarea');
+    ta.oninput=()=>EDIT[x.i]=ta.value;
+    c.querySelector('button').onclick=async()=>{try{await navigator.clipboard.writeText(ta.value)}catch(e){ta.select();document.execCommand('copy')}x.sent=true;c.classList.add('done');toast(`${x.name} 고객 멘트 복사됨`)};});
+}
+$('dlT').onclick=()=>{
+  const G=groups(), L='─'.repeat(70);
+  const ds=[...new Set(G.flatMap(g=>g.L.map(x=>x.date||$('dDate').value)).filter(Boolean))].sort();
+  const txt=`# 안내 멘트 ${ds.length?'('+ds.join('~')+')':''}\n${'='.repeat(70)}\n`+G.map(g=>`\n\n### ${g.title}\n\n`+g.L.map(x=>`${L}\n■ ${x.name} (${x.tel||x.bl})\n${L}\n\n${textOf(x,g.t)}\n`).join('\n')).join('');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain;charset=utf-8'}));
+  a.download=`${new Date().toLocaleDateString('en-CA').replace(/-/g,'').slice(4)}_안내멘트.txt`;document.body.appendChild(a);a.click();a.remove();
+};
+/* 템플릿 편집 */
+function renderTplEd(){
+  $('tplEd').innerHTML=TYPES.filter(t=>t.tpl).map(t=>`<div style="margin-top:10px"><b style="font-size:13px">${t.nm}</b> <span style="font-size:12px;color:var(--muted)">변수: {name} {bl} {pkgs} {tel} {addr} {date} {time} {measure} {amount} {last} {first} {email}</span><textarea data-tpl="${t.id}">${esc(TPL[t.id])}</textarea></div>`).join('');
+  document.querySelectorAll('[data-tpl]').forEach(ta=>ta.oninput=()=>{TPL[ta.dataset.tpl]=ta.value;LS.set('nt_tpl_'+ta.dataset.tpl,ta.value);EDIT={};if(ROWS.length)renderOut();if(typeof mRenderFields==='function'&&ta.dataset.tpl===$('mType').value){mEdited=false;mRenderFields()}});
+}
+$('tplReset').onclick=()=>{TYPES.forEach(t=>LS.del('nt_tpl_'+t.id));loadTpl();renderTplEd();EDIT={};if(ROWS.length)renderOut();mEdited=false;mRenderFields();toast('기본 템플릿으로 되돌렸습니다')};
+['mbl','dirF'].forEach(id=>$(id).onchange=()=>ROWS.length&&render());
+$('q').oninput=()=>ROWS.length&&render();
+['dDate','dTime'].forEach(id=>$(id).oninput=()=>{EDIT={};ROWS.length&&renderOut()});
+$('all').onchange=e=>{visible().forEach(x=>x.on=e.target.checked);render()};
+
+/* ===== 파일 ===== */
+const drop=$('drop'),file=$('file');
+drop.onclick=()=>file.click();
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');load([...e.dataTransfer.files])};
+file.onchange=()=>load([...file.files]);
+async function load(list){
+  let all=[];
+  for(const f of list){
+    try{const rows=/\.xlsx$/i.test(f.name)?await readXlsx(f):parseCSV(await f.text());const o=toObjs(rows);
+      if(!o.length||!('bl_no' in o[0])||!('branch' in o[0])){FILES.push(`${f.name} — BL Search 양식 아님`);continue}
+      all=all.concat(o);FILES.push(`${f.name} (${o.length}건)`);}catch(e){FILES.push(`${f.name} — 읽기 실패`)}
+  }
+  $('files').textContent=FILES.join(' · ');
+  if(all.length){const seen=new Set();build(all.filter(r=>{const k=r.bl_no;if(seen.has(k))return false;seen.add(k);return true}));}
+}
+const nd=new Date();nd.setDate(nd.getDate()+1);$('dDate').value=nd.toLocaleDateString('en-CA');
+loadTpl();renderTplEd();
+
+/* ===== 바로 쓰기 (직접 입력) ===== */
+const MF={name:['고객명','예) 홍길동'],bl:['BL / 운송장 번호','예) COSC261072'],pkgs:['박스 수','예) 2'],tel:['연락처','예) 604-455-1000'],
+  addr:['주소','예) #1203-1234 ROBSON ST, VANCOUVER, BC V6E 1B5'],date:['배송 예정일',''],time:['배송 예정 시간',''],
+  measure:['측정 정보 (실무게 / 부피무게)','예) 30KG 3개'],amount:['총 결제 금액','예) 384'],last:['영문 성 (Last Name)','예) RYU'],first:['영문 이름 (First Name)','예) JI WON'],email:['이메일','예) name@gmail.com']};
+let MV={time:'배송 전일 별도 안내 예정'}, mEdited=false;
+try{MV=Object.assign(MV,JSON.parse(sessionStorage.getItem('nt_manual')||'{}'))}catch(e){}
+$('mType').innerHTML=TYPES.filter(t=>t.tpl).map(t=>`<option value="${t.id}">${t.nm}</option>`).join('');
+function mFieldsFor(id){return [...new Set((TPL[id].match(/\{(\w+)\}/g)||[]).map(x=>x.slice(1,-1)))].filter(k=>MF[k])}
+function mRenderFields(){
+  const ks=mFieldsFor($('mType').value);
+  const row=k=>k==='addr'?`<label class="mf">${MF[k][0]}<textarea data-mv="addr" placeholder="${MF[k][1]}">${esc(MV.addr||'')}</textarea></label>`
+    :k==='date'?`<label class="mf">${MF[k][0]}<input type="date" data-mv="date" value="${esc(MV.date||'')}"></label>`
+    :`<label class="mf">${MF[k][0]}<input data-mv="${k}" value="${esc(MV[k]||'')}" placeholder="${MF[k][1]}" ${k==='pkgs'||k==='amount'?'inputmode="decimal"':''}></label>`;
+  const pairs=[['last','first'],['pkgs','tel'],['date','time']];
+  let html='',done=new Set();
+  ks.forEach(k=>{if(done.has(k))return;const pr=pairs.find(p=>p.includes(k)&&p.every(x=>ks.includes(x)));
+    if(pr){html+=`<div class="mf2">${pr.map(row).join('')}</div>`;pr.forEach(x=>done.add(x))} else {html+=row(k);done.add(k)}});
+  $('mFields').innerHTML=html||'<p class="note">입력할 항목이 없는 안내입니다. 오른쪽 멘트를 그대로 복사하세요.</p>';
+  document.querySelectorAll('[data-mv]').forEach(el=>el.oninput=()=>{MV[el.dataset.mv]=el.value;try{sessionStorage.setItem('nt_manual',JSON.stringify(MV))}catch(e){}mEdited=false;clearTimeout(window._mt);window._mt=setTimeout(mRender,200)});
+  mRender();
+}
+function mRender(){
+  if(mEdited) return;
+  const a=String(MV.amount||'').trim();
+  const v={name:MV.name||'{고객명}',bl:MV.bl||'{BL 번호}',pkgs:MV.pkgs||'{박스 수}',tel:MV.tel||'{연락처}',addr:(MV.addr||'{주소}').replace(/\s*\n\s*/g,', '),
+    date:MV.date?fmtDate(MV.date):'{배송 예정일}',time:MV.time||'{시간}',measure:MV.measure||'{측정 정보}',
+    amount:a?(/^[\d.,]+$/.test(a)?'$'+a.replace(/,/g,''):a):'{금액}',last:(MV.last||'{성}').toUpperCase(),first:(MV.first||'{이름}').toUpperCase(),email:MV.email||'{이메일}'};
+  $('mOut').value=fill(TPL[$('mType').value],v);
+}
+$('mType').onchange=()=>{mEdited=false;mRenderFields()};
+$('mOut').oninput=()=>mEdited=true;
+$('mCopy').onclick=async()=>{const t=$('mOut').value;if(/\{[^}]+\}/.test(t)&&!confirm('아직 채우지 않은 칸 { } 이 있습니다. 그래도 복사할까요?'))return;
+  try{await navigator.clipboard.writeText(t)}catch(e){$('mOut').select();document.execCommand('copy')}toast('멘트 복사됨')};
+$('mClear').onclick=()=>{MV={time:'배송 전일 별도 안내 예정'};mEdited=false;try{sessionStorage.removeItem('nt_manual')}catch(e){}mRenderFields()};
+mRenderFields();
+</script>
+</body>
+</html>
