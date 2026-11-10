@@ -4,215 +4,614 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>EASY COSHIP</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<title>COSHIP AI · 문의센터</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#16181d;--muted:#5f646c;--faint:#9aa0a8;--line:#e3e5e9;--bg:#f5f6f7;--red:#e31e24;--red-soft:#fdeced}
+:root{--ink:#16181d;--muted:#666b73;--faint:#9aa0a8;--line:#e2e4e8;--bg:#f6f7f8;--red:#e31e24;--red-soft:#fdeced;--green:#2e7d32;--amber:#a15c00}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:14px;line-height:1.5}
-a{color:inherit;text-decoration:none}
-button,input{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-
-header{background:var(--ink);color:#fff}
-.top{max-width:1180px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:14px}
-.logo{background:#fff;border-radius:8px;padding:7px 12px;display:flex;align-items:center}
-.logo img{height:60px;width:auto;display:block}
-.brand .tx{display:flex;flex-direction:column;gap:2px}
-.brand b{font-weight:900;font-size:20px;letter-spacing:.02em}
-.brand b span{color:var(--red)}
-.brand small{font-size:11px;color:#b7bcc4;letter-spacing:.08em}
-.clocks{display:flex;gap:4px}
-.who{margin-left:auto;font-size:12px;color:#b7bcc4;display:flex;align-items:center;gap:6px}
-.who select{background:#23262d;color:#fff;border:1px solid #3a3e46;border-radius:4px;padding:6px 8px;font-size:13px}
-.clock{padding:6px 12px;border-radius:4px;background:#23262d;text-align:center;min-width:92px}
-.clock .c{font-size:10.5px;color:#b7bcc4;letter-spacing:.06em}
-.clock .t{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
-.clock .d{font-size:10.5px;color:#8b9099}
-.clock.off .t{color:#8b9099}
-.searchbar{max-width:1180px;margin:0 auto;padding:0 20px 16px}
-.searchbar input{width:100%;padding:12px 16px;border-radius:5px;border:0;font-size:15px;background:#fff}
-.notice{background:var(--red);color:#fff;font-size:13px}
-.notice div{max-width:1180px;margin:0 auto;padding:8px 20px}
-
-main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
-section{margin-bottom:26px}
-section h2{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-section h2::after{content:'';flex:1;height:1px;background:var(--line)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
-.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 14px 12px;display:flex;flex-direction:column;gap:3px;transition:border-color .12s,box-shadow .12s;min-height:84px}
-.card:hover{border-color:var(--ink)}
-.card.soon{background:transparent;border-style:dashed;cursor:default}
-.card.soon:hover{border-color:var(--line)}
-.card .nm{font-weight:700;font-size:14.5px;padding-right:46px}
-.card .ds{font-size:12.5px;color:var(--muted)}
-.card .tg{display:inline-block;font-size:10.5px;padding:1px 6px;border-radius:3px;border:1px solid var(--line);color:var(--muted);margin-top:auto;align-self:flex-start}
-.card .tg.red{border-color:var(--red);color:var(--red)}
-.card .acts{position:absolute;top:9px;right:8px;display:flex;gap:2px}
-.ic{width:26px;height:26px;border-radius:4px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--faint)}
-.ic:hover{background:var(--bg);color:var(--ink)}
-.ic.on{color:var(--red)}
-.ic svg{width:15px;height:15px}
-.copied{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 16px;border-radius:4px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
-.copied.show{opacity:1}
-.none{color:var(--faint);padding:30px 0;text-align:center}
-footer{max-width:1180px;margin:0 auto;padding:0 20px 30px;font-size:12px;color:var(--faint)}
-@media(max-width:700px){.who{margin-left:0}.logo img{height:46px}.clocks{margin-left:0;width:100%}.clock{flex:1;min-width:0}.grid{grid-template-columns:1fr}}
+button,input,select,textarea{font:inherit;color:inherit}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header b{font-size:16px;letter-spacing:.04em}
+header .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:2px 7px;border-radius:3px}
+header .me{margin-left:auto;font-size:12.5px;color:var(--muted)}
+header a{font-size:12.5px;color:var(--muted);text-decoration:none}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:6px;margin-bottom:16px}
+.ph{padding:12px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ph h2{font-size:15px}.ph .sub{color:var(--muted);font-size:12.5px}
+.pb{padding:16px 18px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted)}
+label.f input,label.f select,label.f textarea,.inp{padding:8px 10px;border:1px solid #c9ccd2;border-radius:4px;background:#fff;color:var(--ink);font-size:14px;width:100%}
+textarea{resize:vertical}
+.btn{padding:8px 14px;border-radius:4px;border:1px solid var(--ink);background:#fff;cursor:pointer;font-weight:500;font-size:13px;white-space:nowrap;text-decoration:none;display:inline-block}
+.btn.pri{background:var(--ink);color:#fff}
+.btn.red{border-color:var(--red);color:var(--red)}
+.btn.sm{padding:4px 10px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:default}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.info{font-size:12.5px;color:var(--muted)}
+.err{color:var(--red);font-size:13px}
+.hide{display:none!important}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:9px 18px;border:1px solid var(--line);border-radius:5px;background:#fff;cursor:pointer;font-weight:500}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:6px 12px;border:1px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;font-size:13px}
+.chip.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.chip i{font-style:normal;color:var(--faint);margin-left:4px}.chip.on i{color:#cfd2d6}
+.flt{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11.5px;color:var(--muted);font-weight:500;padding:8px 8px;border-bottom:1px solid #c9ccd2;white-space:nowrap}
+td{padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr.it{cursor:pointer}tbody tr.it:hover td{background:#fafafb}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+.st{display:inline-block;font-size:12px;padding:1px 8px;border-radius:10px;border:1px solid var(--line);white-space:nowrap}
+.st.s신규{border-color:var(--red);color:var(--red)}
+.st.s배정{border-color:var(--amber);color:var(--amber)}
+.st.s상담중,.st.s회신대기{border-color:var(--ink)}
+.st.s완료{background:var(--ink);color:#fff;border-color:var(--ink)}
+.st.s종료,.st.s스팸,.st.s보류{color:var(--faint)}
+.late{color:var(--red);font-weight:500}
+.sm2{font-size:12px;color:var(--muted)}
+.mut{color:var(--faint)}
+/* 상세 */
+#dw{position:fixed;inset:0;background:rgba(22,24,29,.35);z-index:20;display:flex;justify-content:flex-end}
+#dwIn{background:var(--bg);width:min(760px,100%);height:100%;overflow:auto;box-shadow:-4px 0 18px rgba(0,0,0,.12)}
+.dh{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:12px 18px;display:flex;gap:10px;align-items:center;z-index:2}
+.dh h3{font-size:16px}.dh .x{margin-left:auto}
+.dbody{padding:14px 16px 40px}
+.flow{display:flex;gap:0;margin:2px 0 4px;flex-wrap:wrap}
+.flow span{flex:1;min-width:84px;text-align:center;font-size:12px;padding:6px 4px;border:1px solid var(--line);background:#fff;color:var(--faint)}
+.flow span+span{border-left:0}
+.flow span.done{color:var(--ink)}
+.flow span.cur{background:var(--ink);color:#fff;border-color:var(--ink)}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:13px}
+.kv dt{color:var(--muted)}.kv dd{white-space:pre-wrap;word-break:break-word}
+.tl{list-style:none}
+.tl li{padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.tl li .w{font-size:12px;color:var(--muted)}
+.tl li .k{font-weight:500}
+.tl li .nt{white-space:pre-wrap;margin-top:2px}
+.save{font-size:12px;color:var(--muted)}.save.bad{color:var(--red)}
+/* 대시보드 */
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.kpi div{background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--muted)}
+.bar{height:8px;background:var(--ink);border-radius:2px;display:inline-block;vertical-align:middle}
+.bar.g{background:#c9ccd2}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid2 td:first-child{white-space:nowrap}
+.tlab{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 16px;border-radius:4px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:40}
+.toast.show{opacity:1}
+.svcs{display:flex;flex-wrap:wrap;gap:4px}
+.svcs label{font-size:11.5px;border:1px solid var(--line);border-radius:3px;padding:1px 6px;cursor:pointer;white-space:nowrap}
+.svcs input{margin-right:3px;vertical-align:-1px}
+.tpl{border:1px solid var(--line);border-radius:6px;padding:12px;margin-bottom:10px;background:#fff}
+@media (max-width:760px){
+  header{padding:12px 16px}
+  .grid2{grid-template-columns:1fr}
+  .grid2 td:last-child,.grid2 th:last-child{display:none}
+  .kv{grid-template-columns:1fr}.kv dt{margin-top:6px}
+  table.lst thead{display:none}
+  table.lst tr.it{display:block;border-bottom:1px solid var(--line);padding:8px 4px}
+  table.lst td{display:inline-block;border:0;padding:2px 6px}
+  table.lst td.c-svc{display:block}
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="top">
-    <div class="brand"><a class="logo" href="https://coship.ca" target="_blank" rel="noopener" title="coship.ca"><img src="data:image/jpeg;base64,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" alt="COSHIP Canada Orient Shipping"></a><div class="tx"><b>EASY <span>COSHIP</span></b><small>업무 허브</small></div></div>
-    <label class="who" title="즐겨찾기를 사람별로 따로 저장합니다">★ <select id="user"></select></label>
-    <div class="clocks" id="clocks"></div>
-  </div>
-  <div class="searchbar"><input id="q" type="search" placeholder="찾기 — 예) 선박, 시트, 가격, 카톡, 접수폼" autocomplete="off"></div>
-</header>
-<div class="notice" id="notice"></div>
+<header><b>COSHIP AI</b><span class="tag">문의센터 · 홈페이지 문의 배정·진행·템플릿</span><span class="me" id="meTag"></span><a href="../">← EASY COSHIP</a></header>
+<main>
 
-<main id="main"></main>
-<footer>링크는 각 시스템의 로그인·공유 권한으로 보호됩니다. 이 페이지에는 데이터가 없습니다. 링크 추가·수정은 담당자에게 요청하세요.</footer>
-<div class="copied" id="copied">링크 복사됨</div>
+<section class="panel" id="conn">
+  <div class="ph"><h2>연결</h2><span class="sub">처음 한 번만 입력하면 이 브라우저에 기억합니다</span><button class="btn sm" id="connToggle" style="margin-left:auto">접기</button></div>
+  <div class="pb" id="connBody">
+    <div class="row">
+      <label class="f">서버 주소 (Apps Script /exec)<input id="gas" placeholder="https://script.google.com/macros/s/…/exec"></label>
+      <label class="f">직원 코드<input id="code" type="password" autocomplete="off"></label>
+      <label class="f">내 이름<select id="meSel"><option value="">(불러온 뒤 선택)</option></select></label>
+      <label class="f">목록에 없으면 직접 입력<input id="meTxt" placeholder="예) 고서현"></label>
+    </div>
+    <div class="acts" style="margin-top:12px"><button class="btn pri" id="connGo">저장하고 불러오기</button><span class="info" id="connMsg"></span></div>
+  </div>
+</section>
+
+<div class="tabs"><button class="tab on" data-t="list">문의함</button><button class="tab" data-t="dash">대시보드</button><button class="tab" data-t="cfg">설정</button></div>
+
+<!-- 문의함 -->
+<div id="tabList">
+<section class="panel">
+  <div class="ph">
+    <div class="chips" id="views"></div>
+    <button class="btn sm" id="reload" style="margin-left:auto">새로고침</button><span class="info" id="lastLoad"></span>
+  </div>
+  <div class="pb" style="padding-top:6px">
+    <div class="flt">
+      <select class="inp" id="fBranch"></select>
+      <select class="inp" id="fSvc"></select>
+      <select class="inp" id="fStaff"></select>
+      <select class="inp" id="fDays"><option value="30">최근 30일</option><option value="90" selected>최근 90일</option><option value="365">최근 1년</option><option value="0">전체</option></select>
+      <input class="inp" id="fQ" placeholder="이름·전화·이메일·내용 검색">
+    </div>
+  </div>
+  <div style="overflow:auto">
+    <table class="lst"><thead><tr><th>접수</th><th>서비스</th><th>고객</th><th>연락처</th><th>지사 · 부서</th><th>담당</th><th>상태</th><th>경과</th></tr></thead><tbody id="tb"></tbody></table>
+  </div>
+  <div class="pb info" id="listInfo"></div>
+</section>
+</div>
+
+<!-- 대시보드 -->
+<div id="tabDash" class="hide">
+<section class="panel">
+  <div class="ph"><h2>대시보드</h2>
+    <select class="inp" id="dDays" style="width:auto"><option value="7">최근 7일</option><option value="30" selected>최근 30일</option><option value="90">최근 90일</option><option value="365">최근 1년</option><option value="0">전체</option></select>
+    <select class="inp" id="dBranch" style="width:auto"></select>
+    <select class="inp" id="dStaff" style="width:auto"></select>
+  </div>
+  <div class="pb">
+    <div class="kpi" id="kpi"></div>
+    <div style="margin-top:18px"><div class="sm2" style="margin-bottom:6px">기간별 문의 수 (일별, 주간은 90일 이상)</div><div id="trend"></div></div>
+  </div>
+</section>
+<div class="grid2">
+  <section class="panel"><div class="ph"><h2>담당자별</h2><span class="sub">이름을 누르면 해당 문의 목록</span></div><div class="pb" style="overflow:auto"><table id="byStaff"></table></div></section>
+  <section class="panel"><div class="ph"><h2>지사별</h2></div><div class="pb" style="overflow:auto"><table id="byBranch"></table></div></section>
+</div>
+<div class="grid2">
+  <section class="panel"><div class="ph"><h2>서비스별</h2></div><div class="pb" style="overflow:auto"><table id="bySvc"></table></div></section>
+  <section class="panel"><div class="ph"><h2>유입경로</h2></div><div class="pb" style="overflow:auto"><table id="byRef"></table></div></section>
+</div>
+</div>
+
+<!-- 설정 -->
+<div id="tabCfg" class="hide">
+<section class="panel">
+  <div class="ph"><h2>관리자 확인</h2><span class="sub">담당자·부서·템플릿 저장과 이관은 관리자 코드가 필요합니다 (기억하지 않음)</span></div>
+  <div class="pb acts"><input class="inp" id="admin" type="password" style="max-width:240px" placeholder="관리자 코드"><button class="btn pri" id="cfgSave">설정 저장</button><span class="info" id="cfgMsg"></span></div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>담당자</h2><span class="sub">지사와 맡는 서비스를 지정 · 지사+서비스에 해당하는 사람이 1명이면 자동 배정 · 퇴사자는 '사용' 해제(이력 보존)</span><button class="btn sm" id="stAdd" style="margin-left:auto">+ 담당자</button></div>
+  <div class="pb" style="overflow:auto"><table><thead><tr><th>이름</th><th>지사</th><th>맡는 서비스</th><th>사용</th><th></th></tr></thead><tbody id="stBody"></tbody></table></div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>서비스 → 부서</h2><span class="sub">자동 배정 시 부서 이름</span></div>
+  <div class="pb" style="overflow:auto"><table><thead><tr><th>서비스</th><th>코드</th><th>부서</th></tr></thead><tbody id="svBody"></tbody></table></div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>이메일 보내는 사람 · 회신 주소</h2><span class="sub">고객이 '답장'을 누르면 회신 주소로 갑니다 · 위에서부터 처음 맞는 규칙 적용 · 지사 '전체'·서비스 미선택은 모두 해당</span><button class="btn sm" id="mrAdd" style="margin-left:auto">+ 규칙</button></div>
+  <div class="pb">
+    <div class="acts"><label class="f" style="flex-direction:row;align-items:center;gap:8px">보내는 사람<input class="inp" id="cfSender" style="width:220px"></label>
+      <label class="chk" style="display:flex;gap:6px;align-items:center;font-size:13px"><input type="checkbox" id="cfDirect">회신 주소 사서함 명의로 직접 발송 <span class="sm2">(Exchange 발신 권한 설정 완료 후에만 켜기)</span></label></div>
+    <div style="overflow:auto;margin-top:10px"><table><thead><tr><th>순서</th><th>지사</th><th>서비스</th><th>회신 주소</th><th></th></tr></thead><tbody id="mrBody"></tbody></table></div>
+  </div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>지사별 서명</h2><span class="sub">이메일 끝에 자동 추가 · {담당자} = 보내는 직원 이름 · 영문 템플릿은 영문 서명</span></div>
+  <div class="pb" id="sgBody"></div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>상담 템플릿</h2><span class="sub">변수: {고객명} {서비스} {담당자} {지사} {지사전화} {출발지} {도착지} {카톡} {홈페이지} {택배접수} · [ ] 칸은 직접 채움</span><button class="btn sm" id="tpAdd" style="margin-left:auto">+ 템플릿</button></div>
+  <div class="pb" id="tpBody"></div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>배정 규칙 (현재)</h2></div>
+  <div class="pb info" style="line-height:1.9">
+    한→캐 · 캐나다 도착: 한국 번호 → 한국지사 / 캐나다 번호 → 밴쿠버본사<br>
+    캐→한 · 캐나다 출발: 한국 번호 → 한국지사 / 캐나다 번호 → 출발지 서부(BC·AB·SK·MB) 밴쿠버본사, 동부(ON·QC·대서양) 토론토지사. 출발지 판정 불가 시 전화 지역번호로 판정<br>
+    캐나다 국내(타주이사 등): 출발지 → 없으면 지역번호<br>
+    방향 미상(일반 문의·택배 일부): 한국 번호 → 한국지사, 그 외 출발지 → 지역번호<br>
+    판정 불가 → 미배정. 지사·부서·담당자는 상세 화면에서 언제든 바꿀 수 있고 모든 변경은 이력에 남습니다.
+  </div>
+</section>
+<section class="panel">
+  <div class="ph"><h2>원본 동기화</h2><span class="sub">홈페이지 문의 시트(Wix Mastertab)와 기존 인콰이어리 기록을 읽어 옴 · 화면을 열 때와 5분마다 자동</span></div>
+  <div class="pb acts"><button class="btn" id="syncGo">지금 동기화</button><span class="info" id="syncMsg"></span></div>
+</section>
+</div>
+
+</main>
+
+<div id="dw" class="hide"><div id="dwIn"></div></div>
+<div class="toast" id="toast"></div>
 
 <script>
-/* =========================================================
-   설정 — 공지와 링크는 여기만 고치면 됩니다
-   ========================================================= */
-const NOTICE = '';   // 예) '이번 주 선박 마감 10/24(금) · 이메일 입력 교육 10/28(화)'
+'use strict';
+const $=id=>document.getElementById(id);
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200)};
 
-const SECTIONS = [
- {title:'COSHIP AI · 택배팀 자동화', items:[
-  {n:'메일센터', d:'캐→한 선편 출항 안내 일괄 발송', u:'mailcenter/', tag:'시험판', red:true},
-  {n:'검수센터', d:'BL CSV·CLP·선적대기·매니페스트 · 물품리스트·리마크 점검', u:'inspect/', tag:'시험판', red:true},
-  {n:'스케줄센터', d:'픽업·배송 스케줄 엑셀·카톡 멘트 자동 작성', u:'schedule/', tag:'시험판', red:true},
-  {n:'안내센터', d:'입고·통관·배송·UPS 출고·가격·영문명 확인 안내 멘트', u:'notice/', tag:'시험판', red:true},
-  {n:'조회센터', d:'코쉽 가격(티어 할인)·UPS 견적·배송조회·단위·CBM 계산', u:'quote/', tag:'시험판 · 직원용', red:true},
-  {n:'문의센터', d:'홈페이지 문의 자동 배정·상담 이력·템플릿·담당자별 현황', u:'inquiry/', tag:'시험판 · 전 부서', red:true},
-  {n:'진행관리', d:'고객별 서류·진행 단계·일정', soon:true},
-  {n:'통합 대시보드', d:'항공 접수→출고·통관→완료, 지연 10일', u:'dashboard/', tag:'시험판 · 항공', red:true},
-  {n:'통계 리포트', d:'기간별 출고량·거래처별 물량', soon:true, tag:'팀장 담당'},
- ]},
- {title:'시스템', items:[
-  {n:'코쉽 BMS', d:'BL·AR 입력과 수정', u:'https://bms.coship.ca/'},
-  {n:'택배팀 DB', d:'BL·AR·파트너 조회, CSV 내려받기', u:'https://courier.coship.ca/'},
-  {n:'파트너 조회', d:'택배팀 DB → Partner Search', u:'https://courier.coship.ca/'},
-  {n:'운영 앱', d:'정산·GST·매출', u:'https://auto.coship.ca/', tag:'권한자'},
- ]},
- {title:'고객 응대', items:[
-  {n:'홈페이지 문의 관리', d:'고객 문의 확인·담당자 배정', u:'https://inquiry.coship.ca/'},
-  {n:'가격 안내 멘트 (Gems)', d:'서비스별 가격 안내 문구', u:'https://exp-coship.github.io/gemini/'},
-  {n:'개인통관고유부호 조회', d:'통관부호 유효성 확인', u:'https://script.google.com/macros/s/AKfycbyY7LY8Tl_gOvi4S9gxdp0NInZLPo4vLnpGaPjdrxwbUkt57ui84XslJP7f6OCbzl6x/exec'},
-  {n:'고객안내 자료', d:'요금표·접수처·안내 이미지 (드라이브)', u:'https://drive.google.com/drive/folders/1yCzualcHHo80MdKOYfj_lYrDjjY0csvm?usp=sharing'},
-  {n:'카카오톡 채널 관리자', d:'1:1 상담 응대', u:'https://center-pf.kakao.com/'},
-  {n:'카카오톡 채널 (고객용)', d:'고객에게 보낼 채널 링크', u:'https://pf.kakao.com/_dLNBd', copy:true},
- ]},
- {title:'온라인 접수 시트', items:[
-  {n:'캐→한 메이플', d:'선박 접수 시트', u:'https://docs.google.com/spreadsheets/d/1FqwtUcLJ1q4FStQiQ5r_61mo66heZzIRpR_VJqvvZEw/edit?gid=0#gid=0'},
-  {n:'캐→한 항공', d:'항공 접수 시트', u:'https://docs.google.com/spreadsheets/d/15gh-9hRymReuuR2BJzcAtT2lUsW5WkxCpsWtjHBJcIs/edit'},
-  {n:'한→캐 메이플', d:'선박 접수 시트', u:'https://docs.google.com/spreadsheets/d/10xIzzLMxDwluRuV-SaaPYlNKjfYf7gYqSPDRfSxVpqU/edit?gid=86204045#gid=86204045'},
-  {n:'한→캐 항공', d:'항공 접수 시트', u:'https://docs.google.com/spreadsheets/d/1iw_wCMxbK_pDPWys1Ir5H8kNVA7AV7J0wSz_Sr0kmP8/edit?gid=1149549543#gid=1149549543'},
-  {n:'캐나다 국내택배', d:'국내택배 접수 시트', u:'https://docs.google.com/spreadsheets/d/1rrle9aJS1Q0eMt202rWgNUyjDN4mmTb1S__Hqu5mJE4/edit'},
- ]},
- {title:'고객 전달용 접수폼', items:[
-  {n:'캐→한 항공택배', d:'한국어', u:'https://form.coship.ca/ca-to-kr-air/', copy:true},
-  {n:'캐→한 선박택배(메이플)', d:'한국어', u:'https://form.coship.ca/ca-to-kr-maple/', copy:true},
-  {n:'한→캐 항공택배', d:'한국어', u:'https://form.coship.ca/kr-to-ca-air/', copy:true},
-  {n:'한→캐 선박택배(메이플)', d:'한국어', u:'https://form.coship.ca/kr-to-ca-maple/', copy:true},
-  {n:'캐나다 국내택배', d:'한국어', u:'https://form.coship.ca/ca-domestic/', copy:true},
- ]},
- {title:'운송장 조회', items:[
-  {n:'UPS', d:'UPS 배송 조회', u:'https://www.ups.com/track?loc=ko_KR'},
-  {n:'Canada Post', d:'캐나다 우체국 조회', u:'https://www.canadapost-postescanada.ca/track-reperage/en'},
-  {n:'CJ대한통운', d:'국내 택배 조회', u:'https://www.cjlogistics.com/ko/tool/parcel/tracking'},
-  {n:'우체국 택배', d:'국내 우체국 조회', u:'https://service.epost.go.kr/iservice/usr/trace/usrtrc001k01.jsp'},
- ]},
- {title:'홈페이지 · SNS', items:[
-  {n:'코쉽 홈페이지', d:'www.coship.ca', u:'https://www.coship.ca/', copy:true},
-  {n:'인스타그램', d:'@canadashipping_', u:'https://www.instagram.com/canadashipping_/'},
-  {n:'유튜브', d:'@coship1000', u:'https://www.youtube.com/@coship1000'},
- ]},
+const STATUSES=['신규','배정','상담중','회신대기','보류','완료','종료','스팸'];
+const FLOW=['신규','배정','상담중','회신대기','완료'];
+const CLOSED=['완료','종료','스팸'];
+const CHANNELS=['전화','문자','이메일','카카오톡','WhatsApp','방문','기타'];
+const RESULTS=['통화완료','부재중','문자발송','이메일발송','카톡연결','안내완료','견적발송','접수전환','기타'];
+const LINKS={카톡:'http://pf.kakao.com/_dLNBd/chat',홈페이지:'https://www.coship.ca/ko',택배접수:'https://www.coship.ca/ko/courier-ecommerce/#apply'};
+
+const DEFAULT_TPL=[
+ {name:'부재중 문자 (공통)',channel:'문자',svcs:[],subject:'',body:'안녕하세요, {고객명}님. 캐나다쉬핑 {지사} {담당자}입니다.\n홈페이지로 남겨주신 {서비스} 문의 관련해 연락드렸는데 통화가 어려우셔서 문자 남겨요.\n편하신 시간 알려주시면 다시 연락드릴게요. 카카오톡으로도 편하게 상담하실 수 있어요.\n카카오톡: {카톡}\n전화: {지사전화}'},
+ {name:'부재중 이메일 (공통)',channel:'이메일',svcs:[],subject:'[캐나다쉬핑] {서비스} 문의 관련 안내드려요',body:'안녕하세요, {고객명}님.\n캐나다쉬핑 {지사} {담당자}입니다.\n\n홈페이지로 남겨주신 {서비스} 문의 잘 받았어요. 전화를 드렸는데 연결이 어려워 메일로 먼저 안내드려요.\n\n정확한 안내를 위해 아래 내용을 회신해 주실 수 있나요?\n- 보내실 물품과 대략적인 양(박스 수·무게 등)\n- 출발지와 도착지: {출발지} → {도착지}\n- 희망 일정\n\n카카오톡으로 문의하시면 더 빠르게 답변드릴 수 있어요.\n\n감사합니다.'},
+ {name:'택배 접수 안내',channel:'이메일',svcs:['courier','general'],subject:'[캐나다쉬핑] 택배 접수 방법 안내드려요',body:'안녕하세요, {고객명}님.\n캐나다쉬핑 {담당자}입니다.\n\n문의하신 택배는 아래 링크에서 바로 접수하실 수 있어요.\n- 캐나다→한국 항공: https://exp-coship.github.io/ca-to-kr-air/\n- 캐나다→한국 선박(메이플): https://exp-coship.github.io/ocean-to-kr/\n- 캐나다 국내: https://exp-coship.github.io/CANADA-DOMESTIC-EXP/\n- 요금 계산: https://www.coship.ca/ko/courier-ca-to-kr/#rate\n\n예상 요금: [ ]\n\n접수 중 궁금한 점은 카카오톡으로 편하게 물어봐 주세요.\n\n감사합니다.'},
+ {name:'카카오톡 채널 연결 안내',channel:'문자',svcs:[],subject:'',body:'{고객명}님, 캐나다쉬핑입니다. 상담은 카카오톡 채널에서 이어서 도와드릴게요.\n아래 링크를 눌러 채널 추가 후 성함을 남겨주시면 바로 연결해 드릴게요.\n{카톡}'},
+ {name:'해외이사 견적 안내',channel:'이메일',svcs:['move_kr_ca','move_ca_kr','move_to_ca','move_from_ca','interprov'],subject:'[캐나다쉬핑] {서비스} 견적 안내드려요',body:'안녕하세요, {고객명}님.\n캐나다쉬핑 {지사} {담당자}입니다.\n\n{서비스} 문의 감사드려요. 정확한 견적을 위해 아래 내용을 알려주실 수 있나요?\n- 현재 주소와 도착지 주소(도시): {출발지} → {도착지}\n- 짐의 양(박스 수, 가구·가전 품목)\n- 희망 출발일과 입국 예정일\n- 체류 신분(시민권·영주권·워크퍼밋 등)\n- 방문 견적 또는 영상 견적 희망 여부\n\n예상 비용: [ ]\n진행 일정: [ ]\n\n감사합니다.'},
+ {name:'차량운송 정보 요청',channel:'이메일',svcs:['vehicle_kr_ca','vehicle_ca_kr'],subject:'[캐나다쉬핑] 차량운송 문의 관련 안내드려요',body:'안녕하세요, {고객명}님.\n캐나다쉬핑 {담당자}입니다.\n\n차량운송 견적을 위해 아래 내용을 확인 부탁드려도 될까요?\n- 차종·연식·모델\n- 차량 소유 기간과 명의(본인/공동/할부 여부)\n- 출발지와 도착지: {출발지} → {도착지}\n- 희망 선적 시기\n\n예상 비용: [ ]\n필요 서류: [ ]\n\n감사합니다.'},
+ {name:'상업화물·3PL 정보 요청',channel:'이메일',svcs:['freight','3pl','ecom_kr_ca','ecom_ca_kr','nri'],subject:'[캐나다쉬핑] {서비스} 문의 관련 안내드려요',body:'안녕하세요, {고객명}님.\n캐나다쉬핑 {담당자}입니다.\n\n문의 감사드려요. 견적을 위해 아래 내용을 알려주실 수 있나요?\n- 품목과 HS 코드(알고 계시면)\n- 포장 형태·수량·중량·크기\n- 출발지와 도착지: {출발지} → {도착지}\n- 월 예상 물량, 희망 시작 시기\n\n감사합니다.'},
+ {name:'English — follow-up',channel:'이메일',en:true,svcs:[],subject:'COSHIP — Your {서비스} inquiry',body:'Hello {고객명},\n\nThank you for contacting COSHIP (Canada Orient Shipping). This is {담당자} from our {지사}.\nI tried calling you regarding your inquiry but could not reach you.\n\nCould you reply with a few details so we can prepare an accurate quote?\n- What you are shipping and the approximate volume\n- Origin and destination: {출발지} → {도착지}\n- Preferred timeline\n\nBest regards,'}
 ];
 
-/* ========================================================= */
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-/* 즐겨찾기 — 사용자(이름)별로 이 브라우저에 저장 */
-const LSX={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let USERS=LSX.get('easy_users',['공용']), ME=LSX.get('easy_me','공용');
-if(!USERS.includes(ME)) ME=USERS[0];
-(()=>{const old=LSX.get('easy_fav',null); if(old&&!LSX.get('easy_fav:공용',null)){LSX.set('easy_fav:공용',old)}})();   // 예전 즐겨찾기 → 공용
-const store={get(){return LSX.get('easy_fav:'+ME,[])},set(v){LSX.set('easy_fav:'+ME,v)}};
-let fav=store.get();
-const favKey=it=>(it.sec||'')+'|'+it.n;
-function renderUser(){
-  $('user').innerHTML=USERS.map(u=>`<option ${u===ME?'selected':''}>${esc(u)}</option>`).join('')+'<option value="__add">+ 이름 추가</option>'+(ME!=='공용'?'<option value="__del">− 현재 이름 삭제</option>':'');
+let S={rows:[],cfg:null,view:'mine',open:null,openLog:[],admin:''};
+const cfgSvcs=()=>(S.cfg&&S.cfg.services)||[];
+const svcLabel=c=>(cfgSvcs().find(x=>x.code===c)||{}).label||c||'-';
+const branchNames=()=>((S.cfg&&S.cfg.branches)||[]).map(b=>b.name);
+const staffAll=()=>(S.cfg&&S.cfg.staff)||[];
+const templates=()=>(S.cfg&&S.cfg.templates&&S.cfg.templates.length)?S.cfg.templates:DEFAULT_TPL;
+const me=()=>LS.get('inq_me')||'';
+const mailRoutes=()=>(S.cfg&&S.cfg.mailRoutes)||[];
+const mailSender=()=>String((S.cfg&&S.cfg.mailSender)||'exp@coship.ca').toLowerCase();
+const mailDirect=()=>!!(S.cfg&&S.cfg.mailDirect);
+const mailFroms=()=>[...new Set(mailRoutes().map(x=>String(x.reply).trim().toLowerCase()).filter(Boolean))];
+const mailFromFor=r=>{const x=mailRoutes().find(x=>(!x.branch||x.branch===r.branch)&&(!x.svcs||!x.svcs.length||x.svcs.includes(r.svc)));return x?String(x.reply).trim().toLowerCase():mailSender()};
+
+/* ---------- 서버 ---------- */
+async function api(action,body){
+  const url=$('gas').value.trim();
+  if(url.indexOf('script.google.com')<0) throw new Error('서버 주소를 확인하세요');
+  const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action,code:$('code').value,by:me()},body||{}))});
+  const j=await r.json();
+  if(!j.ok&&!j.conflict) throw new Error(j.error||'서버 오류');
+  return j;
 }
-function setUser(v){
-  if(v==='__add'){const n=(prompt('즐겨찾기를 따로 저장할 이름 (예: WOODY)')||'').trim(); if(n&&!USERS.includes(n)){USERS.push(n);LSX.set('easy_users',USERS)} if(n) ME=n;}
-  else if(v==='__del'){if(confirm(`'${ME}' 이름과 즐겨찾기를 삭제할까요?`)){USERS=USERS.filter(u=>u!==ME);try{localStorage.removeItem('easy_fav:'+ME)}catch(e){} LSX.set('easy_users',USERS);ME=USERS[0]||'공용';}}
-  else ME=v;
-  LSX.set('easy_me',ME); fav=store.get(); renderUser(); render();
+
+/* ---------- 연결 ---------- */
+function initConn(){
+  $('gas').value=LS.get('inq_gas')||'';
+  $('code').value=LS.get('inq_code')||'';
+  $('meTxt').value=me();
+  updMe();
+  if($('gas').value&&$('code').value){collapse(true);load()}
 }
-const IC={
- star:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>',
- copy:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2"/></svg>'
+function collapse(b){$('connBody').classList.toggle('hide',b);$('connToggle').textContent=b?'펼치기':'접기'}
+$('connToggle').onclick=()=>collapse(!$('connBody').classList.contains('hide'));
+function updMe(){$('meTag').textContent=me()?'사용자: '+me():'사용자 미선택'}
+$('meSel').onchange=()=>{if($('meSel').value)$('meTxt').value=$('meSel').value};
+$('connGo').onclick=()=>{
+  LS.set('inq_gas',$('gas').value.trim());LS.set('inq_code',$('code').value);
+  const n=($('meTxt').value||$('meSel').value).trim();
+  if(n)LS.set('inq_me',n);updMe();load(true);
 };
 
-if(NOTICE) $('notice').innerHTML=`<div>${esc(NOTICE)}</div>`;
+async function load(fromBtn){
+  $('connMsg').textContent='불러오는 중…';$('lastLoad').textContent='불러오는 중…';
+  try{
+    const j=await api('list',{days:+$('fDays').value||0});
+    S.rows=j.rows||[];S.cfg=j.config;
+    $('connMsg').textContent='연결됨 · '+S.rows.length+'건';
+    $('lastLoad').textContent=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})+' 기준';
+    fillSelects();renderList();renderDash();if(!$('tabCfg').classList.contains('hide'))renderCfg();
+    if(fromBtn&&me())collapse(true);
+    if(!me()){collapse(false);$('connMsg').textContent='연결됨 · 내 이름을 선택하고 다시 저장하세요'}
+  }catch(e){$('connMsg').textContent='';$('connMsg').innerHTML='<span class="err">'+h(e.message)+'</span>';$('lastLoad').textContent='';collapse(false)}
+}
 
-/* 지사 시각 */
-const ZONES=[['밴쿠버','America/Vancouver'],['토론토','America/Toronto'],['서울','Asia/Seoul']];
-function tick(){
-  const now=new Date();
-  $('clocks').innerHTML=ZONES.map(([c,z])=>{
-    const t=new Intl.DateTimeFormat('ko-KR',{timeZone:z,hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
-    const d=new Intl.DateTimeFormat('ko-KR',{timeZone:z,month:'numeric',day:'numeric',weekday:'short'}).format(now);
-    const h=+new Intl.DateTimeFormat('en-US',{timeZone:z,hour:'numeric',hour12:false}).format(now);
-    const wd=new Intl.DateTimeFormat('en-US',{timeZone:z,weekday:'short'}).format(now);
-    const open=h>=9&&h<18&&!['Sat','Sun'].includes(wd);
-    return `<div class="clock ${open?'':'off'}" title="${open?'업무 시간':'업무 시간 외'}"><div class="c">${c}</div><div class="t">${t}</div><div class="d">${d}</div></div>`;
-  }).join('');
+function fillSelects(){
+  const names=[...new Set(staffAll().filter(s=>s.active!==false).map(s=>s.name))];
+  $('meSel').innerHTML='<option value="">선택</option>'+names.map(n=>`<option ${n===me()?'selected':''}>${h(n)}</option>`).join('');
+  const br=['<option value="">전체 지사</option>',...branchNames().map(b=>`<option>${h(b)}</option>`),'<option value="-">미배정</option>'].join('');
+  const keepB=[$('fBranch').value,$('dBranch').value];
+  $('fBranch').innerHTML=br;$('dBranch').innerHTML=br;$('fBranch').value=keepB[0]||'';$('dBranch').value=keepB[1]||'';
+  const ks=$('fSvc').value;
+  $('fSvc').innerHTML='<option value="">전체 서비스</option>'+cfgSvcs().map(s=>`<option value="${s.code}">${h(s.label)}</option>`).join('');$('fSvc').value=ks||'';
+  const all=[...new Set(names.concat(S.rows.map(r=>r.assignee).filter(Boolean)))].sort();
+  const st='<option value="">전체 담당자</option>'+all.map(n=>`<option>${h(n)}</option>`).join('')+'<option value="-">담당자 없음</option>';
+  const keepS=[$('fStaff').value,$('dStaff').value];
+  $('fStaff').innerHTML=st;$('dStaff').innerHTML=st;$('fStaff').value=keepS[0]||'';$('dStaff').value=keepS[1]||'';
 }
-tick(); setInterval(tick,30000);
 
-/* 렌더 */
-function card(it){
-  const k=it.n;
-  if(it.soon) return `<div class="card soon"><div class="nm">${esc(it.n)}</div><div class="ds">${esc(it.d)}</div><span class="tg">${esc(it.tag||'준비 중')}</span></div>`;
-  return `<a class="card" href="${esc(it.u)}" target="_blank" rel="noopener">
-    <div class="acts">
-      ${it.copy?`<button class="ic" data-copy="${esc(it.u)}" title="링크 복사">${IC.copy}</button>`:''}
-      <button class="ic ${fav.includes(favKey(it))||fav.includes(it.n)?'on':''}" data-fav="${esc(favKey(it))}" title="즐겨찾기">${IC.star}</button>
-    </div>
-    <div class="nm">${esc(it.n)}</div><div class="ds">${esc(it.d)}</div>
-    ${it.tag?`<span class="tg ${it.red?'red':''}">${esc(it.tag)}</span>`:''}
-  </a>`;
+/* ---------- 목록 ---------- */
+const VIEWS=[
+ {k:'mine',n:'내 담당',f:r=>r.assignee===me()&&!CLOSED.includes(r.status)},
+ {k:'open',n:'진행중',f:r=>!CLOSED.includes(r.status)},
+ {k:'new',n:'신규·미배정',f:r=>(r.status==='신규'||r.status==='배정'||!r.branch)&&!CLOSED.includes(r.status)},
+ {k:'wait',n:'회신대기',f:r=>r.status==='회신대기'},
+ {k:'done',n:'완료·종료',f:r=>CLOSED.includes(r.status)},
+ {k:'all',n:'전체',f:r=>true}
+];
+function fmtD(iso,withT){if(!iso)return'';const d=new Date(iso);if(isNaN(d))return iso;const p=n=>String(n).padStart(2,'0');return (d.getMonth()+1)+'/'+p(d.getDate())+(withT?' '+p(d.getHours())+':'+p(d.getMinutes()):'')}
+function fmtFull(iso){const d=new Date(iso);if(isNaN(d))return iso||'';return d.toLocaleString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}
+function ageH(r){const end=r.closedAt?new Date(r.closedAt):new Date();return (end-new Date(r.receivedAt))/36e5}
+function ageTxt(hrs){if(!(hrs>=0))return'';if(hrs<1)return Math.round(hrs*60)+'분';if(hrs<48)return Math.round(hrs)+'시간';return Math.round(hrs/24)+'일'}
+function baseFilter(r){
+  const b=$('fBranch').value,s=$('fSvc').value,st=$('fStaff').value,q=$('fQ').value.trim().toLowerCase();
+  if(b==='-'?r.branch:b&&r.branch!==b)return false;
+  if(s&&r.svc!==s)return false;
+  if(st==='-'?r.assignee:st&&r.assignee!==st)return false;
+  if(q&&![r.name,r.phone,r.phoneNorm,r.email,r.details,r.origin,r.destination,r.svcRaw,r.id].join(' ').toLowerCase().includes(q))return false;
+  return true;
 }
-function render(){
-  const q=$('q').value.trim().toLowerCase();
-  const match=it=>!q||(it.n+' '+it.d+' '+(it.tag||'')+' '+(it.sec||'')).toLowerCase().includes(q);
-  const all=SECTIONS.flatMap(s=>s.items.map(it=>({...it,sec:s.title})));
-  let html='';
-  const favs=all.filter(it=>(fav.includes(favKey(it))||fav.includes(it.n))&&!it.soon&&match(it));
-  if(favs.length) html+=`<section><h2>★ ${esc(ME)} 즐겨찾기</h2><div class="grid">${favs.map(card).join('')}</div></section>`;
-  SECTIONS.forEach(s=>{
-    const its=s.items.map(it=>({...it,sec:s.title})).filter(match);
-    if(its.length) html+=`<section><h2>${esc(s.title)}</h2><div class="grid">${its.map(card).join('')}</div></section>`;
-  });
-  $('main').innerHTML=html||'<div class="none">찾는 항목이 없습니다. 다른 단어로 검색해 보세요.</div>';
+function renderList(){
+  const base=S.rows.filter(baseFilter);
+  $('views').innerHTML=VIEWS.map(v=>`<button class="chip ${S.view===v.k?'on':''}" data-v="${v.k}">${v.n}<i>${base.filter(v.f).length}</i></button>`).join('');
+  const vf=(VIEWS.find(v=>v.k===S.view)||VIEWS[5]).f;
+  const rows=base.filter(vf).sort((a,b)=>b.receivedAt<a.receivedAt?-1:1);
+  $('tb').innerHTML=rows.slice(0,500).map(r=>{
+    const hrs=ageH(r),late=!r.firstContactAt&&!CLOSED.includes(r.status)&&hrs>24;
+    return `<tr class="it" data-id="${h(r.id)}"><td class="n">${fmtD(r.receivedAt,1)}</td><td class="c-svc">${h(svcLabel(r.svc))}<div class="sm2">${h(r.svcRaw)}</div></td><td><b>${h(r.name)}</b><div class="sm2">${h(r.origin)}${r.destination?' → '+h(r.destination):''}</div></td><td class="n">${h(r.phoneNorm||r.phone)}<div class="sm2">${h(r.email)}</div></td><td>${r.branch?h(r.branch):'<span class="late">미배정</span>'}<div class="sm2">${h(r.dept)}</div></td><td>${r.assignee?h(r.assignee):'<span class="mut">-</span>'}</td><td><span class="st s${h(r.status)}">${h(r.status)}</span></td><td class="n ${late?'late':'sm2'}">${CLOSED.includes(r.status)?'':ageTxt(hrs)}${late?'<div class="sm2 late">첫 연락 전</div>':''}</td></tr>`}).join('')||'<tr><td colspan="8" class="info" style="padding:20px">해당 문의가 없습니다</td></tr>';
+  $('listInfo').textContent=rows.length>500?'500건까지 표시합니다. 검색·필터로 좁혀 주세요.':rows.length+'건';
 }
-$('q').oninput=render;
-$('user').onchange=e=>setUser(e.target.value);
-renderUser();
-$('main').addEventListener('click',e=>{
-  const c=e.target.closest('[data-copy]'), f=e.target.closest('[data-fav]');
-  if(c){e.preventDefault();navigator.clipboard.writeText(c.dataset.copy).then(()=>{$('copied').classList.add('show');setTimeout(()=>$('copied').classList.remove('show'),1200)})}
-  if(f){e.preventDefault();const k=f.dataset.fav,nm=k.split('|').slice(1).join('|');fav=fav.includes(k)?fav.filter(x=>x!==k&&x!==nm):[...fav.filter(x=>x!==nm),k];store.set(fav);render()}
+$('views').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;S.view=b.dataset.v;renderList()};
+['fBranch','fSvc','fStaff'].forEach(id=>$(id).onchange=renderList);
+$('fDays').onchange=()=>load();
+let qT;$('fQ').oninput=()=>{clearTimeout(qT);qT=setTimeout(renderList,250)};
+$('reload').onclick=()=>load();
+$('tb').onclick=e=>{const tr=e.target.closest('tr.it');if(tr)openDetail(tr.dataset.id)};
+
+/* ---------- 상세 ---------- */
+async function openDetail(id){
+  const r=S.rows.find(x=>x.id===id);if(!r)return;
+  S.open=Object.assign({},r);S.openLog=null;
+  $('dw').classList.remove('hide');document.body.style.overflow='hidden';
+  renderDetail();
+  try{const j=await api('get',{id});S.open=j.row;S.openLog=j.log;syncRow(j.row);renderDetail()}
+  catch(e){S.openLog=[];renderDetail();toast(e.message)}
+}
+function closeDetail(){$('dw').classList.add('hide');document.body.style.overflow='';S.open=null}
+$('dw').onclick=e=>{if(e.target.id==='dw')closeDetail()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.open)closeDetail()});
+function syncRow(row){const i=S.rows.findIndex(x=>x.id===row.id);const o=Object.assign({},row);delete o.raw;if(i>=0)S.rows[i]=o;else S.rows.unshift(o);renderList();renderDash()}
+
+function rawFields(r){
+  let j={};try{j=JSON.parse(r.raw||'{}')}catch(e){}
+  const out=[];const walk=(o,p)=>{if(Array.isArray(o)){if(o.length&&typeof o[0]==='object'&&o[0]&&('value' in o[0]))o.forEach(x=>out.push([x.label||x.name||x.key,x.value]));else out.push([p,o.join(', ')]);return}
+    if(o&&typeof o==='object')Object.keys(o).forEach(k=>{if(k.charAt(0)==='_'||/^(action|token|code)$/.test(k))return;const v=o[k];if(v&&typeof v==='object')walk(v,k);else out.push([k,v])});};
+  walk(j,'');
+  return out.filter(x=>x[1]!==''&&x[1]!=null).map(([k,v])=>[String(k).replace(/([a-z])([A-Z])/g,'$1 $2').replace(/_/g,' '),String(v)]);
+}
+function opt(list,cur,blank){return (blank!=null?`<option value="">${blank}</option>`:'')+list.map(x=>`<option ${x===cur?'selected':''}>${h(x)}</option>`).join('')+(cur&&!list.includes(cur)?`<option selected>${h(cur)}</option>`:'')}
+
+function renderDetail(){
+  const r=S.open;if(!r)return;
+  const fi=FLOW.indexOf(r.status);
+  const flow=FLOW.map((s,i)=>`<span class="${s===r.status?'cur':(fi>i||CLOSED.includes(r.status)&&r.status!=='스팸'&&i<4)?'done':''}">${s}</span>`).join('');
+  const staffNames=[...new Set(staffAll().filter(s=>s.active!==false&&(!r.branch||!s.branch||s.branch===r.branch)).map(s=>s.name))];
+  const allStaff=[...new Set(staffAll().filter(s=>s.active!==false).map(s=>s.name))];
+  const depts=[...new Set(cfgSvcs().map(s=>s.dept).filter(Boolean))];
+  const tpls=templates().map((t,i)=>({t,i})).filter(x=>!x.t.svcs||!x.t.svcs.length||x.t.svcs.includes(r.svc));
+  const others=templates().map((t,i)=>({t,i})).filter(x=>!tpls.includes(x));
+  const rf=rawFields(r);
+  const phoneDial=(r.phoneNorm||r.phone||'').replace(/[^\d+]/g,'');
+  $('dwIn').innerHTML=`
+  <div class="dh"><div><h3>${h(r.name)||'(이름 없음)'}</h3><div class="sm2">${h(svcLabel(r.svc))} · ${h(r.svcRaw)} · ${fmtFull(r.receivedAt)} · ${h(r.id)}</div></div><button class="btn sm x" id="dClose">닫기</button></div>
+  <div class="dbody">
+    <section class="panel"><div class="pb">
+      <div class="flow">${flow}</div>
+      ${['보류','종료','스팸'].includes(r.status)?`<div class="sm2" style="margin-top:4px">현재 상태: <b>${h(r.status)}</b></div>`:''}
+      <div class="row" style="margin-top:12px">
+        <label class="f">상태<select id="dSt">${opt(STATUSES,r.status)}</select></label>
+        <label class="f">지사<select id="dBr">${opt(branchNames(),r.branch,'미배정')}</select></label>
+        <label class="f">부서<select id="dDe">${opt(depts,r.dept,'미정')}</select></label>
+        <label class="f">담당자<select id="dAs">${opt(staffNames.length?staffNames:allStaff,r.assignee,'없음')}<optgroup label="다른 지사">${allStaff.filter(n=>!staffNames.includes(n)).map(n=>`<option>${h(n)}</option>`).join('')}</optgroup></select></label>
+      </div>
+      <div class="acts" style="margin-top:10px">
+        <button class="btn pri" id="dApply">변경 저장</button>
+        ${me()&&r.assignee!==me()?`<button class="btn" id="dMine">내가 맡기</button>`:''}
+        <button class="btn sm" id="dRule">규칙 다시 적용</button>
+        <span class="save" id="dSave"></span>
+      </div>
+      <div class="sm2" style="margin-top:8px">배정 근거: ${h(r.rule||'-')}</div>
+      ${(()=>{let L={};try{L=JSON.parse(r.legacy||'{}')}catch(e){}return L.checked||L.assignee||L.comment?`<div class="sm2">기존 인콰이어리: ${h(L.checked||'-')} · 담당 칸 ${h(L.assignee||'-')}${L.comment?' · '+h(L.comment):''}</div>`:''})()}
+      <div class="sm2">첫 연락: ${r.firstContactAt?fmtFull(r.firstContactAt)+' ('+ageTxt((new Date(r.firstContactAt)-new Date(r.receivedAt))/36e5)+' 만에)':'<span class="late">아직 없음</span>'} · 마지막 수정: ${h(r.updatedBy||'-')} ${fmtD(r.updatedAt,1)}</div>
+    </div></section>
+
+    <section class="panel"><div class="ph"><h2>고객 정보</h2>
+      <span class="acts" style="margin-left:auto">${phoneDial?`<a class="btn sm" href="tel:${h(phoneDial)}">전화</a><a class="btn sm" href="sms:${h(phoneDial)}">문자</a>`:''}${r.email?`<a class="btn sm" href="mailto:${h(r.email)}">메일</a>`:''}<button class="btn sm" id="dCopyInfo">정보 복사</button></span></div>
+      <div class="pb"><dl class="kv">
+        <dt>이름</dt><dd>${h(r.name)}</dd><dt>전화</dt><dd>${h(r.phoneNorm||r.phone)}${r.phoneNorm&&r.phone&&r.phoneNorm.replace(/\D/g,'')!==r.phone.replace(/\D/g,'')?' <span class="sm2">(입력값 '+h(r.phone)+')</span>':''}</dd>
+        <dt>이메일</dt><dd>${h(r.email)}</dd><dt>출발 → 도착</dt><dd>${h(r.origin||'-')} → ${h(r.destination||'-')}</dd>
+        <dt>문의 내용</dt><dd>${h(r.details||'-')}</dd><dt>유입경로</dt><dd>${h(r.referral||'-')}</dd>
+      </dl>
+      ${rf.length?`<details style="margin-top:12px"><summary class="sm2" style="cursor:pointer">폼 전체 항목 (${rf.length})</summary><dl class="kv" style="margin-top:8px">${rf.map(([k,v])=>`<dt>${h(k)}</dt><dd>${h(v)}</dd>`).join('')}</dl></details>`:''}
+      </div></section>
+
+    <section class="panel"><div class="ph"><h2>상담 기록 남기기</h2><span class="sub">전화 → 부재 시 문자·이메일 → 결과 기록</span></div><div class="pb">
+      <div class="row">
+        <label class="f">연락 수단<select id="lCh"><option value="">(메모만)</option>${CHANNELS.map(c=>`<option>${c}</option>`).join('')}</select></label>
+        <label class="f">결과<select id="lRe"><option value=""></option>${RESULTS.map(c=>`<option>${c}</option>`).join('')}</select></label>
+        <label class="f">상태 변경<select id="lSt"><option value="">(유지: ${h(r.status)})</option>${STATUSES.map(s=>`<option>${s}</option>`).join('')}</select></label>
+        <label class="f">사용 템플릿<input id="lTp" placeholder="자동 입력"></label>
+      </div>
+      <label class="f" style="margin-top:10px">내용<textarea id="lNt" rows="3" placeholder="예) 부재중, 이메일로 예상 가격·카톡 채널 안내"></textarea></label>
+      <div class="acts" style="margin-top:10px"><button class="btn pri" id="lGo">기록 저장</button><span class="save" id="lSave"></span></div>
+    </div></section>
+
+    <section class="panel"><div class="ph"><h2>템플릿</h2><select class="inp" id="tSel" style="width:auto;margin-left:auto">${tpls.map(x=>`<option value="${x.i}">${h(x.t.name)} · ${h(x.t.channel||'')}</option>`).join('')}${others.length?`<optgroup label="다른 서비스">${others.map(x=>`<option value="${x.i}">${h(x.t.name)}</option>`).join('')}</optgroup>`:''}</select></div><div class="pb">
+      <input class="inp" id="tSub" placeholder="제목 (이메일)" style="margin-bottom:8px">
+      <textarea class="inp" id="tBody" rows="10"></textarea>
+      <div id="tMailBox" class="hide" style="margin-top:10px;border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:#fafafb">
+        <div class="acts"><span class="sm2">받는 사람</span><b>${h(r.email||'(이메일 없음)')}</b><span class="sm2" style="margin-left:12px">보내는 사람</span><b id="tFromTxt">${h(mailDirect()?mailFromFor(r):mailSender())}</b><span class="sm2" style="margin-left:12px">회신 주소</span><select class="inp" id="tFrom" style="width:auto">${mailFroms().map(m=>`<option ${m===mailFromFor(r)?'selected':''}>${h(m)}</option>`).join('')}</select></div>
+        <div class="sm2" style="margin-top:8px">서명 (자동 추가 · ${h(r.branch||'기본')})</div><div class="sm2" id="tSig" style="white-space:pre-wrap;color:var(--ink);margin-top:2px"></div>
+        <div class="acts" style="margin-top:10px"><button class="btn pri" id="tSend" ${r.email?'':'disabled'}>이메일 발송</button><button class="btn" id="tTest">회신 주소로 테스트</button><span class="save" id="tMsg"></span></div>
+      </div>
+      <div class="acts" style="margin-top:10px"><button class="btn" id="tCopy">본문 복사</button>${phoneDial?'<a class="btn" id="tSms">문자 앱으로 열기</a>':''}<span class="info">[ ] 칸은 채운 뒤 보내세요 · 문자·카톡은 보낸 뒤 위에 기록 저장</span></div>
+    </div></section>
+
+    <section class="panel"><div class="ph"><h2>진행 이력</h2><span class="sub">누가 · 언제 · 무엇을</span></div><div class="pb">
+      ${S.openLog==null?'<div class="info">불러오는 중…</div>':S.openLog.length?`<ul class="tl">${S.openLog.slice().reverse().map(l=>`<li><span class="k">${h(l.kind)}</span>${l.channel?' · '+h(l.channel):''}${l.result?' · '+h(l.result):''}${l.template?' · <span class="sm2">템플릿: '+h(l.template)+'</span>':''}<div class="w">${fmtFull(l.ts)} · ${h(l.by)}</div>${l.note?`<div class="nt">${h(l.note)}</div>`:''}</li>`).join('')}</ul>`:'<div class="info">이력 없음</div>'}
+    </div></section>
+  </div>`;
+  bindDetail(r,phoneDial);
+}
+
+function fillTpl(t,r){
+  const br=((S.cfg&&S.cfg.branches)||[]).find(b=>b.name===r.branch)||{};
+  const brName={밴쿠버본사:'밴쿠버 본사',토론토지사:'토론토 지사',한국지사:'한국 지사'}[r.branch]||r.branch||'';
+  const en=/English/i.test(t.name);
+  const V={고객명:r.name||'고객',서비스:en?(r.svcRaw||'shipping'):svcLabel(r.svc),담당자:me()||'[담당자]',지사:en?({밴쿠버본사:'Vancouver head office',토론토지사:'Toronto branch',한국지사:'Korea branch'}[r.branch]||'team'):brName,
+    지사전화:br.phone||'604-455-1000',출발지:r.origin||'[ ]',도착지:r.destination||'[ ]',카톡:LINKS.카톡,홈페이지:LINKS.홈페이지,택배접수:LINKS.택배접수};
+  const f=s=>String(s||'').replace(/\{([^}]+)\}/g,(m,k)=>k in V?V[k]:m);
+  return {subject:f(t.subject),body:f(t.body)};
+}
+
+function bindDetail(r,phoneDial){
+  $('dClose').onclick=closeDetail;
+  const status=(t,bad)=>{const s=$('dSave');s.textContent=t;s.className='save'+(bad?' bad':'')};
+  $('dApply').onclick=()=>doUpdate({set:{status:$('dSt').value,branch:$('dBr').value,dept:$('dDe').value,assignee:$('dAs').value}},status);
+  if($('dMine'))$('dMine').onclick=()=>doUpdate({set:{assignee:me()}},status);
+  $('dRule').onclick=async()=>{status('적용 중…');try{const j=await api('reroute',{id:r.id,ver:r.ver});afterUpd(j,status)}catch(e){status(e.message,1)}};
+  $('dCopyInfo').onclick=()=>copy(`[${svcLabel(r.svc)}] ${r.name} / ${r.phoneNorm||r.phone} / ${r.email}\n${r.origin||'-'} → ${r.destination||'-'}\n${r.details||''}`);
+  // 기록
+  const sugg={부재중:'회신대기',문자발송:'회신대기',이메일발송:'회신대기',견적발송:'회신대기',통화완료:'상담중',카톡연결:'상담중',안내완료:'상담중',접수전환:'완료'};
+  $('lRe').onchange=()=>{const s=sugg[$('lRe').value];if(s&&s!==r.status)$('lSt').value=s};
+  $('lCh').onchange=()=>{if($('lCh').value&&['신규','배정'].includes(r.status)&&!$('lSt').value)$('lSt').value='상담중'};
+  $('lGo').onclick=()=>{
+    const log={kind:$('lCh').value?'연락':'메모',channel:$('lCh').value,result:$('lRe').value,template:$('lTp').value.trim(),note:$('lNt').value.trim()};
+    if(!log.channel&&!log.result&&!log.note){toast('내용을 입력하세요');return}
+    const set={};if($('lSt').value)set.status=$('lSt').value;
+    if((set.status==='상담중'||log.channel)&&!r.assignee&&me())set.assignee=me();
+    const ls=(t,bad)=>{const s=$('lSave');s.textContent=t;s.className='save'+(bad?' bad':'')};
+    doUpdate({set,log},ls,()=>{$('lNt').value='';$('lTp').value=''});
+  };
+  // 템플릿
+  const sigOf=t=>{const br=((S.cfg&&S.cfg.branches)||[]).find(b=>b.name===r.branch)||((S.cfg&&S.cfg.branches)||[])[0]||{};return String((t&&t.en?br.sigEn:br.sig)||'').replace(/\{담당자\}/g,me()||'[담당자]')};
+  const showT=()=>{const t=templates()[+$('tSel').value];if(!t)return;const o=fillTpl(t,r);$('tSub').value=o.subject;$('tBody').value=o.body;$('tSub').classList.toggle('hide',!t.subject);
+    const isMail=t.channel==='이메일';$('tMailBox').classList.toggle('hide',!isMail);$('tSig').textContent=sigOf(t);$('tMsg').textContent='';
+    if($('tSms'))$('tSms').href='sms:'+phoneDial+'?&body='+encodeURIComponent(o.body)};
+  $('tSel').onchange=showT;showT();
+  const used=ch=>{const t=templates()[+$('tSel').value];$('lTp').value=t?t.name:'';if(ch&&!$('lCh').value)$('lCh').value=ch;if(!$('lRe').value)$('lRe').value=ch==='이메일'?'이메일발송':ch==='문자'?'문자발송':'';$('lRe').onchange()};
+  $('tCopy').onclick=()=>{copy(($('tSub').classList.contains('hide')?'':$('tSub').value+'\n\n')+$('tBody').value);const t=templates()[+$('tSel').value];used(t&&t.channel)};
+  const mailGo=async test=>{
+    const t=templates()[+$('tSel').value]||{};const sub=$('tSub').value.trim(),body=$('tBody').value.trim(),reply=$('tFrom').value,from=mailDirect()?reply:mailSender();
+    const m=(x,bad)=>{$('tMsg').textContent=x;$('tMsg').className='save'+(bad?' bad':'')};
+    if(!me()){m('연결에서 내 이름을 먼저 선택하세요',1);return}
+    if(!sub||!body){m('제목과 본문을 확인하세요',1);return}
+    if(/\[\s*\]/.test(sub+body)){m('[ ] 칸을 채운 뒤 보내세요',1);return}
+    if(!test&&!confirm(`${r.name} (${r.email})\n보내는 사람: ${from}\n회신 주소: ${reply}\n제목: ${sub}\n\n발송할까요?`))return;
+    $('tSend').disabled=$('tTest').disabled=true;m(test?'테스트 발송 중…':'발송 중…');
+    try{const j=await api('sendMail',{id:r.id,reply,subject:sub,body,template:t.name||'',en:!!t.en,test});
+      if(test){m('테스트 발송됨 → '+j.to+' 받은편지함 확인')}
+      else{S.open=j.row;S.openLog=j.log;syncRow(j.row);renderDetail();toast('발송됨 · '+from+' 보낸편지함 저장 · 회신은 '+reply)}}
+    catch(e){m(e.message,1)}
+    finally{if($('tSend')){$('tSend').disabled=!r.email;$('tTest').disabled=false}}
+  };
+  $('tSend').onclick=()=>mailGo(false);$('tTest').onclick=()=>mailGo(true);
+  if($('tSms'))$('tSms').addEventListener('click',()=>{$('tSms').href='sms:'+phoneDial+'?&body='+encodeURIComponent($('tBody').value);used('문자')});
+  $('tBody').oninput=()=>{if($('tSms'))$('tSms').href='sms:'+phoneDial+'?&body='+encodeURIComponent($('tBody').value)};
+}
+
+async function doUpdate(payload,status,after){
+  const r=S.open;if(!r)return;
+  if(!me()){toast('연결에서 내 이름을 먼저 선택하세요');collapse(false);return}
+  // 화면 먼저 반영
+  const prev=Object.assign({},r);
+  Object.assign(S.open,payload.set||{});syncRow(S.open);
+  status('저장 중…');
+  try{
+    const j=await api('update',Object.assign({id:r.id,ver:prev.ver},payload));
+    afterUpd(j,status);if(j.ok&&after)after();
+  }catch(e){Object.assign(S.open,prev);syncRow(prev);renderDetail();
+    status('저장 실패: '+e.message+' — 다시 눌러 주세요',1)}
+}
+function afterUpd(j,status){
+  if(j.conflict){S.open=j.row;syncRow(j.row);api('get',{id:j.row.id}).then(g=>{S.open=g.row;S.openLog=g.log;renderDetail();toast(j.error)});return}
+  S.open=j.row;S.openLog=j.log;syncRow(j.row);renderDetail();toast('저장됨');
+}
+function copy(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('복사됨')).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('복사됨')}catch(e){}ta.remove()})}
+
+/* ---------- 대시보드 ---------- */
+function renderDash(){
+  if(!S.rows.length&&!S.cfg)return;
+  const days=+$('dDays').value,b=$('dBranch').value,st=$('dStaff').value,since=days?Date.now()-days*864e5:0;
+  const rows=S.rows.filter(r=>(!since||new Date(r.receivedAt)>=since)&&(b==='-'?!r.branch:!b||r.branch===b)&&(st==='-'?!r.assignee:!st||r.assignee===st));
+  const open=rows.filter(r=>!CLOSED.includes(r.status)),done=rows.filter(r=>r.status==='완료');
+  const cut=S.cfg&&S.cfg.cutover?new Date(S.cfg.cutover):new Date(0);
+  const live=rows.filter(r=>new Date(r.receivedAt)>=cut&&r.status!=='스팸');
+  const contacted=live.filter(r=>r.firstContactAt);
+  const fc=contacted.map(r=>(new Date(r.firstContactAt)-new Date(r.receivedAt))/36e5).filter(x=>x>=0).sort((a,b)=>a-b);
+  const med=fc.length?fc[Math.floor(fc.length/2)]:null;
+  const in24=fc.filter(x=>x<=24).length;
+  const noC=open.filter(r=>!r.firstContactAt);
+  $('kpi').innerHTML=[
+    [rows.length,'문의'],[open.length,'진행중'],[done.length,'완료(접수 전환)'],[rows.filter(r=>!r.branch&&!CLOSED.includes(r.status)).length,'미배정'],
+    [noC.filter(r=>ageH(r)>24).length,'24시간 넘게 첫 연락 전'],[med==null?'-':ageTxt(med),'첫 연락까지 중앙값 (도입 후)'],[live.length?Math.round(in24/live.length*100)+'%':'-','24시간 내 첫 연락'+(S.cfg&&S.cfg.cutover?' (문의센터 도입 후)':'')]
+  ].map(([v,n])=>`<div><b>${v}</b><span>${n}</span></div>`).join('');
+  // 추이
+  const weekly=!days||days>=90;
+  const bucket=d=>{const x=new Date(d);x.setHours(0,0,0,0);if(weekly){x.setDate(x.getDate()-((x.getDay()+6)%7))}return x.getTime()};
+  const cnt={};rows.forEach(r=>{const k=bucket(r.receivedAt);cnt[k]=(cnt[k]||0)+1});
+  const keys=Object.keys(cnt).map(Number).sort((a,b)=>a-b);
+  if(keys.length){
+    const start=since?bucket(since):keys[0],end=bucket(Date.now()),step=weekly?7*864e5:864e5;const pts=[];
+    for(let t=start;t<=end+1e3;t+=step){const d=new Date(t);d.setHours(0,0,0,0);pts.push([d.getTime(),cnt[d.getTime()]||0]);if(pts.length>400)break}
+    const W=1000,H=150,mx=Math.max(1,...pts.map(p=>p[1]));const x=i=>pts.length<2?W/2:i*(W-40)/(pts.length-1)+30,y=v=>H-20-(v/mx)*(H-35);
+    const path=pts.map((p,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(p[1]).toFixed(1)).join('');
+    const lab=[0,Math.floor(pts.length/2),pts.length-1].filter((v,i,a)=>a.indexOf(v)===i).map(i=>`<span>${fmtD(new Date(pts[i][0]).toISOString())}</span>`).join('');
+    $('trend').innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="none" style="display:block"><line x1="30" x2="${W-10}" y1="${H-20}" y2="${H-20}" stroke="#e2e4e8" vector-effect="non-scaling-stroke"/><path d="${path}" fill="none" stroke="#16181d" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg><div class="tlab">${lab}</div><div class="sm2">${weekly?'주별':'일별'} · 최대 ${mx}건</div>`;
+  }else $('trend').innerHTML='<div class="info">데이터 없음</div>';
+  // 표
+  const group=(key,label)=>{const g={};rows.forEach(r=>{const k=key(r)||'-';(g[k]=g[k]||[]).push(r)});return Object.keys(g).map(k=>({k,n:label?label(k):k,rows:g[k]})).sort((a,b)=>b.rows.length-a.rows.length)};
+  const tbl=(id,groups,click)=>{const mx=Math.max(1,...groups.map(g=>g.rows.length));
+    $(id).innerHTML='<thead><tr><th>구분</th><th style="text-align:right">문의</th><th style="text-align:right">진행</th><th style="text-align:right">완료</th><th style="text-align:right">첫 연락 전</th><th></th></tr></thead><tbody>'+groups.map(g=>{const o=g.rows.filter(r=>!CLOSED.includes(r.status)).length,d=g.rows.filter(r=>r.status==='완료').length,nc=g.rows.filter(r=>!r.firstContactAt&&!CLOSED.includes(r.status)).length;
+    return `<tr><td>${click?`<a href="#" data-k="${h(g.k)}" style="color:inherit">${h(g.n)}</a>`:h(g.n)}</td><td class="n" style="text-align:right">${g.rows.length}</td><td class="n" style="text-align:right">${o}</td><td class="n" style="text-align:right">${d}</td><td class="n ${nc?'late':''}" style="text-align:right">${nc||''}</td><td style="width:30%"><span class="bar" style="width:${d/mx*100}%"></span><span class="bar g" style="width:${(g.rows.length-d)/mx*100}%"></span></td></tr>`}).join('')+'</tbody>';
+    if(click)$(id).onclick=e=>{const a=e.target.closest('a[data-k]');if(!a)return;e.preventDefault();click(a.dataset.k)}};
+  tbl('byStaff',group(r=>r.assignee,k=>k==='-'?'(담당자 없음)':k),k=>{$('fStaff').value=k;$('fBranch').value='';$('fSvc').value='';S.view='all';showTab('list');renderList()});
+  tbl('byBranch',group(r=>r.branch,k=>k==='-'?'(미배정)':k),k=>{$('fBranch').value=k;$('fStaff').value='';S.view='all';showTab('list');renderList()});
+  tbl('bySvc',group(r=>r.svc,k=>svcLabel(k)),k=>{$('fSvc').value=k;S.view='all';showTab('list');renderList()});
+  tbl('byRef',group(r=>(r.referral||'').split(/,\s*/)[0].replace(/^Other:.*/i,'Other').trim()));
+}
+['dDays','dBranch','dStaff'].forEach(id=>$(id).onchange=renderDash);
+
+/* ---------- 설정 ---------- */
+let C=null;
+function renderCfg(){
+  if(!S.cfg){$('stBody').innerHTML='<tr><td class="info">먼저 연결하세요</td></tr>';return}
+  if(!C)C=JSON.parse(JSON.stringify(Object.assign({},S.cfg,{templates:templates()})));
+  const br=branchNames();
+  $('stBody').innerHTML=C.staff.map((s,i)=>`<tr data-i="${i}"><td><input class="inp" data-f="name" value="${h(s.name)}" style="min-width:90px"></td><td><select class="inp" data-f="branch" style="min-width:120px">${opt(br,s.branch,'전체')}</select></td><td><div class="svcs">${C.services.map(v=>`<label><input type="checkbox" data-sv="${v.code}" ${(s.svcs||[]).includes(v.code)?'checked':''}>${h(v.label)}</label>`).join('')}</div></td><td><input type="checkbox" data-f="active" ${s.active!==false?'checked':''}></td><td><button class="btn sm red" data-del>삭제</button></td></tr>`).join('');
+  $('svBody').innerHTML=C.services.map((v,i)=>`<tr data-i="${i}"><td><input class="inp" data-f="label" value="${h(v.label)}"></td><td class="sm2">${h(v.code)}</td><td><input class="inp" data-f="dept" value="${h(v.dept)}"></td></tr>`).join('');
+  $('cfSender').value=C.mailSender||'exp@coship.ca';$('cfDirect').checked=!!C.mailDirect;
+  $('mrBody').innerHTML=C.mailRoutes.map((x,i)=>`<tr data-i="${i}"><td class="n">${i+1} <button class="btn sm" data-up ${i?'':'disabled'}>▲</button></td><td><select class="inp" data-f="branch" style="min-width:120px">${opt(br,x.branch,'전체')}</select></td><td><div class="svcs">${C.services.map(v=>`<label><input type="checkbox" data-sv="${v.code}" ${(x.svcs||[]).includes(v.code)?'checked':''}>${h(v.label)}</label>`).join('')}</div></td><td><input class="inp" data-f="reply" value="${h(x.reply)}" style="min-width:170px"></td><td><button class="btn sm red" data-del>삭제</button></td></tr>`).join('');
+  $('sgBody').innerHTML=C.branches.map((b,i)=>`<div class="tpl" data-i="${i}"><b>${h(b.name)}</b><div class="row" style="margin-top:8px"><label class="f">한국어 서명<textarea data-f="sig" rows="5">${h(b.sig||'')}</textarea></label><label class="f">영문 서명<textarea data-f="sigEn" rows="5">${h(b.sigEn||'')}</textarea></label><label class="f">대표 전화<input data-f="phone" value="${h(b.phone||'')}"></label></div></div>`).join('');
+  $('tpBody').innerHTML=C.templates.map((t,i)=>`<div class="tpl" data-i="${i}"><div class="row"><label class="f">이름<input data-f="name" value="${h(t.name)}"></label><label class="f">수단<select data-f="channel">${opt(['문자','이메일','카카오톡'],t.channel)}</select></label><label class="f">제목(이메일)<input data-f="subject" value="${h(t.subject)}"></label></div>
+   <div class="svcs" style="margin:8px 0"><span class="sm2" style="margin-right:4px">우선 표시 서비스(없으면 전체):</span>${C.services.map(v=>`<label><input type="checkbox" data-sv="${v.code}" ${(t.svcs||[]).includes(v.code)?'checked':''}>${h(v.label)}</label>`).join('')}</div>
+   <textarea class="inp" data-f="body" rows="6">${h(t.body)}</textarea><div class="acts" style="margin-top:6px"><button class="btn sm red" data-del>삭제</button></div></div>`).join('');
+}
+// change 이벤트 위임 (select·checkbox)
+['stBody','svBody','tpBody','mrBody','sgBody'].forEach((id,ix)=>{const key=['staff','services','templates','mailRoutes','branches'][ix];const cont=$(id);
+  const up=e=>{const row=e.target.closest('[data-i]');if(!row||!C)return;const o=C[key][+row.dataset.i];if(!o)return;
+    if(e.target.dataset.f)o[e.target.dataset.f]=e.target.type==='checkbox'?e.target.checked:e.target.value;
+    if(e.target.dataset.sv)o.svcs=[...row.querySelectorAll('[data-sv]:checked')].map(x=>x.dataset.sv)};
+  cont.addEventListener('input',up);cont.addEventListener('change',up);
+  cont.addEventListener('click',e=>{if(e.target.hasAttribute('data-up')){const i=+e.target.closest('[data-i]').dataset.i;const a=C[key];[a[i-1],a[i]]=[a[i],a[i-1]];renderCfg();return}
+    if(!e.target.hasAttribute('data-del'))return;const row=e.target.closest('[data-i]');if(!confirm('삭제할까요? (설정 저장을 눌러야 반영됩니다)'))return;C[key].splice(+row.dataset.i,1);renderCfg()});
 });
-document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==$('q')){e.preventDefault();$('q').focus()}});
-render();
+$('mrAdd').onclick=()=>{if(!C)return;C.mailRoutes.push({branch:'',svcs:[],reply:''});renderCfg()};
+$('cfSender').oninput=()=>{if(C)C.mailSender=$('cfSender').value.trim().toLowerCase()};
+$('cfDirect').onchange=()=>{if(!C)return;if($('cfDirect').checked&&!confirm('회신 주소 사서함마다 Exchange 발신 권한이 설정되어 있어야 합니다. 켤까요?')){$('cfDirect').checked=false;return}C.mailDirect=$('cfDirect').checked};
+$('stAdd').onclick=()=>{if(!C)return;C.staff.push({name:'',branch:'',svcs:[],active:true});renderCfg()};
+$('tpAdd').onclick=()=>{if(!C)return;C.templates.push({name:'새 템플릿',channel:'이메일',svcs:[],subject:'',body:''});renderCfg()};
+$('cfgSave').onclick=async()=>{
+  if(!C)return;$('cfgMsg').textContent='저장 중…';
+  C.staff=C.staff.filter(s=>s.name.trim()).map(s=>Object.assign(s,{name:s.name.trim()}));
+  try{const j=await api('saveConfig',{admin:$('admin').value,config:{staff:C.staff,services:C.services,templates:C.templates,branches:C.branches,mailSender:C.mailSender||'exp@coship.ca',mailDirect:!!C.mailDirect,mailRoutes:C.mailRoutes.filter(x=>String(x.reply).trim()).map(x=>Object.assign(x,{reply:String(x.reply).trim().toLowerCase()}))}});S.cfg=j.config;C=null;fillSelects();renderCfg();$('cfgMsg').textContent='저장됨 · 다른 직원은 새로고침하면 반영';}
+  catch(e){$('cfgMsg').innerHTML='<span class="err">'+h(e.message)+'</span>'}
+};
+
+/* ---------- 원본 동기화 ---------- */
+$('syncGo').onclick=async()=>{$('syncMsg').textContent='동기화 중…';try{const j=await api('sync');$('syncMsg').textContent=j.busy?'다른 동기화가 진행 중입니다. 잠시 후 다시':'새 문의 '+(j.added||0)+'건 · 인콰이어리 변경 '+(j.legacyChanged||0)+'건 · 기준 시점 '+fmtFull(j.cutover);load()}catch(e){$('syncMsg').innerHTML='<span class="err">'+h(e.message)+'</span>'}};
+
+/* ---------- 탭 ---------- */
+function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  $('tabList').classList.toggle('hide',t!=='list');$('tabDash').classList.toggle('hide',t!=='dash');$('tabCfg').classList.toggle('hide',t!=='cfg');
+  if(t==='cfg')renderCfg();if(t==='dash')renderDash()}
+document.querySelector('.tabs').onclick=e=>{const b=e.target.closest('.tab');if(b)showTab(b.dataset.t)};
+
+// 90초마다 목록 갱신 (상세 화면이 열려 있지 않을 때)
+setInterval(()=>{if(document.visibilityState==='visible'&&!S.open&&S.cfg)load()},90000);
+initConn();
 </script>
 </body>
 </html>
